@@ -2,26 +2,52 @@ const router = require("express").Router();
 const {
   subAdminRegister,
   subAdminLogin,
-  getAllSubAdmin,
   getSubAdmin,
-  deleteSubAdmin,
-  updateSubAdminData,
-  subAdminStatus,
 } = require("../../controllers/subAdmin.controller");
 const authenticate = require("../../middlewares/authentication");
-const subAdminAuthentication = require ("../../middlewares/subAdmin.authentication")
-const { getUsers } = require("../../controllers/users.controller");
+const subAdminAuthentication = require("../../middlewares/subAdmin.authentication");
+const {
+  getUsers,
+  updateUserData,
+  userStatus,
+  deleteUser,
+} = require("../../controllers/users.controller");
+
+//--------------------------------------------------------subAdmin route
 
 router.post("/subAdmin/register", subAdminRegister);
 router.post("/subAdmin/login", subAdminLogin);
-router.get("/subAdmin/allsubAdmins/data", authenticate, subAdminAuthentication, getAllSubAdmin);
-router.delete("/subAdmin/deleteSubAdmin/:subAdminId", deleteSubAdmin);
 router.get("/subAdmin/singleSubAdmin", getSubAdmin);
-router.patch("/subAdmin/updateSubAdmin", updateSubAdminData);
-router.put("/subAdmin/:subAdminId/:isActive", subAdminStatus);
 
-// to get user's data
-router.get("/subAdmin/usersdata", authenticate, subAdminAuthentication, getUsers);
+//--------------------------------------------------------user route
 
+// to get all user's data
+router.get(
+  "/subAdmin/user/data",
+  authenticate,
+  subAdminAuthentication,
+  getUsers
+);
+// to update user's data
+router.patch(
+  "subAdmin/user/update/:userId",
+  authenticate,
+  subAdminAuthentication,
+  updateUserData
+);
+// to update user's status
+router.put(
+  "subAdmin/user/:userId/:isActive",
+  authenticate,
+  subAdminAuthentication,
+  userStatus
+);
+// to delete user
+router.delete(
+  "subAdmin/user/delete/:userId",
+  authenticate,
+  subAdminAuthentication,
+  deleteUser
+);
 
 module.exports = router;
