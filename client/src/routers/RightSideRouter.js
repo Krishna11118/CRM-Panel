@@ -6,6 +6,7 @@ import Support from "../Components/pages/Support";
 import PrivateRoutes from "../Components/protectRoute/privateRoute";
 import Dashboard from "../Components/pages/Dashboard";
 import Profile from "../Components/pages/Profile";
+import SubAdmin from "../Components/pages/subAdmin/SubUserData";
 
 const RightSideRouter = () => {
   return (
@@ -13,7 +14,7 @@ const RightSideRouter = () => {
       <Route element={<Outlet />} />
       <Route element={<PrivateRoutes />}>
         <Route element={<Dashboard />} path="/" />
-        <Route element={<News />} path="/subAdmins" />
+        <Route element={<SubAdmin />} path="/subAdmins" />
         <Route element={<Performance />} path="/users" />
         <Route element={<Support />} path="/support" />
         <Route element={<Profile />} path="/profile" />

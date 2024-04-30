@@ -41,9 +41,9 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: "subAdmin",
   },
-  status: {
+  isActive: {
     type: Boolean,
-    default: true,
+    default: true, 
   },
   adminId: {
     type: mongoose.Schema.Types.ObjectId,

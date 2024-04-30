@@ -1,17 +1,17 @@
+// login
 import React, { useState } from "react";
 import { Image, Form, Button } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
-import axios from "axios";
-import config from "../../../Config/Config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import "../../../Styles/style.css";
 import Img from "../../../Assets/wave.png";
 import { IconContext } from "react-icons";
-import { FaUser } from "react-icons/fa";
-import { IoIosLock } from "react-icons/io";
-import { FaRegCircleUser } from "react-icons/fa6";
 import { useAuth } from "../../../context/AuthContext";
+import { FaRegCircleUser } from "react-icons/fa6";
+import axios from "axios";
+import config from "../../../Config/Config";
+import { validateInput } from "../../../utils/Validations";
 
 const Login = () => {
   const { setUser } = useAuth();
@@ -33,28 +33,27 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //--------------------------------------------- Validate Input ---------------------------------------------
     if (!validateInput({ email, password })) {
       return;
     }
-
+    //--------------------------------------------- Login User ---------------------------------------------
     try {
-      const token = localStorage.getItem("token");
       setLoading(true);
       const response = await axios.post(`${config.endpoint}/user/login`, {
         email: email,
         password: password,
       });
-      console.log("response", response.data);
-      
+
       if (response.status === 201) {
         setUser(response.data.user);
         toast.success("Login Successful");
-
         persistLogin(
           response.data.token,
           response.data.user.mobile,
           response.data.user.fname,
-          response.data.user.email
+          response.data.user.email,
+          response.data.user.role[0]
         );
         navigate("/");
       } else {
@@ -62,12 +61,10 @@ const Login = () => {
         toast.error("Login Failed");
       }
     } catch (err) {
-
       setLoading(false);
-       if (err?.response?.status === 401) {
+      if (err?.response?.status === 401) {
         toast.error(err.response.data.error);
-       }
-       else if (err?.response?.status === 400) {
+      } else if (err?.response?.status === 400) {
         toast.error(err.response.data.error);
       } else {
         setLoading(false);
@@ -76,26 +73,13 @@ const Login = () => {
     }
   };
 
-  const validateInput = (data) => {
-    const { email, password } = data;
-
-    if (!email.trim()) {
-      toast.error("Email is a required field");
-      return false;
-    }
-
-    if (!password.trim()) {
-      toast.error("Password is a required field");
-      return false;
-    }
-    return true;
-  };
-
-  const persistLogin = (token, mobile, fname, email) => {
+  //--------------------------------------------- Persist Login ---------------------------------------------
+  const persistLogin = (token, mobile, fname, email, role) => {
     localStorage.setItem("token", token);
     localStorage.setItem("mobile", mobile);
-    localStorage.setItem("fname", fname);
+    localStorage.setItem("name", fname);
     localStorage.setItem("email", email);
+    localStorage.setItem("role", role);
   };
 
   return (
@@ -123,10 +107,9 @@ const Login = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <InputGroup className="mb-3">
-                <InputGroup.Text id="email-id">
-                  
-                </InputGroup.Text>
-                <Form.Control className="w-[100%]"
+                <InputGroup.Text id="email-id"></InputGroup.Text>
+                <Form.Control
+                  className="w-[100%]"
                   style={{ color: "#c3c5c7" }}
                   type="email"
                   placeholder="Email"
@@ -139,10 +122,9 @@ const Login = () => {
             </Form.Group>
 
             <Form.Group controlId="pswd">
-              <InputGroup className="mb-3"> 
-                <InputGroup.Text id="basic-addon1">
-                </InputGroup.Text>
-                <Form.Control 
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1"></InputGroup.Text>
+                <Form.Control
                   style={{ color: "#c3c5c7" }}
                   type="password"
                   placeholder="Password"

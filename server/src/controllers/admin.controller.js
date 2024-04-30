@@ -72,8 +72,8 @@ const adminLogin = asyncHandler(async (req, res) => {
       id: user._id,
     },
   };
-  const token = generateToken(loginUserData);
 
+  const token = generateToken(loginUserData);
   const loginResult = {
     user,
     token,
@@ -83,4 +83,15 @@ const adminLogin = asyncHandler(async (req, res) => {
   return res.status(201).json(loginResult);
 });
 
-module.exports = { adminRegister, adminLogin };
+//-----------------------------------------Get admin for context-----------------------------------------
+const getAdmin = async (req, res) => {
+  const userId = req.userId;
+  try {
+    const users = await admindb.findOne({ _id: userId });
+    res.status(200).json({ users, success: true });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+module.exports = { adminRegister, adminLogin, getAdmin };

@@ -15,9 +15,13 @@ const {
 
 //--------------------------------------------------------subAdmin route
 
-router.post("/subAdmin/register", subAdminRegister);
 router.post("/subAdmin/login", subAdminLogin);
-router.get("/subAdmin/singleSubAdmin", getSubAdmin);
+router.get(
+  "/subAdmin/singleData",
+  authenticate,
+  subAdminAuthentication,
+  getSubAdmin
+);
 
 //--------------------------------------------------------user route
 
@@ -28,23 +32,26 @@ router.get(
   subAdminAuthentication,
   getUsers
 );
+
 // to update user's data
 router.patch(
-  "subAdmin/user/update/:userId",
+  "/subAdmin/user/update/:userId",
   authenticate,
   subAdminAuthentication,
   updateUserData
 );
+
 // to update user's status
 router.put(
-  "subAdmin/user/:userId/:isActive",
+  "/subAdmin/user/:userId/:isActive",
   authenticate,
   subAdminAuthentication,
   userStatus
 );
+
 // to delete user
 router.delete(
-  "subAdmin/user/delete/:userId",
+  "/subAdmin/user/delete/:userId",
   authenticate,
   subAdminAuthentication,
   deleteUser

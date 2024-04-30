@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const [CMSData, setCMSData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [role, setRole] = useState("");
 
   // useEffect(() => {
   //     CMSServices.getCMS().then((res) => {
@@ -27,35 +28,34 @@ export const AuthProvider = ({ children }) => {
   //         localStorage.setItem("logo", res.data.logo)
   //     })
   // }, [])
-
-  const fetchUser = async () => {
-    try {
-      setLoader(true);
-      const token = localStorage.getItem("token"); // Retrieve token from localStorage
-      console.log("🚀 ~ fetchUser ~ token:", token)
-      const response = await axios.get(`${config.endpoint}/user/singleuserdata`, {
-        headers: {
-          authorization: `${token}`,
-        },
-      });
-
-      setUser(response.data);
-      setLoader(false);
-      // if (!response.data.success) return;
-      // setUser(response.data.data.user);
-      // setRolesAndPermissions(response.data.data.rolesAndPermissions);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      setLoader(false);
-    }
-  };
-
   useEffect(() => {
-    // Only fetch user data if it hasn't been fetched before
-    if (!user) {
+    const token = localStorage.getItem("token");
+    const getRole = localStorage.getItem("role");
+    setRole(getRole);
+
+    const fetchUser = async () => {
+      try {
+        setLoader(true);
+        const response = await axios.get(
+          `${config.endpoint}/${getRole}/singleData`,
+          {
+            headers: {
+              authorization: `${token}`,
+            },
+          }
+        );
+        setUser(response.data);
+        setLoader(false);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setLoader(false);
+      }
+    };
+
+    if (!user && token) {
       fetchUser();
     }
-  }, []); // Fetch user data whenever the "user" state change
+  }, []); // Empty dependency array ensures this effect runs only once, on mount
 
   const value = {
     CMSData,
@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
     rolesAndPermissions,
     isOpen,
     setIsOpen,
+    role,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

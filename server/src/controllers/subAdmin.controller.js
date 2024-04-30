@@ -8,14 +8,14 @@ const { comparePasswords } = require("../utils/bcrypt.utils");
 const subAdminRegister = asyncHandler(async (req, res) => {
   const { email, password, mobile, fname, role } = req.body;
 
-  if (!email || !password || !mobile || !fname ) {
+  if (!email || !password || !mobile || !fname) {
     return res.status(400).json({ error: "Please fill all details" });
   }
 
   // Check if the user already exists
   const existingUser = await subAdmindb.findOne({ email });
   if (existingUser) {
-    return res.status(400).json({ error: "User already exists" });
+    return res.status(409).json({ error: "Sub Admin already exists" });
   }
 
   // Hash the password
@@ -42,7 +42,7 @@ const subAdminRegister = asyncHandler(async (req, res) => {
   const token = generateToken(userdata);
 
   // Respond with the token
-  res.status(201).json({ token , message: "SubAdmin Created Successfully" });
+  res.status(201).json({ token, message: "SubAdmin Created Successfully" });
 });
 
 //----------------------------------------------------------------------------- Login
@@ -57,7 +57,7 @@ const subAdminLogin = asyncHandler(async (req, res) => {
   // ---------------------------------------Compare user-------------------------
   const user = await subAdmindb.findOne({ email: email });
   if (!user) {
-    return res.status(401).json({ error: "Invalid password" });
+    return res.status(400).json({ error: "Sub Admin not founded!" });
   }
 
   //----------------------------------------Compare password-----------------
@@ -68,6 +68,9 @@ const subAdminLogin = asyncHandler(async (req, res) => {
     return res.status(401).json({ error: "Invalid password" });
   }
 
+  if (user.isActive === false) {
+    return res.status(401).json({ error: "Your account is not active" });
+  }
   //----------------------------------------Create Token
   const loginUserData = {
     user: {
@@ -97,9 +100,9 @@ const getAllSubAdmin = async (req, res) => {
 
 //--------------------------------------------------------------------------------Delete subAdmins
 const deleteSubAdmin = async (req, res) => {
-  const { userId } = req.params;
+  const { subAdminId } = req.params;
   try {
-    await subAdmindb.findByIdAndDelete(userId);
+    await subAdmindb.findByIdAndDelete(subAdminId);
     res.status(200).send("User deleted successfully");
   } catch (error) {
     console.error("Error deleting user:", error);
@@ -159,12 +162,12 @@ const updateSubAdminData = asyncHandler(async (req, res) => {
 
 // -------------------------------------------------------------------------------Update subAdmin status
 const subAdminStatus = asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
+  const subAdminId = req.params.subAdminId;
   const isActive = req.params.isActive;
   console.log("isActive", isActive);
 
   try {
-    const user = await subAdmindb.findByIdAndUpdate(userId, {
+    const user = await subAdmindb.findByIdAndUpdate(subAdminId, {
       isActive: isActive,
     });
     if (!user) {

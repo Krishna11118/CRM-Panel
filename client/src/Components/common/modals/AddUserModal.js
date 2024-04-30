@@ -2,8 +2,8 @@ import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import CustomButton from "../buttons/CustomButton";
-import { useApiHooks } from "../../../hooks/useApiHooks";
-import { Validation } from "../../validation/Validation";
+import { useUserApiHooks } from "../../../hooks/userApiHooks";
+import { Validation } from "../../../utils/Validations";
 import { FaStarOfLife } from "react-icons/fa";
 import { Dropdown } from "flowbite-react";
 
@@ -21,7 +21,7 @@ const AddUserModal = () => {
   function onCloseModal() {
     setOpenModal(false);
   }
-  const { handleSubmit , handleSubmitSubAdmin} = useApiHooks();
+  const { handleSubmit , handleSubmitSubAdmin} = useUserApiHooks();
   const { registerUserValidation } = Validation();
 
   //--------------------------------------Create SubUsers
@@ -46,7 +46,7 @@ const AddUserModal = () => {
         onClick={() => setOpenModal(true)}
         variant="contained"
         color="primary"
-        startIcon={<AiOutlineUserAdd />}
+        starticon={<AiOutlineUserAdd />}
         style={{ margin: "10px" }}
         className=" bg-custom-600 ml-6 hover:shadow-lg text-white font-bold py-1 px-2 "
       >

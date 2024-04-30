@@ -4,28 +4,29 @@ import axios from "axios";
 import { Typography, Grid } from "@mui/material";
 import config from "../../../Config/Config";
 import AddUserModal from "../../common/modals/AddUserModal";
-import { useAdminApiHook } from "../../../hooks/adminApiHooks";
-import UsersTable from "./UsersTable";
-import { useAuth } from "../../../context/AuthContext";
+import { useSubAdminApiHook } from "../../../hooks/subAdminApiHook";
+import UsersTable from "./SubadminTable";
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
-  const { handleUserStatus, handleDeleteUser, loading, error } =
-    useAdminApiHook();
+const SubUserData = () => {
+  const [subAdmin, setSubAdmin] = useState([]);
+  const { handleSubAdminStatus, handleDeleteSubAdmin, loading, error } =
+  useSubAdminApiHook();
+
+  //-----------------------------------------get user data from local storage----------------------------------
   const fullName = localStorage.getItem("name");
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   //-----------------------------------------Fetch All Data----------------------------------
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      const getRole = localStorage.getItem("role");
       try {
-        const res = await axios.get(`${config.endpoint}/${getRole}/user/data`, {
+        const res = await axios.get(`${config.endpoint}/admin/subAdmin/data`, {
           headers: {
             authorization: `${token}`,
           },
         });
-        setUsers(res.data);
+        setSubAdmin(res.data);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
@@ -35,9 +36,9 @@ const Users = () => {
   }, []);
 
   // -----------------------------------------Delete User--------------------------------
-  const handleDelete = async (userId) => {
-    handleDeleteUser(userId);
-    setUsers(users.filter((user) => user._id !== userId));
+  const handleDelete = async (subAdminId) => {
+    handleDeleteSubAdmin(subAdminId);
+    setSubAdmin(subAdmin.filter((subAdmin) => subAdmin._id !== subAdminId));
   };
 
   //------------------------------------------User Avatar--------------------------------
@@ -69,15 +70,15 @@ const Users = () => {
   };
 
   // ------------------------------------------Status switch---------------------------
-  const handleStatus = async (userId) => {
-    const userToUpdate = users.find((user) => user._id === userId);
+  const handleStatus = async (subAdminId) => {
+    const userToUpdate = subAdmin.find((user) => user._id === subAdminId);
     const updatedStatus = !userToUpdate.isActive;
 
-    await handleUserStatus(userId, updatedStatus);
+    await handleSubAdminStatus(subAdminId, updatedStatus);
 
-    setUsers((prevUsers) =>
+    setSubAdmin((prevUsers) =>
       prevUsers.map((user) =>
-        user._id === userId ? { ...user, isActive: updatedStatus } : user
+        user._id === subAdminId ? { ...user, isActive: updatedStatus } : user
       )
     );
   };
@@ -106,7 +107,7 @@ const Users = () => {
           <AddUserModal />
 
           <UsersTable
-            users={users}
+            users={subAdmin}
             handleDelete={handleDelete}
             handleStatus={handleStatus}
             stringAvatar={stringAvatar}
@@ -117,4 +118,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default SubUserData;

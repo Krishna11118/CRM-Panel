@@ -1,11 +1,12 @@
 import React from "react";
-import Users from "./Users";
-import User from "./user/Users"
+import Users from "./user/Users"
+
 
 const Dashboard = () => {
+
   return (
     <>
-      <User/>
+      <Users/>
     </>
   );
 };

@@ -4,8 +4,10 @@ const adminAuthentication = require("../../middlewares/admin.authentication");
 const {
   adminRegister,
   adminLogin,
+  getAdmin,
 } = require("../../controllers/admin.controller");
 const {
+  subAdminRegister,
   getAllSubAdmin,
   deleteSubAdmin,
   updateSubAdminData,
@@ -21,8 +23,10 @@ const {
 // -------------------------------------------------------------------------------admin route
 router.post("/admin/register", adminRegister);
 router.post("/admin/login", adminLogin);
+router.get("/admin/singleData", authenticate, adminAuthentication, getAdmin);
 
 // -------------------------------------------------------------------------------subAdmin route
+
 // to get subAdmin's data
 router.get(
   "/admin/subAdmin/data",
@@ -31,14 +35,22 @@ router.get(
   getAllSubAdmin
 );
 
+// to register subAdmin
+router.post(
+  "/admin/subAdmin/register",
+  authenticate,
+  adminAuthentication,
+  subAdminRegister
+);
+
 // to detete subAdmin
-router.delete("admin/subAdminelete/:subAdminId", deleteSubAdmin);
+router.delete("/admin/subAdmin/delete/:subAdminId", deleteSubAdmin);
 
 // to update subAdmin
-router.patch("admin/subAdmin/update/:subAdminId", updateSubAdminData);
+router.patch("/admin/subAdmin/update/:subAdminId", updateSubAdminData);
 
-// to update subAdmin's status
-router.put("/subAdmin/:subAdminId/:isActive", subAdminStatus);
+// to change subAdmin's status
+router.put("/admin/subAdmin/:subAdminId/:isActive", subAdminStatus);
 
 // -------------------------------------------------------------------------------users route
 
@@ -46,12 +58,12 @@ router.put("/subAdmin/:subAdminId/:isActive", subAdminStatus);
 router.get("/admin/user/data", authenticate, adminAuthentication, getUsers);
 
 // to update user's data
-router.patch("admin/user/update/:userId", updateUserData);
+router.patch("/admin/user/update/:userId", updateUserData);
 
-// to update user's status
-router.put("admin/user/:userId/:isActive", userStatus);
+// to change user's status
+router.put("/admin/user/:userId/:isActive", userStatus);
 
 // to delete user
-router.delete("admin/user/delete/:userId", deleteUser);
+router.delete("/admin/user/delete/:userId", deleteUser);
 
 module.exports = router;

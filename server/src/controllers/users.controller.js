@@ -24,6 +24,7 @@ const loginUser = async (req, res) => {
         error: "Your are inactive. Please contact the administrator.",
       });
     }
+
     // Compare the password
     const isMatch = await comparePasswords(password, user.password);
 
@@ -42,6 +43,7 @@ const loginUser = async (req, res) => {
       user,
       token,
       msg: "Logged In Successfully",
+      success: true,
     };
 
     return res.status(201).json(result);

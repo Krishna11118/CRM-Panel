@@ -5,9 +5,6 @@ import {
   FaUser,
   FaComments,
   FaChartPie,
-  FaFolder,
-  FaShoppingCart,
-  FaHeart,
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
@@ -16,12 +13,10 @@ import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-const Sidebar2 = () => {
+const Sidebar = () => {
   const navigate = useNavigate();
-  // const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { setUser, isOpen, setIsOpen } = useAuth();
-  console.log("🚀 ~ Sidebar2 ~ isOpen:", isOpen);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -62,7 +57,7 @@ const Sidebar2 = () => {
           {" "}
           <ul className="nav-list">
             {/* ------------------------------------Dashboard */}
-            <li onClick={dashboardButton}>
+            <li onClick={dashboardButton} className="cursor-pointer">
               <a>
                 <FaChartPie color="white" />
                 <span className="links_name">Dashboard</span>
@@ -183,12 +178,6 @@ const Sidebar2 = () => {
   );
 };
 
-const HomeSection = () => {
-  return (
-    <section className="home-section">
-      <div className="text">Dashboard</div>
-    </section>
-  );
-};
 
-export { Sidebar2, HomeSection };
+
+export default Sidebar ;

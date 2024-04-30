@@ -20,7 +20,7 @@ import { useAuth } from "../../context/AuthContext";
 import config from "../../Config/Config";
 import AddUserModal from "../common/modals/AddUserModal";
 import MenuButton from "../common/editMenuButton/EditMenuButton";
-import { useApiHooks } from "../../hooks/useApiHooks";
+import { useUserApiHooks } from "../../hooks/userApiHooks";
 
 const Users = () => {
   const { setUser, user } = useAuth();
@@ -28,13 +28,13 @@ const Users = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const fullName = localStorage.getItem("fname");
-  const { handleUserStatus, handleDeleteUser, loading, error } = useApiHooks();
+  const { handleUserStatus, handleDeleteUser, loading, error } = useUserApiHooks();
   const [userStatus, setUserStatus] = useState({});
   //-----------------------------------------Fetch Data--------------------------------
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${config.endpoint}/usersdata`);
+        const res = await axios.get(`${config.endpoint}/user/usersdata`);
         setUsers(res.data);
 
         // Create an object with userId as key and isActive as value

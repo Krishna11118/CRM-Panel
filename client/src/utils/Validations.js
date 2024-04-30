@@ -1,13 +1,7 @@
 import { toast } from "react-hot-toast";
 
 export const Validation = () => {
-  const registerUserValidation = (
-    fname,
-    email,
-    mobile,
-    password,
-    role
-  ) => {
+  const registerUserValidation = (fname, email, mobile, password, role) => {
     let isValid = true;
 
     if (!fname.trim()) {
@@ -40,4 +34,19 @@ export const Validation = () => {
   };
 
   return { registerUserValidation };
+};
+
+export const validateInput = (data) => {
+  const { email, password } = data;
+
+  if (!email.trim()) {
+    toast.error("Email is a required field");
+    return false;
+  }
+
+  if (!password.trim()) {
+    toast.error("Password is a required field");
+    return false;
+  }
+  return true;
 };

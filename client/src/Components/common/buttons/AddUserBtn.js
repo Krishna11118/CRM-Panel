@@ -8,7 +8,7 @@ const AddUserBtn = () => {
         <Button
             variant="contained"
             color="primary"
-            startIcon={<AiOutlineUserAdd />}
+            starticon={<AiOutlineUserAdd />}
             style={{ margin: "10px" }}
         >
             Add User

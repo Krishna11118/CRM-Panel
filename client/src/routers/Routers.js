@@ -1,5 +1,7 @@
+//Router
+
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import Login from "../Components/pages/user/Login";
@@ -23,11 +25,12 @@ function Routers() {
         {token && !user && <Skelton />}
 
         <Routes>
+          <Route element={<Outlet />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/" />
             <Route path="/dashboard" />
             <Route path="/subAdmins" />
-            <Route path="/users" />
+             <Route path="/users" />
           </Route>
           <Route element={<PublicRoutes />}>
             <Route element={<Login />} path="/login" />

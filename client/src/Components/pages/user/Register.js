@@ -5,14 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import "../../../Styles/style.css";
 import Img from "../../../Assets/wave.png";
-import { FaUser } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { IoIosLock } from "react-icons/io";
-import { AiFillMobile } from "react-icons/ai";
-import { useApiHooks } from "../../../hooks/useApiHooks";
+
+import { useUserApiHooks } from "../../../hooks/userApiHooks";
 
 const Register = () => {
-  const { data, error, loading, handleSubmit } = useApiHooks();
+  const { data, error, loading, handleUserRegister } = useUserApiHooks();
 
   const [formData, setFormData] = useState({
     fname: "",
@@ -32,7 +30,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    handleSubmit(
+    handleUserRegister(
       formData.fname,
       formData.mobile,
       formData.email,
@@ -64,8 +62,8 @@ const Register = () => {
         <Form onSubmit={handleRegister}>
           <Form.Group controlId="formFullName">
             <InputGroup className="mb-3">
-
-              <Form.Control className="w-[100%]"
+              <Form.Control
+                className="w-[100%]"
                 type="text"
                 name="fname"
                 placeholder="Full name"
@@ -78,8 +76,8 @@ const Register = () => {
 
           <Form.Group controlId="mobileNo">
             <InputGroup className="mb-3">
-             
-              <Form.Control className="w-[100%]"
+              <Form.Control
+                className="w-[100%]"
                 type="tel"
                 name="mobile"
                 placeholder="Mobile no"
@@ -92,8 +90,8 @@ const Register = () => {
 
           <Form.Group controlId="formEmail">
             <InputGroup className="mb-3">
-             
-              <Form.Control className="w-[100%]"
+              <Form.Control
+                className="w-[100%]"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -106,8 +104,8 @@ const Register = () => {
 
           <Form.Group controlId="formPswd">
             <InputGroup className="mb-3">
-             
-              <Form.Control className="w-[100%]"
+              <Form.Control
+                className="w-[100%]"
                 type="password"
                 name="password"
                 placeholder="Password"

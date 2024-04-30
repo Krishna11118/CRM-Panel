@@ -18,8 +18,8 @@ import { useState } from "react";
 import axios from "axios";
 import config from "../../../Config/Config";
 import { useAuth } from "../../../context/AuthContext";
-
 import CircularProgress from "@mui/material/CircularProgress";
+import { validateInput } from "../../../utils/Validations";
 
 // function Copyright(props) {
 //   return (
@@ -60,15 +60,15 @@ export default function SignInSide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    // ---------------------------------------Validation-------------------------------------
     if (!validateInput({ email, password })) {
       return;
     }
-
+    // ---------------------------------------API call-------------------------------------
     try {
       const token = localStorage.getItem("token");
       setLoading(true);
-      const response = await axios.post(`${config.endpoint}/adminLogin`, {
+      const response = await axios.post(`${config.endpoint}/admin/login`, {
         email: email,
         password: password,
         headers: {
@@ -76,14 +76,12 @@ export default function SignInSide() {
         },
       });
 
-
       if (response.status === 201) {
-        
         setLoading(false);
         setUser(response.data.user);
         toast.success("Login Successful");
 
-        persistLogin(response.data.token, response.data.user.email);
+        persistLogin(response.data.token, response.data.user.email, response.data.user.role[0]);
         navigate("/");
       } else {
         setLoading(false);
@@ -100,24 +98,25 @@ export default function SignInSide() {
     }
   };
 
-  const validateInput = (data) => {
-    const { email, password } = data;
+  // const validateInput = (data) => {
+  //   const { email, password } = data;
 
-    if (!email.trim()) {
-      toast.error("Email is a required field");
-      return false;
-    }
+  //   if (!email.trim()) {
+  //     toast.error("Email is a required field");
+  //     return false;
+  //   }
 
-    if (!password.trim()) {
-      toast.error("Password is a required field");
-      return false;
-    }
-    return true;
-  };
+  //   if (!password.trim()) {
+  //     toast.error("Password is a required field");
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
-  const persistLogin = (token, email) => {
+  const persistLogin = (token, email, role) => {
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
+    localStorage.setItem("role", role);
   };
 
   return (
