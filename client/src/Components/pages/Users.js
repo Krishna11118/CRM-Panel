@@ -21,15 +21,19 @@ import config from "../../Config/Config";
 import AddUserModal from "../common/modals/AddUserModal";
 import MenuButton from "../common/editMenuButton/EditMenuButton";
 import { useUserApiHooks } from "../../hooks/userApiHooks";
+import { useLocalStorage } from "../../utils/LocalStorage";
 
 const Users = () => {
   const { setUser, user } = useAuth();
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const fullName = localStorage.getItem("fname");
+  const {getFromLocalStorage} = useLocalStorage();
   const { handleUserStatus, handleDeleteUser, loading, error } = useUserApiHooks();
   const [userStatus, setUserStatus] = useState({});
+
+
+  const fullName = getFromLocalStorage("fname");
   //-----------------------------------------Fetch Data--------------------------------
   useEffect(() => {
     const fetchData = async () => {

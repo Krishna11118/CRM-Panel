@@ -6,6 +6,7 @@ import { useUserApiHooks } from "../../../hooks/userApiHooks";
 import { Validation } from "../../../utils/Validations";
 import { FaStarOfLife } from "react-icons/fa";
 import { Dropdown } from "flowbite-react";
+import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 
 const AddUserModal = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -13,6 +14,7 @@ const AddUserModal = () => {
   const [email, setEmail] = useState("");
   const [mobile, setmobile] = useState("");
   const [password, setPassword] = useState("");
+  const { handleCreateSubAdminAndUser } = useAdminApiHook();
 
   const [role, setRole] = useState("");
   // const [subAdminRole, setSubAdminRole] = useState("");
@@ -21,21 +23,18 @@ const AddUserModal = () => {
   function onCloseModal() {
     setOpenModal(false);
   }
-  const { handleSubmit , handleSubmitSubAdmin} = useUserApiHooks();
+  const { handleSubmit, handleSubmitSubAdmin } = useUserApiHooks();
   const { registerUserValidation } = Validation();
 
   //--------------------------------------Create SubUsers
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    console.log("role", role);
     if (!registerUserValidation(fname, email, mobile, password, role)) {
       return;
     } else {
-      if (role === "user") {
-        handleSubmit(fname, mobile, email, password, role);
-      } else {
-        handleSubmitSubAdmin(fname, mobile, email, password, role);
-      }
+      handleCreateSubAdminAndUser(fname, mobile, email, password, role);
     }
     setOpenModal(false);
   };

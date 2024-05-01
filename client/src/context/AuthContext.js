@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import config from "../Config/Config";
+import { useLocalStorage } from "../utils/LocalStorage";
 
 const AuthContext = createContext();
 
@@ -14,7 +15,12 @@ export const AuthProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const [CMSData, setCMSData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const [role, setRole] = useState("");
+  const [localRole, setLocalRole] = useState([]);
+  const [responseRole, setResponseRole] = useState([]);
+  const [role, setRole] = useState([]);
+  const [token] = useState(localStorage.getItem("token"));
+
+  const { getFromLocalStorage } = useLocalStorage();
 
   // useEffect(() => {
   //     CMSServices.getCMS().then((res) => {
@@ -28,12 +34,13 @@ export const AuthProvider = ({ children }) => {
   //         localStorage.setItem("logo", res.data.logo)
   //     })
   // }, [])
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const getRole = localStorage.getItem("role");
-    setRole(getRole);
 
-    const fetchUser = async () => {
+  //----------------------------------------------------Fetching User Data --------------------
+  useEffect(() => {
+    const fetchData = async () => {
+      const getRole = getFromLocalStorage("role");
+      setLocalRole(getRole);
+
       try {
         setLoader(true);
         const response = await axios.get(
@@ -46,6 +53,14 @@ export const AuthProvider = ({ children }) => {
         );
         setUser(response.data);
         setLoader(false);
+        console.log(response.data)
+        if (response.data.users.role[0] === "noAccess") {
+          setRole("user");
+        } else if (response.data.users.role[0] === "midLevelAccess") {
+          setRole("subAdmin");
+        } else if (response.data.users.role[0] === "globalAccess") {
+          setRole("admin");
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
         setLoader(false);
@@ -53,10 +68,34 @@ export const AuthProvider = ({ children }) => {
     };
 
     if (!user && token) {
-      fetchUser();
+      fetchData();
     }
-  }, []); // Empty dependency array ensures this effect runs only once, on mount
+  }, [token , role]);
 
+  console.log(localRole, role);
+  //------------------------------------Setting Role--------------------
+  useEffect(() => {
+    const setUIRole = async () => {
+      if (localRole === responseRole && responseRole === "noAccess") {
+        setRole("user");
+        console.log("user");
+      } else if (
+        localRole === responseRole &&
+        responseRole === "midLevelAccess"
+
+      ) {
+        setRole("subAdmin");
+        console.log("subAdmin");
+      } else if (
+        localRole === responseRole &&
+        responseRole === "globalAccess"
+      ) {
+        setRole("admin");
+      }
+    };
+    setUIRole();
+  }, [localRole, responseRole]);
+  //----------------------------------------providing value --------------------
   const value = {
     CMSData,
     user,
@@ -65,7 +104,9 @@ export const AuthProvider = ({ children }) => {
     rolesAndPermissions,
     isOpen,
     setIsOpen,
+    token,
     role,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

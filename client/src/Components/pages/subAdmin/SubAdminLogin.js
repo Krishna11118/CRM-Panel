@@ -70,7 +70,7 @@ export default function SignInSide() {
     try {
       const token = getFromLocalStorage("token");
       setLoading(true);
-      const response = await axios.post(`${config.endpoint}/admin/login`, {
+      const response = await axios.post(`${config.endpoint}/subAdmin/login`, {
         email: email,
         password: password,
         headers: {
@@ -89,13 +89,13 @@ export default function SignInSide() {
         saveToLocalStorage("token", response.data.token);
 
         navigate("/");
+      } else {
+        setLoading(false);
+        toast.error("Login Failed");
       }
     } catch (err) {
       setLoading(false);
-      if (err.response.status === 401) {
-        setLoading(false);
-        toast.error(err.response.data.error);
-      } else if (err?.response?.status === 400) {
+      if (err?.response?.status === 400) {
         toast.error(err.response.data.error);
       } else {
         setLoading(false);

@@ -6,18 +6,20 @@ import config from "../../../Config/Config";
 import AddUserModal from "../../common/modals/AddUserModal";
 import { useSubAdminApiHook } from "../../../hooks/subAdminApiHook";
 import UsersTable from "./SubadminTable";
+import { useLocalStorage } from "../../../utils/LocalStorage";
 
 const SubUserData = () => {
   const [subAdmin, setSubAdmin] = useState([]);
   const { handleSubAdminStatus, handleDeleteSubAdmin, loading, error } =
-  useSubAdminApiHook();
+    useSubAdminApiHook();
+  const { getFromLocalStorage } = useLocalStorage();
 
-  //-----------------------------------------get user data from local storage----------------------------------
-  const fullName = localStorage.getItem("name");
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
+  //----------------------------------------get user data from local storage----------------------------------
+  const fullName = getFromLocalStorage("name");
+  const token = getFromLocalStorage("token");
+  const role = getFromLocalStorage("role");
 
-  //-----------------------------------------Fetch All Data----------------------------------
+  //-----------------------------------------fetch All Data----------------------------------
   useEffect(() => {
     const fetchData = async () => {
       try {

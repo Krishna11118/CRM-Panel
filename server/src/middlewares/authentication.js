@@ -8,8 +8,9 @@ const authenticate = async (req, res, next) => {
     const secKey = config.secretKey;
 
     const verifytoken = jwt.verify(token, secKey);
-
-    req.token = token;
+ console.log(verifytoken,"verifytoken")
+    // req.token = token;
+    // console.log(verifytoken, "verifytoken");
     req.verifytoken = verifytoken;
 
     next();

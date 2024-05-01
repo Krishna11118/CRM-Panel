@@ -5,6 +5,7 @@ import { useState } from "react";
 import config from "../Config/Config";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import {useLocalStorage} from "../utils/LocalStorage";
 
 export const useUserApiHooks = () => {
   const [data, setData] = useState(null);
@@ -12,6 +13,8 @@ export const useUserApiHooks = () => {
   const [loader, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { saveToLocalStorage } = useLocalStorage();
+
 
   // -----------------------------------------------user login
   const handleUserLogin = (email, password) => {
@@ -26,10 +29,12 @@ export const useUserApiHooks = () => {
         console.log("response", response.data);
         setLoading(false);
         toast.success("User logged in successfully");
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("mobile", response.data.user.mobile);
-        localStorage.setItem("fname", response.data.user.fname);
-        localStorage.setItem("email", response.data.user.email);
+
+        saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("mobile", response.data.user.mobile);
+        saveToLocalStorage("fname", response.data.user.fname);
+        saveToLocalStorage("email", response.data.user.email);
+
 
         response.data.success && navigate("/");
         // setTimeout(() => {

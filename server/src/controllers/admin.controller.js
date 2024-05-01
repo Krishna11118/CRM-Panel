@@ -66,6 +66,10 @@ const adminLogin = asyncHandler(async (req, res) => {
     return res.status(401).json({ error: "Invalid password" });
   }
 
+  if (!user.status) {
+    return res.status(401).json({ error: "Admin is inactive!" });
+  }
+
   //----------------------------------------Create Token
   const loginUserData = {
     user: {

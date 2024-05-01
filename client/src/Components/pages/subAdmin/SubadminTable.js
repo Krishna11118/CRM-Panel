@@ -16,7 +16,6 @@ import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
-
   const [deleteUserId, setDeleteUserId] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -37,7 +36,6 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
   };
 
   return (
-
     // --------------------------------------------------Table Container for Users
     <TableContainer
       className="bg-custom-600"
@@ -76,10 +74,9 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             />
           ))}
         </TableBody>
-{/* ****************************************************************** */}
+        {/* ****************************************************************** */}
 
-
-   {/* // ---------------------------------------------Delete Modal */}
+        {/* // ---------------------------------------------Delete Modal */}
         <Modal
           show={openDeleteModal}
           size="md"

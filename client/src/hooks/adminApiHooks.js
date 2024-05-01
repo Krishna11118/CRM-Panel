@@ -8,8 +8,7 @@ export const useAdminApiHook = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const { role } = useAuth();
+  const { token } = useAuth();
 
   // -------------------------------------------------------------------------------------------------admin's API
   // ---------------------------------------- admin login
@@ -109,15 +108,21 @@ export const useAdminApiHook = () => {
       });
   };
 
-  //------------------------------------------------------------------- create subAdmin
-  const handleCreateSubAdmin = (fname, mobile, email, password) => {
+  //------------------------------------------------------------------- create subAdmin & user
+  const handleCreateSubAdminAndUser = (fname, mobile, email, password , role) => {
     setLoading(true);
     axios
-      .post(`${config.endpoint}/subAdmin/register`, {
+      .post(`${config.endpoint}/${role}/register`, {
         fname,
         mobile,
         email,
         password,
+        
+      }, {
+        headers: {
+          authorization: `${token}`,
+        },
+        
       })
       .then((response) => {
         setData(response.data);
@@ -141,35 +146,35 @@ export const useAdminApiHook = () => {
   };
 
   //------------------------------------------------------------------- create user
-  const handleCreatUser = (fname, mobile, email, password) => {
-    setLoading(true);
-    axios
-      .post(`${config.endpoint}/user/register`, {
-        fname,
-        mobile,
-        email,
-        password,
-      })
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-        toast.success("User registered successfully");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setError("An error occurred while registering. Please try again.");
-        setLoading(false);
-        if (
-          error.response &&
-          error.response.data.error.includes("Email is Already Exist")
-        ) {
-          setError("This email is already registered");
-          toast.error("This email is already registered");
-        } else {
-          toast.error("An error occurred while registering. Please try again.");
-        }
-      });
-  };
+  // const handleCreatUser = (fname, mobile, email, password) => {
+  //   setLoading(true);
+  //   axios
+  //     .post(`${config.endpoint}/user/register`, {
+  //       fname,
+  //       mobile,
+  //       email,
+  //       password,
+  //     })
+  //     .then((response) => {
+  //       setData(response.data);
+  //       setLoading(false);
+  //       toast.success("User registered successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //       setError("An error occurred while registering. Please try again.");
+  //       setLoading(false);
+  //       if (
+  //         error.response &&
+  //         error.response.data.error.includes("Email is Already Exist")
+  //       ) {
+  //         setError("This email is already registered");
+  //         toast.error("This email is already registered");
+  //       } else {
+  //         toast.error("An error occurred while registering. Please try again.");
+  //       }
+  //     });
+  // };
 
 
 
@@ -178,7 +183,11 @@ export const useAdminApiHook = () => {
   const handleDeleteUser = (userId) => {
     setLoading(true);
     axios
-      .delete(`${config.endpoint}/admin/user/delete/${userId}`)
+      .delete(`${config.endpoint}/admin/user/delete/${userId}`,{
+        headers: {
+          authorization: `${token}`,
+        },
+      })
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -251,8 +260,8 @@ export const useAdminApiHook = () => {
     handleUpdateSubAdmin,
     handleDeleteSubAdmin,
     handleSubAdminStatus,
-    handleCreateSubAdmin,
-    handleCreatUser,
+    handleCreateSubAdminAndUser,
+    // handleCreatUser,
     handleDeleteUser,
     handleUpdateUser,
     handleUserStatus,

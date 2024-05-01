@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: Array,
-    default: "subAdmin",
+    default: "midLevelAccess",
   },
   isActive: {
     type: Boolean,

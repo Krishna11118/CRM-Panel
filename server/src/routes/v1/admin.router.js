@@ -23,7 +23,7 @@ const {
 // -------------------------------------------------------------------------------admin route
 router.post("/admin/register", adminRegister);
 router.post("/admin/login", adminLogin);
-router.get("/admin/singleData", authenticate, adminAuthentication, getAdmin);
+router.get("/globalAccess/singleData", authenticate, adminAuthentication, getAdmin);
 
 // -------------------------------------------------------------------------------subAdmin route
 
@@ -37,7 +37,7 @@ router.get(
 
 // to register subAdmin
 router.post(
-  "/admin/subAdmin/register",
+  "/subAdmin/register",
   authenticate,
   adminAuthentication,
   subAdminRegister

@@ -6,21 +6,27 @@ import config from "../../../Config/Config";
 import AddUserModal from "../../common/modals/AddUserModal";
 import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 import UsersTable from "./UsersTable";
+import { useLocalStorage } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const { handleUserStatus, handleDeleteUser, loading, error } =
     useAdminApiHook();
-  const fullName = localStorage.getItem("name");
+  const { getFromLocalStorage } = useLocalStorage();
+  const { role } = useAuth();
+
+  //-----------------------------------------get data from localStorage----------------------------------
+  const fullName = getFromLocalStorage("name");
 
   //-----------------------------------------Fetch All Data----------------------------------
+
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      const getRole = localStorage.getItem("role");
+    const fetchUserData = async () => {
+      const token = getFromLocalStorage("token");
+
       try {
-        const res = await axios.get(`${config.endpoint}/${getRole}/user/data`, {
+        const res = await axios.get(`${config.endpoint}/${role}/user/data`, {
           headers: {
             authorization: `${token}`,
           },
@@ -31,8 +37,8 @@ const Users = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    fetchUserData();
+  }, [role]);
 
   // -----------------------------------------Delete User--------------------------------
   const handleDelete = async (userId) => {

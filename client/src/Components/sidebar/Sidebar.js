@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { useState } from "react";
 import {
   FaBars,
@@ -16,7 +16,9 @@ import { useAuth } from "../../context/AuthContext";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { setUser, isOpen, setIsOpen } = useAuth();
+  const { setUser, isOpen, setIsOpen, role } = useAuth();
+  const [hideForSubAdmin, setHideForSubAdmin] = useState(false);
+  const [hideForUser, setHideForUser] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -45,6 +47,15 @@ const Sidebar = () => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    if (role === "user") {
+      setHideForUser(true);
+    }
+    if (role === "subAdmin") {
+      setHideForSubAdmin(true);
+    }
+  }, []);
+
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar-content">
@@ -66,22 +77,26 @@ const Sidebar = () => {
             </li>
 
             {/* ------------------------------------Sub admin */}
-            <li onClick={subAdminsButton}>
-              <a href="#">
-                <FaUser className="sidebar-icon" color="white" />
-                <span className="links_name">Sub Admins</span>
-              </a>
-              <span className="tooltip">Sub Admins</span>
-            </li>
+            {!hideForUser && !hideForSubAdmin && (
+              <li onClick={subAdminsButton}>
+                <a href="#">
+                  <FaUser className="sidebar-icon" color="white" />
+                  <span className="links_name">Sub Admins</span>
+                </a>
+                <span className="tooltip">Sub Admins</span>
+              </li>
+            )}
 
             {/* ----------------------------------------Users */}
-            <li className="sidebar-text-list" onClick={usersButton}>
-              <a href="#">
-                <FaChartPie className="sidebar-icon" color="white" />
-                <span className="links_name">Users</span>
-              </a>
-              <span className="tooltip">Users</span>
-            </li>
+            {!hideForUser && (
+              <li className="sidebar-text-list" onClick={usersButton}>
+                <a href="#">
+                  <FaChartPie className="sidebar-icon" color="white" />
+                  <span className="links_name">Users</span>
+                </a>
+                <span className="tooltip">Users</span>
+              </li>
+            )}
 
             {/* ---------------------------------------Messages */}
             <li className="sidebar-text-list">
@@ -178,6 +193,4 @@ const Sidebar = () => {
   );
 };
 
-
-
-export default Sidebar ;
+export default Sidebar;

@@ -13,6 +13,7 @@ import AdminLogin from "../Components/pages/admin/AdminLogin";
 import Layout from "../Components/layout/Layout";
 import { useAuthRouter } from "../Components/Auth/useAuth";
 import Skelton from "../Components/pages/Skelton";
+import SubAdminLogin from "../Components/pages/subAdmin/SubAdminLogin";
 
 function Routers() {
   const { user } = useAuth();
@@ -36,6 +37,7 @@ function Routers() {
             <Route element={<Login />} path="/login" />
             <Route path="/register" element={<Register />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/subAdmin/login" element={<SubAdminLogin />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -12,6 +12,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import axios from "axios";
 import config from "../../../Config/Config";
 import { validateInput } from "../../../utils/Validations";
+import { useLocalStorage } from "../../../utils/LocalStorage";
 
 const Login = () => {
   const { setUser } = useAuth();
@@ -20,6 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { saveToLocalStorage } = useLocalStorage();
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -48,13 +50,13 @@ const Login = () => {
       if (response.status === 201) {
         setUser(response.data.user);
         toast.success("Login Successful");
-        persistLogin(
-          response.data.token,
-          response.data.user.mobile,
-          response.data.user.fname,
-          response.data.user.email,
-          response.data.user.role[0]
-        );
+
+        // -----------------------------------------------save to local storage
+        saveToLocalStorage("name", response.data.user.fname);
+        saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("role", response.data.user.role[0]);
+        saveToLocalStorage("email", response.data.user.email);
+        saveToLocalStorage("mobile", response.data.user.mobile);
         navigate("/");
       } else {
         setLoading(false);
@@ -71,15 +73,6 @@ const Login = () => {
         toast.error("Login Failed");
       }
     }
-  };
-
-  //--------------------------------------------- Persist Login ---------------------------------------------
-  const persistLogin = (token, mobile, fname, email, role) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("mobile", mobile);
-    localStorage.setItem("name", fname);
-    localStorage.setItem("email", email);
-    localStorage.setItem("role", role);
   };
 
   return (

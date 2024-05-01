@@ -1,12 +1,15 @@
 import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
-import News from "../Components/pages/News";
-import Performance from "../Components/pages/Performance";
 import Support from "../Components/pages/Support";
 import PrivateRoutes from "../Components/protectRoute/privateRoute";
-import Dashboard from "../Components/pages/Dashboard";
 import Profile from "../Components/pages/Profile";
+
+//-----------------------------------------------------main pages
+import Dashboard from "../Components/pages/Dashboard";
 import SubAdmin from "../Components/pages/subAdmin/SubUserData";
+import Users from "../Components/pages/user/Users";
+
+
 
 const RightSideRouter = () => {
   return (
@@ -15,7 +18,7 @@ const RightSideRouter = () => {
       <Route element={<PrivateRoutes />}>
         <Route element={<Dashboard />} path="/" />
         <Route element={<SubAdmin />} path="/subAdmins" />
-        <Route element={<Performance />} path="/users" />
+        <Route element={<Users />} path="/users" />
         <Route element={<Support />} path="/support" />
         <Route element={<Profile />} path="/profile" />
       </Route>

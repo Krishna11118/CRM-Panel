@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: Array,
-    default: "user",
+    default: "noAccess",
   },
   adminId: {
     type: mongoose.Schema.Types.ObjectId,
