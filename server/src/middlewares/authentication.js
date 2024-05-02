@@ -1,14 +1,13 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 
-// --------------------------------------------------------------------Authentication for all 
+// --------------------------------------------------------------------Authentication for all
 const authenticate = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const secKey = config.secretKey;
 
     const verifytoken = jwt.verify(token, secKey);
- console.log(verifytoken,"verifytoken")
     // req.token = token;
     // console.log(verifytoken, "verifytoken");
     req.verifytoken = verifytoken;

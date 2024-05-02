@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Typography, Grid } from "@mui/material";
 import config from "../../../Config/Config";
-import AddUserModal from "../../common/modals/AddUserModal";
+import AddSubAdminModal from "../../common/modals/AddSubAdminModal";
 import { useSubAdminApiHook } from "../../../hooks/subAdminApiHook";
 import UsersTable from "./SubadminTable";
 import { useLocalStorage } from "../../../utils/LocalStorage";
@@ -106,7 +106,7 @@ const SubUserData = () => {
           </div>
         </div>
         <Grid sx={{ margin: "1.5rem auto" }}>
-          <AddUserModal />
+          <AddSubAdminModal />
 
           <UsersTable
             users={subAdmin}

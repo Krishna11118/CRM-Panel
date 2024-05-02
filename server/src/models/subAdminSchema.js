@@ -34,8 +34,18 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
   permissions: {
-    type: Array,
-    default: "subAdmin",
+    type: {
+      create: { type: Boolean, default: true },
+      read: { type: Boolean, default: true },
+      update: { type: Boolean, default: true },
+      delete: { type: Boolean, default: true },
+    },
+    default: {
+      create: true,
+      read: true,
+      update: true,
+      delete: true,
+    },
   },
   role: {
     type: Array,
@@ -43,7 +53,7 @@ const userSchema = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
-    default: true, 
+    default: true,
   },
   adminId: {
     type: mongoose.Schema.Types.ObjectId,

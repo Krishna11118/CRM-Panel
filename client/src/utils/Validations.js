@@ -25,10 +25,11 @@ export const Validation = () => {
     } else if (password.trim().length < 6) {
       isValid = false;
       toast.error("Password must be at least 6 characters long");
-    } else if (!role.trim()) {
-      isValid = false;
-      toast.error("Please select a Role");
     }
+    // else if (!role.trim()) {
+    //   isValid = false;
+    //   toast.error("Please select a Role");
+    // }
 
     return isValid;
   };

@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema({
   permissions: {
     type: Array,
     default: [
-      "admin",
       // "create",
       // "read",
       // "update",

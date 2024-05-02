@@ -15,16 +15,16 @@ const AddUserModal = () => {
   const [email, setEmail] = useState("");
   const [mobile, setmobile] = useState("");
   const [password, setPassword] = useState("");
-  const { handleCreatUser } = useAdminApiHook();
-  // const { role } = useAuth();
+  const { handleCreateSubAdmin } = useAdminApiHook();
+    const { role } = useAuth();
 
-  const [role, setRole] = useState("");
   // const [subAdminRole, setSubAdminRole] = useState("");
   // const [userdRole, setUserRole] = useState("");
 
   function onCloseModal() {
     setOpenModal(false);
   }
+  //--------------------------------------validate inputs
   const { registerUserValidation } = Validation();
 
   //--------------------------------------Create SubUsers
@@ -34,10 +34,12 @@ const AddUserModal = () => {
     if (!registerUserValidation(fname, email, mobile, password)) {
       return;
     } else {
-      handleCreatUser(fname, mobile, email, password);
+      handleCreateSubAdmin(fname, mobile, email, password);
     }
     setOpenModal(false);
   };
+
+  
 
   return (
     <>
@@ -49,7 +51,7 @@ const AddUserModal = () => {
         style={{ margin: "10px" }}
         className=" bg-custom-600 ml-6 hover:shadow-lg text-white font-bold py-1 px-2 "
       >
-        <AiOutlineUserAdd className="mr-2" size={20} /> Add User
+        <AiOutlineUserAdd className="mr-2" size={20} /> Add Sub Admin
       </Button>
       <Modal
         show={openModal}
@@ -62,7 +64,7 @@ const AddUserModal = () => {
         <Modal.Body className="bg-custom-600">
           <div className="space-y-2 ">
             <h3 className="text-xl font-medium text-white " color="primary">
-              Create user
+              Create Sub Admin
             </h3>
 
             <div>
@@ -115,30 +117,31 @@ const AddUserModal = () => {
               />
             </div>
 
-            <div className="mb-2 block flex pt-2">
-              <FaStarOfLife color="red" size={8} />
-              <Label
-                htmlFor="password"
-                value=" Password"
-                className="text-white"
+            <div>
+              <div className="mb-2 block flex pt-2">
+                <FaStarOfLife color="red" size={8} />
+                <Label
+                  htmlFor="password"
+                  value=" Password"
+                  className="text-white"
+                />
+              </div>
+              <TextInput
+                className="py-2"
+                id="password"
+                type="password"
+                placeholder="password"
+                required
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               />
-            </div>
-            <TextInput
-              className="py-2"
-              id="password"
-              type="password"
-              placeholder="password"
-              required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
 
-            {/* <div className="mb-2 block flex pt-2">
+              {/* <div className="mb-2 block flex pt-2">
                 <FaStarOfLife color="red" size={8} />
                 <Label htmlFor="password" value="Role" className="text-white" />
-              </div> */}
+              </div>
 
-            {/* <div className="bg-custom-800 w-[37%] rounded-md">
+              <div className="bg-custom-800 w-[37%] rounded-md">
                 <Dropdown
                   label="Select role"
                   className="bg-custom-500 shadow-md border-0"
@@ -159,6 +162,7 @@ const AddUserModal = () => {
                   </Dropdown.Item>
                 </Dropdown>
               </div> */}
+            </div>
             <div onClick={handleRegister}>
               <CustomButton
                 text="Create User"
