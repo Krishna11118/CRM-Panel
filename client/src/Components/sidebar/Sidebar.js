@@ -44,7 +44,7 @@ const Sidebar = () => {
   const logoutButton = () => {
     setUser(null);
     localStorage.clear();
-    navigate("/login");
+    navigate("/subAdmin/login");
   };
 
   useEffect(() => {

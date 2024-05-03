@@ -16,10 +16,6 @@ const AddUserModal = () => {
   const [mobile, setmobile] = useState("");
   const [password, setPassword] = useState("");
   const { handleCreateSubAdmin } = useAdminApiHook();
-    const { role } = useAuth();
-
-  // const [subAdminRole, setSubAdminRole] = useState("");
-  // const [userdRole, setUserRole] = useState("");
 
   function onCloseModal() {
     setOpenModal(false);

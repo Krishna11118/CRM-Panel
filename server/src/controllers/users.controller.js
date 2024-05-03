@@ -169,7 +169,6 @@ const updateUserData = asyncHandler(async (req, res) => {
 const userStatus = asyncHandler(async (req, res) => {
   const userId = req.params.userId;
   const isActive = req.params.isActive;
-  console.log("isActive", isActive);
 
   try {
     const user = await userdb.findByIdAndUpdate(userId, { isActive: isActive });

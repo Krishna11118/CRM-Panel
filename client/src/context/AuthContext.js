@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [responseRole, setResponseRole] = useState([]);
   const [role, setRole] = useState([]);
   const [token] = useState(localStorage.getItem("token"));
-
+  const [resData, setResData] = useState({});
   const { getFromLocalStorage } = useLocalStorage();
 
   // useEffect(() => {
@@ -52,8 +52,8 @@ export const AuthProvider = ({ children }) => {
           }
         );
         setUser(response.data);
+        setResData(response.data);
         setLoader(false);
-        console.log(response.data)
         if (response.data.users.role[0] === "noAccess") {
           setRole("user");
         } else if (response.data.users.role[0] === "midLevelAccess") {
@@ -70,9 +70,9 @@ export const AuthProvider = ({ children }) => {
     if (!user && token) {
       fetchData();
     }
-  }, [token , role]);
+  }, [token, role]);
 
-  console.log(localRole, role);
+  console.log(resData," resData from context");
   //------------------------------------Setting Role--------------------
   useEffect(() => {
     const setUIRole = async () => {
@@ -82,7 +82,6 @@ export const AuthProvider = ({ children }) => {
       } else if (
         localRole === responseRole &&
         responseRole === "midLevelAccess"
-
       ) {
         setRole("subAdmin");
         console.log("subAdmin");
@@ -106,6 +105,7 @@ export const AuthProvider = ({ children }) => {
     setIsOpen,
     token,
     role,
+    resData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

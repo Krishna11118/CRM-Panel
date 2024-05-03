@@ -6,7 +6,13 @@ const { comparePasswords } = require("../utils/bcrypt.utils");
 
 // --------------------------------------------------------------------------- register
 const subAdminRegister = asyncHandler(async (req, res) => {
-  const { email, password, mobile, fname, role } = req.body;
+  const {
+    email,
+    password,
+    mobile,
+    fname,
+    permissions: { createUser, readUser, updateUser, deleteUser, changeStatus },
+  } = req.body;
 
   if (!email || !password || !mobile || !fname) {
     return res.status(400).json({ error: "Please fill all details" });
@@ -27,6 +33,13 @@ const subAdminRegister = asyncHandler(async (req, res) => {
     password: hashedPassword,
     fname,
     mobile,
+    permissions: {
+      createUser,
+      readUser,
+      updateUser,
+      deleteUser,
+      changeStatus,
+    },
   });
 
   // Save the new user to the database

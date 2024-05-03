@@ -15,7 +15,10 @@ const {
 
 //--------------------------------------------------------subAdmin route
 
+// subAdmin login
 router.post("/subAdmin/login", subAdminLogin);
+
+// subAdmin single data
 router.get(
   "/midLevelAccess/singleData",
   authenticate,

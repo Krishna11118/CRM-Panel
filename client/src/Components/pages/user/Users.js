@@ -14,7 +14,9 @@ const Users = () => {
   const { handleUserStatus, handleDeleteUser, loading, error } =
     useAdminApiHook();
   const { getFromLocalStorage } = useLocalStorage();
-  const { role } = useAuth();
+  const { role, resData } = useAuth();
+
+  const subUserCreatePermissions = resData.users.permissions.createUser;
 
   //-----------------------------------------get data from localStorage----------------------------------
   const fullName = getFromLocalStorage("name");
@@ -109,7 +111,7 @@ const Users = () => {
           </div>
         </div>
         <Grid sx={{ margin: "1.5rem auto" }}>
-          <AddUserModal />
+          {subUserCreatePermissions && <AddUserModal />}
 
           <UsersTable
             users={users}

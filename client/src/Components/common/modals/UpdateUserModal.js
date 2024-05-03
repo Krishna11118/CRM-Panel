@@ -24,12 +24,12 @@ const AddUserModal = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // if (!registerUserValidation(fname, email, mobile, password)) {
-    //   return;
-    // } else {
-    updateUser(fname, mobile, email, password);
-    setOpenModal(false);
-    // }
+    if (!registerUserValidation(fname, email, mobile, password)) {
+      return;
+    } else {
+      updateUser(fname, mobile, email, password);
+      setOpenModal(false);
+    }
   };
 
   return (

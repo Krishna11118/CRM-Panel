@@ -3,7 +3,7 @@ import { useAuthRouter } from "../Auth/useAuth";
 
 function PrivateRoutes() {
   const token = useAuthRouter();
-  return token ? <Outlet /> : <Navigate to="/login" />;
+  return token ? <Outlet /> : <Navigate to="/" />;
 }
 
 export default PrivateRoutes;

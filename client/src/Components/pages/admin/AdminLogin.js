@@ -62,6 +62,7 @@ export default function SignInSide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+               
     // ---------------------------------------Validation-------------------------------------
     if (!validateInput({ email, password })) {
       return;

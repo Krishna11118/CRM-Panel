@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,10 +18,10 @@ import { toast } from "react-hot-toast";
 import { useState } from "react";
 import axios from "axios";
 import config from "../../../Config/Config";
-import { useAuth } from "../../../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
+import { useAuth } from "../../../context/AuthContext";
 
 // function Copyright(props) {
 //   return (
@@ -44,12 +45,13 @@ const defaultTheme = createTheme();
 //---------------------------------------Handle submit function-------------------------------------
 
 export default function SignInSide() {
-  const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { saveToLocalStorage, getFromLocalStorage } = useLocalStorage();
+  const { setUser } = useAuth();
+
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -62,10 +64,12 @@ export default function SignInSide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // ---------------------------------------Validation-------------------------------------
     if (!validateInput({ email, password })) {
       return;
     }
+
     // ---------------------------------------API call---------------------------------------
     try {
       const token = getFromLocalStorage("token");
@@ -73,9 +77,6 @@ export default function SignInSide() {
       const response = await axios.post(`${config.endpoint}/subAdmin/login`, {
         email: email,
         password: password,
-        headers: {
-          authorization: `${token}`,
-        },
       });
 
       if (response.status === 201) {

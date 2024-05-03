@@ -14,11 +14,17 @@ import Paper from "@mui/material/Paper";
 import UserRow from "./UserRow";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { useAuth } from "../../../context/AuthContext";
 
 const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
-
   const [deleteUserId, setDeleteUserId] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const { resData } = useAuth();
+
+  //-----------------------------------------User Permissions--------------------------------
+  const userStatusPermissions = resData.users.permissions.changeStatus;
+  const userDeletePermissions = resData.users.permissions.deleteUser;
+  const userUpdatePermissions = resData.users.permissions.updateUser;
 
   //-----------------------------------------Delete User--------------------------------
   const handleDeletebtn = async (userId) => {
@@ -37,7 +43,6 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
   };
 
   return (
-
     // --------------------------------------------------Table Container for Users
     <TableContainer
       className="bg-custom-600"
@@ -60,10 +65,18 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             <TableCell className="text-white">Name</TableCell>
             <TableCell className="text-white">E-mail</TableCell>
             <TableCell className="text-white">Mobile No</TableCell>
-            <TableCell className="text-white">Status</TableCell>
-            <TableCell className="text-white">Action</TableCell>
+            {userStatusPermissions && (
+              <TableCell className="text-white">Status</TableCell>
+            )}
+            {userUpdatePermissions && (
+              <TableCell className="text-white">Edit</TableCell>
+            )}
+            {userDeletePermissions && (
+              <TableCell className="text-white">Action</TableCell>
+            )}
           </TableRow>
         </TableHead>
+        {/* // ------------------------------------------Table Body */}
         <TableBody>
           {users.map((user, index) => (
             <UserRow
@@ -76,10 +89,9 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             />
           ))}
         </TableBody>
-{/* ****************************************************************** */}
+        {/* ****************************************************************** */}
 
-
-   {/* // ---------------------------------------------Delete Modal */}
+        {/* // ---------------------------------------------Delete Modal */}
         <Modal
           show={openDeleteModal}
           size="md"
