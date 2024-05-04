@@ -8,15 +8,15 @@ import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 import UsersTable from "./UsersTable";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
+import { useSetRole } from "../../../utils/SetPermission";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const { handleUserStatus, handleDeleteUser, loading, error } =
     useAdminApiHook();
   const { getFromLocalStorage } = useLocalStorage();
-  const { role, resData } = useAuth();
-
-  const subUserCreatePermissions = resData.users.permissions.createUser;
+  const { role } = useAuth();
+  const { subAdminCreatePermissions } = useSetRole();
 
   //-----------------------------------------get data from localStorage----------------------------------
   const fullName = getFromLocalStorage("name");
@@ -111,7 +111,7 @@ const Users = () => {
           </div>
         </div>
         <Grid sx={{ margin: "1.5rem auto" }}>
-          {subUserCreatePermissions && <AddUserModal />}
+          {subAdminCreatePermissions && <AddUserModal />}
 
           <UsersTable
             users={users}

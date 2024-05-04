@@ -35,11 +35,11 @@ const userSchema = new mongoose.Schema({
   },
   permissions: {
     type: {
-      createUser: { type: Boolean },
-      readUser: { type: Boolean },
-      updateUser: { type: Boolean },
-      deleteUser: { type: Boolean },
-      changeStatus: { type: Boolean },
+      createUser: { type: Boolean, default: true },
+      readUser: { type: Boolean, default: true },
+      updateUser: { type: Boolean, default: true },
+      deleteUser: { type: Boolean, default: true },
+      changeStatus: { type: Boolean, default: true },
     },
     default: {
       createUser: true,

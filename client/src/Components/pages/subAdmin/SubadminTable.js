@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import {
-  Typography,
-  Grid,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Avatar,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import UserRow from "../user/UserRow";
@@ -18,6 +15,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
   const [deleteUserId, setDeleteUserId] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
 
   //-----------------------------------------Delete User--------------------------------
   const handleDeletebtn = async (userId) => {
@@ -52,6 +50,7 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
         aria-label="a dense table "
         className=" bg-custom-700 rounded-md"
       >
+        {/* // -----------------------------------------Table header */}
         <TableHead>
           <TableRow className="main">
             <TableCell className="text-white ">#</TableCell>
@@ -59,9 +58,11 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             <TableCell className="text-white">E-mail</TableCell>
             <TableCell className="text-white">Mobile No</TableCell>
             <TableCell className="text-white">Status</TableCell>
+            <TableCell className="text-white">Edit</TableCell>
             <TableCell className="text-white">Action</TableCell>
           </TableRow>
         </TableHead>
+        {/* // -----------------------------------------Table Body */}
         <TableBody>
           {users.map((user, index) => (
             <UserRow
@@ -74,8 +75,6 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             />
           ))}
         </TableBody>
-        {/* ****************************************************************** */}
-
         {/* // ---------------------------------------------Delete Modal */}
         <Modal
           show={openDeleteModal}
@@ -110,8 +109,6 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             </div>
           </Modal.Body>
         </Modal>
-
-        {/* ******************************************* */}
       </Table>
     </TableContainer>
   );

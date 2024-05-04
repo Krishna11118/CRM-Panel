@@ -21,7 +21,7 @@ const SubUserData = () => {
   const fullName = getFromLocalStorage("name");
   const token = getFromLocalStorage("token");
 
-  //-----------------------------------------fetch All Data----------------------------------
+  //-----------------------------------------fetch all subAdmin Data----------------------------------
   useEffect(() => {
     const fetchData = async () => {
       try {

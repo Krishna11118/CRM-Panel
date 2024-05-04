@@ -11,7 +11,12 @@ const subAdminRegister = asyncHandler(async (req, res) => {
     password,
     mobile,
     fname,
-    permissions: { createUser, readUser, updateUser, deleteUser, changeStatus },
+    // permissions: { createUser, readUser, updateUser, deleteUser, changeStatus },
+    createUser,
+    readUser,
+    updateUser,
+    deleteUser,
+    changeStatus,
   } = req.body;
 
   if (!email || !password || !mobile || !fname) {
@@ -177,8 +182,6 @@ const updateSubAdminData = asyncHandler(async (req, res) => {
 const subAdminStatus = asyncHandler(async (req, res) => {
   const subAdminId = req.params.subAdminId;
   const isActive = req.params.isActive;
-  console.log("isActive", isActive);
-
   try {
     const user = await subAdmindb.findByIdAndUpdate(subAdminId, {
       isActive: isActive,

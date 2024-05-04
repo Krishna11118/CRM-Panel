@@ -1,13 +1,19 @@
-import { React, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 export const useSetRole = () => {
-  const { localRole, responseRole } = useAuth();
+  const { resData } = useAuth();
 
-  const roleCheck = (role) => {
-    // setLocalRole(role);
-    console.log(localRole, responseRole, "rolesssssssss");
-    console.log("role", role);
+  const subAdminCreatePermissions = resData.users.permissions.createUser;
+  const subAdminReadPermissions = resData.users.permissions.readUser;
+  const subAdminUpdatePermissions = resData.users.permissions.updateUser;
+  const subAdminDeletePermissions = resData.users.permissions.deleteUser;
+  const subAdminStatusPermissions = resData.users.permissions.changeStatus;
+
+  return {
+    subAdminCreatePermissions,
+    subAdminReadPermissions,
+    subAdminUpdatePermissions,
+    subAdminDeletePermissions,
+    subAdminStatusPermissions,
   };
-  return { roleCheck };
 };
