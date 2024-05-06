@@ -28,12 +28,15 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const {getFromLocalStorage} = useLocalStorage();
-  const { handleUserStatus, handleDeleteUser, loading, error } = useUserApiHooks();
+  const { getFromLocalStorage } = useLocalStorage();
+  const { handleUserStatus, handleDeleteUser, loading, error } =
+    useUserApiHooks();
   const [userStatus, setUserStatus] = useState({});
 
-
   const fullName = getFromLocalStorage("fname");
+  if (fullName === "undefined") {
+    fullName = "Admin";
+  }
   //-----------------------------------------Fetch Data--------------------------------
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +52,6 @@ const Users = () => {
         });
 
         setUserStatus(statusObj);
-        
       } catch (err) {
         console.error("Error fetching data:", err);
       }

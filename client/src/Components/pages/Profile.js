@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
+import Table from "./Table";
 
 const Profile = () => {
-    return (
-        <>
-            <h1>Profile</h1>
-        </>
-    );
+  return (
+    <>
+      <div >
+        {/* <h1>Profile</h1> */}
+        <Table />
+      </div>
+    </>
+  );
 };
 
 export default Profile;

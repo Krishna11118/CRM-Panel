@@ -114,7 +114,7 @@ export const useAdminApiHook = () => {
     mobile,
     email,
     password,
-    role
+    { createUser, readUser, updateUser, changeStatus, deleteUser }
   ) => {
     setLoading(true);
     axios
@@ -125,6 +125,11 @@ export const useAdminApiHook = () => {
           mobile,
           email,
           password,
+          createUser,
+          readUser,
+          updateUser,
+          changeStatus,
+          deleteUser,
         },
         {
           headers: {

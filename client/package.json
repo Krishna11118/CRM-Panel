@@ -17,9 +17,10 @@
     "bootstrap": "^5.3.2",
     "flowbite-react": "^0.7.8",
     "postcss": "^8.4.38",
-    "react": "^18.2.0",
+    "react": "^17.0.0 || ^18.0.0",
     "react-bootstrap": "^2.10.0",
-    "react-dom": "^18.2.0",
+    "react-countup": "^6.5.3",
+    "react-dom": "^17.0.0 || ^18.0.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.22.0",
@@ -57,5 +58,4 @@
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
   }
-  
 }

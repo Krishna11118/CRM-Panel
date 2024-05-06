@@ -21,6 +21,10 @@ export const AuthProvider = ({ children }) => {
   const [token] = useState(localStorage.getItem("token"));
   const [resData, setResData] = useState({});
   const { getFromLocalStorage } = useLocalStorage();
+  const [usersData, setUsersData] = useState(0);
+  const [subAdminsData, setSubAdminsData] = useState(0);
+
+  
 
   // useEffect(() => {
   //     CMSServices.getCMS().then((res) => {
@@ -72,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token, role]);
 
-  console.log(resData," resData from context");
+  console.log(resData, " resData from context");
   //------------------------------------Setting Role--------------------
   useEffect(() => {
     const setUIRole = async () => {
@@ -106,6 +110,12 @@ export const AuthProvider = ({ children }) => {
     token,
     role,
     resData,
+
+    usersData,
+    setUsersData,
+    subAdminsData,
+    setSubAdminsData,
+    
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

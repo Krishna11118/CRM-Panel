@@ -23,25 +23,7 @@ import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
 
-// function Copyright(props) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       {/* <Link color="inherit" src="www.ganeshcars.com">
-//       Ganesh Cars
-//       </Link>{" "} */}
-//       {new Date().getFullYear()}
-//     </Typography>
-//   );
-// }
-
 const defaultTheme = createTheme();
-
 //---------------------------------------Handle submit function-------------------------------------
 
 export default function SignInSide() {
@@ -51,7 +33,6 @@ export default function SignInSide() {
   const navigate = useNavigate();
   const { saveToLocalStorage, getFromLocalStorage } = useLocalStorage();
   const { setUser } = useAuth();
-
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -96,6 +77,10 @@ export default function SignInSide() {
       }
     } catch (err) {
       setLoading(false);
+      if (err.response.status === 401) {
+        toast.error(err.response.data.error);
+        return;
+      }
       if (err?.response?.status === 400) {
         toast.error(err.response.data.error);
       } else {

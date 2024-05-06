@@ -11,13 +11,13 @@ const subAdminRegister = asyncHandler(async (req, res) => {
     password,
     mobile,
     fname,
-    // permissions: { createUser, readUser, updateUser, deleteUser, changeStatus },
     createUser,
     readUser,
     updateUser,
     deleteUser,
     changeStatus,
   } = req.body;
+  console.log(createUser, readUser, updateUser, deleteUser, changeStatus);
 
   if (!email || !password || !mobile || !fname) {
     return res.status(400).json({ error: "Please fill all details" });
@@ -196,6 +196,21 @@ const subAdminStatus = asyncHandler(async (req, res) => {
   }
 });
 
+// -------------------------------------------------------------------------------Single subAdmin
+const getSingleSubAdmin = asyncHandler(async (req, res) => {
+  const subAdminId = req.params.subAdminId;
+  try {
+    const user = await subAdmindb.findById(subAdminId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = {
   subAdminRegister,
   subAdminLogin,
@@ -204,4 +219,5 @@ module.exports = {
   deleteSubAdmin,
   updateSubAdminData,
   subAdminStatus,
+  getSingleSubAdmin,
 };

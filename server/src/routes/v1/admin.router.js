@@ -12,6 +12,7 @@ const {
   deleteSubAdmin,
   updateSubAdminData,
   subAdminStatus,
+  getSingleSubAdmin,
 } = require("../../controllers/subAdmin.controller");
 const {
   getUsers,
@@ -23,7 +24,12 @@ const {
 // -------------------------------------------------------------------------------admin route
 router.post("/admin/register", adminRegister);
 router.post("/admin/login", adminLogin);
-router.get("/globalAccess/singleData", authenticate, adminAuthentication, getAdmin);
+router.get(
+  "/globalAccess/singleData",
+  authenticate,
+  adminAuthentication,
+  getAdmin
+);
 
 // -------------------------------------------------------------------------------subAdmin route
 
@@ -51,6 +57,14 @@ router.patch("/admin/subAdmin/update/:subAdminId", updateSubAdminData);
 
 // to change subAdmin's status
 router.put("/admin/subAdmin/:subAdminId/:isActive", subAdminStatus);
+
+// to get single subAdmin
+router.get(
+  "/admin/subAdmin/single/:subAdminId",
+  authenticate,
+  adminAuthentication,
+  getSingleSubAdmin
+);
 
 // -------------------------------------------------------------------------------users route
 

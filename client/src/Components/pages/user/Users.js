@@ -106,7 +106,8 @@ const Users = () => {
               sx={{ fontSize: "1.5rem", fontWeight: "600 " }}
               className="flex text-white"
             >
-              Welcome &nbsp; <div className="uppercase"> {fullName}</div>
+            Users
+              {/* Welcome &nbsp; <div className="uppercase"> {fullName}</div> */}
             </Typography>
           </div>
         </div>

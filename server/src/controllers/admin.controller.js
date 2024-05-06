@@ -87,7 +87,7 @@ const adminLogin = asyncHandler(async (req, res) => {
   return res.status(201).json(loginResult);
 });
 
-//-----------------------------------------Get admin for context-----------------------------------------
+//-----------------------------------------Get single data-----------------------------------------
 const getAdmin = async (req, res) => {
   const userId = req.userId;
   try {

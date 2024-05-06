@@ -15,7 +15,7 @@ const SubUserData = () => {
   const { handleSubAdminStatus, handleDeleteSubAdmin, loading, error } =
     useSubAdminApiHook();
   const { getFromLocalStorage } = useLocalStorage();
-  const { role } = useAuth();
+  const { role, setSubAdminsData  } = useAuth();
 
   //----------------------------------------get user data from local storage----------------------------------
   const fullName = getFromLocalStorage("name");
@@ -31,6 +31,7 @@ const SubUserData = () => {
           },
         });
         setSubAdmin(res.data);
+        setSubAdminsData(res.data);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
@@ -112,13 +113,14 @@ const SubUserData = () => {
                 sx={{ fontSize: "1.5rem", fontWeight: "600 " }}
                 className="flex text-white"
               >
-                Welcome &nbsp; <div className="uppercase"> {fullName}</div>
+                Sub Admins{" "}
+                {/*  Welcome &nbsp;{" "}
+                <div className="uppercase"> {fullName}</div> */}
               </Typography>
             </div>
           </div>
           <Grid sx={{ margin: "1.5rem auto" }}>
             <AddSubAdminModal />
-
             <UsersTable
               users={subAdmin}
               handleDelete={handleDelete}

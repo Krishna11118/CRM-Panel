@@ -17,5 +17,15 @@ export const useLocalStorage = () => {
     localStorage.removeItem(key);
   }
 
-  return { getFromLocalStorage, saveToLocalStorage, deleteFromLocalStorage };
+  //------------------------------------------clear all data from local storage----------------------------------
+  function clearLocalStorage() {
+    localStorage.clear();
+  }
+
+  return {
+    getFromLocalStorage,
+    saveToLocalStorage,
+    deleteFromLocalStorage,
+    clearLocalStorage,
+  };
 };

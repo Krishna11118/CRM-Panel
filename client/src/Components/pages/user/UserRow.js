@@ -8,7 +8,6 @@ import { useSetRole } from "../../../utils/SetPermission";
 
 const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
   const {
-    subAdminCreatePermissions,
     subAdminReadPermissions,
     subAdminUpdatePermissions,
     subAdminDeletePermissions,
@@ -45,7 +44,7 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
           <TableCell className="text-white">{user.email}</TableCell>
           <TableCell className="text-white">{user.mobile}</TableCell>
 
-          {/* //---------------------------------change ui acc to subAdmin response--------------------------------- */}
+          {/* //---------------------------------changing UI acc to subAdmin response--------------------------------- */}
           {subAdminStatusPermissions && (
             <TableCell className="text-white">
               {/* Status Toggle button */}

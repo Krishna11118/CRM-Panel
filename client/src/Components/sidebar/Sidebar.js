@@ -12,6 +12,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { FaUsers } from "react-icons/fa";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ const Sidebar = () => {
             {/* ------------------------------------Sub admin */}
             {!hideForUser && !hideForSubAdmin && (
               <li onClick={subAdminsButton}>
-                <a href="#">
+                <a >
                   <FaUser className="sidebar-icon" color="white" />
                   <span className="links_name">Sub Admins</span>
                 </a>
@@ -90,8 +91,9 @@ const Sidebar = () => {
             {/* ----------------------------------------Users */}
             {!hideForUser && (
               <li className="sidebar-text-list" onClick={usersButton}>
-                <a href="#">
-                  <FaChartPie className="sidebar-icon" color="white" />
+                <a >
+                  <FaUsers className="sidebar-icon" color="white" />
+                  {/* <FaChartPie className="sidebar-icon" color="white" /> */}
                   <span className="links_name">Users</span>
                 </a>
                 <span className="tooltip">Users</span>
@@ -100,7 +102,7 @@ const Sidebar = () => {
 
             {/* ---------------------------------------Messages */}
             <li className="sidebar-text-list">
-              <a href="#" onClick={messagesButton}>
+              <a  onClick={messagesButton}>
                 <FaComments className="sidebar-icon" color="white" />
                 <span className="links_name ">Messages </span>
                 <RiArrowDropDownLine
@@ -117,7 +119,7 @@ const Sidebar = () => {
                   <ul className={isDropdownOpen ? "dropdown-open" : ""}>
                     <li>
                       <div className="sidebar-dropdown-div">
-                        <a href="#">
+                        <a >
                           <FaChartPie
                             className="sidebar-dropdown-icon"
                             color="white"
@@ -129,7 +131,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                       <div className="sidebar-dropdown-div">
-                        <a href="#">
+                        <a >
                           <FaChartPie
                             className="sidebar-dropdown-icon"
                             color="white"
@@ -141,7 +143,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                       <div className="sidebar-dropdown-div">
-                        <a href="#">
+                        <a >
                           <FaChartPie
                             className="sidebar-dropdown-icon"
                             color="white"
@@ -160,7 +162,7 @@ const Sidebar = () => {
 
             {/* -----------------------------------Analytics */}
             <li className="sidebar-text-list">
-              <a href="#">
+              <a >
                 <FaChartPie className="sidebar-icon" color="white" />
                 <span className="links_name">Analytics</span>
               </a>
@@ -169,7 +171,7 @@ const Sidebar = () => {
 
             {/* ---------------------------------------Setting */}
             <li className="sidebar-text-list">
-              <a href="#">
+              <a >
                 <FaCog color="white" />
                 <span className="links_name">Setting</span>
               </a>
@@ -181,7 +183,7 @@ const Sidebar = () => {
             className="sidebar-text-list sidebar-logout-button "
             onClick={logoutButton}
           >
-            <a href="#">
+            <a >
               <FaSignOutAlt color="white" />
               <span className="links_name">Logout</span>
             </a>
