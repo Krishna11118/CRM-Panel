@@ -9,7 +9,6 @@ const userAuthentication = async (req, res, next) => {
     if (!rootUser) {
       throw new Error("User not found");
     } 
-    console.log(rootUser , getId, "rootUser", "getId");
 
     req.userId = rootUser._id;
 

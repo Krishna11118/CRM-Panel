@@ -1,10 +1,24 @@
-// UserRow.js
-import React from "react";
+import { React, useState } from "react";
 import { TableRow, TableCell, Avatar } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import MenuButton from "../../common/editMenuButton/EditMenuButton";
+import { Link } from "react-router-dom";
+import { Dropdown } from "flowbite-react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
+const SubAdminRow = ({
+  user,
+  index,
+  handleDelete,
+  handleStatus,
+  stringAvatar,
+  handleProfile,
+}) => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleMoreVertClick = () => {
+    setDropdownOpen(true);
+  };
+
   return (
     <TableRow
       key={user._id}
@@ -30,22 +44,52 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
       </TableCell>
       <TableCell className="text-white">{user.email}</TableCell>
       <TableCell className="text-white">{user.mobile}</TableCell>
-     
+
+      {/* ---------------------------------------Status Toggle button */}
       <TableCell className="text-white">
-        {/* Status Toggle button */}
         <label className="inline-flex items-center cursor-pointer">
           <input
             type="checkbox"
-            value=""
             checked={user.isActive}
             onChange={() => handleStatus(user._id)}
             className="sr-only peer"
           />
+          <div
+            className="relative w-11 h-6 bg-red-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-800 rounded-full
+                          peer dark:bg-gray-700 peer-checked:after:translate-x-full
+                          rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['']
+                       after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
+                       after:h-5 after:w-5 after:transition-all dark:border-green-400 peer-checked:bg-green-400"
+          ></div>
         </label>
       </TableCell>
-
+      {/*----------------------------------------------edit Dropdown */}
+      <TableCell className="cursor-pointer">
+        <Dropdown
+          label=""
+          dismissOnClick={false}
+          renderTrigger={() => (
+            <span>
+              {" "}
+              <MoreVertIcon
+                style={{ color: "white" }}
+                size={10}
+                onClick={handleMoreVertClick}
+              />
+            </span>
+          )}
+        >
+          <Link to={`/profile/${user._id}`} className="btn">
+            <Dropdown.Item>
+              Profile
+            </Dropdown.Item>
+          </Link>
+          {/* <Dropdown.Item>Settings</Dropdown.Item> */}
+          {/* <Dropdown.Item>Update</Dropdown.Item> */}
+        </Dropdown>
+      </TableCell>
+      {/* /--------------------------------------------delete */}
       <TableCell>
-        <MenuButton />
         <CancelIcon
           className="cursor-pointer"
           color="error"
@@ -57,4 +101,4 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
   );
 };
 
-export default UserRow;
+export default SubAdminRow;

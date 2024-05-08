@@ -8,14 +8,19 @@ import {
   TableRow,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import UserRow from "../user/UserRow";
+import SubAdminRow from "./SubAdminRow";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
+const SubAdminTable = ({
+  users,
+  handleDelete,
+  handleStatus,
+  stringAvatar,
+  handleProfile,
+}) => {
   const [deleteUserId, setDeleteUserId] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
 
   //-----------------------------------------Delete User--------------------------------
   const handleDeletebtn = async (userId) => {
@@ -32,6 +37,8 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
   const handleCloseDeleteModal = () => {
     setOpenDeleteModal(false);
   };
+
+  //-----------------------------------------handle Profile--------------------------------
 
   return (
     // --------------------------------------------------Table Container for Users
@@ -60,18 +67,20 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
             <TableCell className="text-white">Status</TableCell>
             <TableCell className="text-white">Edit</TableCell>
             <TableCell className="text-white">Action</TableCell>
+            {/* <Button variant="outlined" onClick={() => handleOpenDetails(user._id)}>Details</Button> */}
           </TableRow>
         </TableHead>
         {/* // -----------------------------------------Table Body */}
         <TableBody>
           {users.map((user, index) => (
-            <UserRow
+            <SubAdminRow
               key={user._id}
               user={user}
               index={index}
               handleDelete={() => handleOpenDeleteModal(user._id)}
               handleStatus={handleStatus}
               stringAvatar={stringAvatar}
+              handleProfile={handleProfile}
             />
           ))}
         </TableBody>
@@ -114,4 +123,4 @@ const UsersTable = ({ users, handleDelete, handleStatus, stringAvatar }) => {
   );
 };
 
-export default UsersTable;
+export default SubAdminTable;

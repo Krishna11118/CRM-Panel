@@ -6,7 +6,7 @@ import Profile from "../Components/pages/Profile";
 
 //-----------------------------------------------------main pages
 import Dashboard from "../Components/pages/Dashboard";
-import SubAdmin from "../Components/pages/subAdmin/SubUserData";
+import SubAdmin from "../Components/pages/subAdmin/SubAdminData";
 import Users from "../Components/pages/user/Users";
 
 
@@ -20,7 +20,7 @@ const RightSideRouter = () => {
         <Route element={<SubAdmin />} path="/subAdmins" />
         <Route element={<Users />} path="/users" />
         <Route element={<Support />} path="/support" />
-        <Route element={<Profile />} path="/profile" />
+        <Route element={<Profile />} path="/profile/:subAdminId" />
       </Route>
     </Routes>
   );

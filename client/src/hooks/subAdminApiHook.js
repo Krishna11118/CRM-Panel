@@ -2,11 +2,13 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import config from "../Config/Config";
+import { useAuth } from "../context/AuthContext";
 
 export const useSubAdminApiHook = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { token , role } = useAuth();
 
   //-------------------------------------------------------------------------------------------------subAdmin's API
   //-------------------------------------------------------------------subAdmin register
@@ -70,11 +72,11 @@ export const useSubAdminApiHook = () => {
   };
 
   // -------------------------------------------------------------------------------------------------- user's API
-  // ---------------------------------------- handle delete user
-  const handleDeleteSubAdmin = (subAdminId) => {
+  // ---------------------------------------- handle delete user pending
+  const handleDeleteUser = (userId) => {
     setLoading(true);
     axios
-      .delete(`${config.endpoint}/admin/subAdmin/delete/${subAdminId}`)
+      .delete(`${config.endpoint}/deleteUser/${userId}`)
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -91,12 +93,18 @@ export const useSubAdminApiHook = () => {
   const handleUpdateUser = (userId, fname, mobile, email, password) => {
     setLoading(true);
     axios
-      .patch(`${config.endpoint}/user/updateUser/${userId}`, {
-        fname,
-        mobile,
-        email,
-        password,
-      })
+      .patch(
+        `${config.endpoint}/user/updateUser/${userId}`,
+        {
+          fname,
+          mobile,
+          email,
+          password,
+        },
+        {
+          headers: { authorization: `${token}` },
+        }
+      )
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -118,32 +126,11 @@ export const useSubAdminApiHook = () => {
         }
       });
   };
-  // ---------------------------------------- handle user status
-  const handleSubAdminStatus = (userId, isActive) => {
-    setLoading(true);
-    axios
-      .put(`${config.endpoint}/admin/subAdmin/${userId}/${isActive}`)
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-        toast.success("User status updated successfully");
-      })
-      .catch((error) => {
-        setError(
-          "An error occurred while updating user status. Please try again."
-        );
-        setLoading(false);
-        toast.error(
-          "An error occurred while updating user status. Please try again."
-        );
-      });
-  };
 
   return {
     handleSubAdminRegister,
     handleSubAdminLogin,
-    handleDeleteSubAdmin,
+    handleDeleteUser,
     handleUpdateUser,
-    handleSubAdminStatus,
   };
 };

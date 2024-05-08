@@ -31,7 +31,7 @@ function Routers() {
             <Route path="/" />
             <Route path="/dashboard" />
             <Route path="/subAdmins" />
-             <Route path="/users" />
+            <Route path="/users" />
           </Route>
           <Route element={<PublicRoutes />}>
             <Route element={<Login />} path="/login" />

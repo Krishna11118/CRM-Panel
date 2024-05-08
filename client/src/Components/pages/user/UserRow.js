@@ -1,10 +1,10 @@
-// UserRow.js
-import React from "react";
+import {React, useState} from "react";
+import { Link } from "react-router-dom";
 import { TableRow, TableCell, Avatar } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import MenuButton from "../../common/editMenuButton/EditMenuButton";
-import { useAuth } from "../../../context/AuthContext";
 import { useSetRole } from "../../../utils/SetPermission";
+import { Dropdown } from "flowbite-react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
   const {
@@ -14,9 +14,15 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
     subAdminStatusPermissions,
   } = useSetRole();
 
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleMoreVertClick = () => {
+    setDropdownOpen(true);
+  };
+
   return (
     <>
-    {/* //------------------------------------------------------------------User Row */}
+      {/* //------------------------------------------------------------------User Row */}
       {/* //--------------------read permission */}
       {subAdminReadPermissions && (
         <TableRow
@@ -67,10 +73,29 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
             </TableCell>
           )}
 
+          {/*----------------------------------------------edit Dropdown */}
           {subAdminUpdatePermissions && (
-            <TableCell className="text-white">
-              {" "}
-              <MenuButton />
+            <TableCell className="cursor-pointer">
+              <Dropdown
+                label=""
+                dismissOnClick={false}
+                renderTrigger={() => (
+                  <span>
+                    {" "}
+                    <MoreVertIcon
+                      style={{ color: "white" }}
+                      size={10}
+                      onClick={handleMoreVertClick}
+                    />
+                  </span>
+                )}
+              >
+                <Link to={`/profile/${user._id}`} className="btn">
+                  <Dropdown.Item>Profile</Dropdown.Item>
+                </Link>
+                {/* <Dropdown.Item>Settings</Dropdown.Item> */}
+                {/* <Dropdown.Item>Update</Dropdown.Item> */}
+              </Dropdown>
             </TableCell>
           )}
 

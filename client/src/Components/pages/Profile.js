@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "./Table";
+import Table from "../common/DetailedPage/Table";
 
 const Profile = () => {
   return (

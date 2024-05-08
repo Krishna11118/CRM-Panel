@@ -9,6 +9,7 @@ import UsersTable from "./UsersTable";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
 import { useSetRole } from "../../../utils/SetPermission";
+import Pagination from "../../common/pagination/Pagination";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -18,11 +19,13 @@ const Users = () => {
   const { role } = useAuth();
   const { subAdminCreatePermissions } = useSetRole();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   //-----------------------------------------get data from localStorage----------------------------------
   const fullName = getFromLocalStorage("name");
 
   //-----------------------------------------Fetch All Data----------------------------------
-
   useEffect(() => {
     const fetchUserData = async () => {
       const token = getFromLocalStorage("token");
@@ -90,6 +93,11 @@ const Users = () => {
     );
   };
 
+  //------------------------------------------ Pagination---------------------------------------------
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const currentItems = users.slice(firstIndex, lastIndex);
+
   return (
     <>
       <div className="home  bg-custom-800">
@@ -106,7 +114,7 @@ const Users = () => {
               sx={{ fontSize: "1.5rem", fontWeight: "600 " }}
               className="flex text-white"
             >
-            Users
+              Users
               {/* Welcome &nbsp; <div className="uppercase"> {fullName}</div> */}
             </Typography>
           </div>
@@ -115,10 +123,15 @@ const Users = () => {
           {subAdminCreatePermissions && <AddUserModal />}
 
           <UsersTable
-            users={users}
+            users={currentItems}
             handleDelete={handleDelete}
             handleStatus={handleStatus}
             stringAvatar={stringAvatar}
+          />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(users.length / itemsPerPage)}
+            setCurrentPage={setCurrentPage}
           />
         </Grid>
       </div>

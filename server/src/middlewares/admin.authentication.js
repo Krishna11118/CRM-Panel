@@ -3,15 +3,14 @@ const admindb = require("../models/adminSchema");
 // --------------------------------------------------------------------Admin authentication
 const adminAuthentication = async (req, res, next) => {
   try {
-    const token = req.token;
+    
     const getId = req.verifytoken.user.id;
     const rootUser = await admindb.findOne({ _id: getId });
-
+ 
+    console.log(rootUser, "rootUser");
     if (!rootUser) {
       throw new Error("User not found");
     }
-
-    req.token = token;
     req.userId = rootUser._id;
 
     next();

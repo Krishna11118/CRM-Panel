@@ -12,7 +12,7 @@ module.exports = {
         100: "#dbeafe",
         200: "#bfdbfe",
         300: "#93c5fd",
-        400: "#60a5fa",
+        400: "#4483F8",
 
         // hover or highlihgt
         500: "#384770",

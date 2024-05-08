@@ -4,11 +4,12 @@ import config from "../Config/Config";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 
+
 export const useAdminApiHook = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { token } = useAuth();
+  const { token , role } = useAuth();
 
   // -------------------------------------------------------------------------------------------------admin's API
   // ---------------------------------------- admin login
@@ -31,17 +32,23 @@ export const useAdminApiHook = () => {
       });
   };
 
-  //-------------------------------------------------------------------------------------------------subAdmin & user API
+  //-------------------------------------------------------------------------------------------------subAdmin API
   // ---------------------------------------- update subAdmin
   const handleUpdateSubAdmin = (subAdminId, fname, mobile, email, password) => {
     setLoading(true);
     axios
-      .patch(`${config.endpoint}/admin/subAdmin/update/${subAdminId}`, {
-        fname,
-        mobile,
-        email,
-        password,
-      })
+      .patch(
+        `${config.endpoint}/admin/subAdmin/update/${subAdminId}`,
+        {
+          fname,
+          mobile,
+          email,
+          password,
+        },
+        {
+          headers: { authorization: `${token}` },
+        }
+      )
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -68,9 +75,13 @@ export const useAdminApiHook = () => {
 
   // ---------------------------------------- delete subAdmin
   const handleDeleteSubAdmin = (subAdminId) => {
+    console.log("handleDeleteSubAdmin", token);
     setLoading(true);
+    console.log("token handleDeleteSubAdmin", token);
     axios
-      .delete(`${config.endpoint}/admin/subAdmin/delete/${subAdminId}`)
+      .delete(`${config.endpoint}/admin/subAdmin/delete/${subAdminId}`, {
+        headers: { authorization: `${token}` },
+      })
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -87,11 +98,17 @@ export const useAdminApiHook = () => {
       });
   };
 
-  // ---------------------------------------------- handle subAdmin status
+  // --------------------------------------- handle subAdmin status
   const handleSubAdminStatus = (subAdminId, isActive) => {
     setLoading(true);
     axios
-      .put(`${config.endpoint}/admin/subAdmin/${subAdminId}/${isActive}`)
+      .put(
+        `${config.endpoint}/admin/subAdmin/${subAdminId}/${isActive}`,
+        {},
+        {
+          headers: { authorization: `${token}` },
+        }
+      )
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -108,7 +125,7 @@ export const useAdminApiHook = () => {
       });
   };
 
-  //------------------------------------------------------------------- create subAdmin
+  //------------------------------------------- create subAdmin
   const handleCreateSubAdmin = (
     fname,
     mobile,
@@ -158,8 +175,6 @@ export const useAdminApiHook = () => {
       });
   };
 
-  //------------------------------------------------------------------- create user
-
   // -------------------------------------------------------------------------------------------------- user's API
 
   // ---------------------------------------- create user
@@ -196,7 +211,7 @@ export const useAdminApiHook = () => {
   const handleDeleteUser = (userId) => {
     setLoading(true);
     axios
-      .delete(`${config.endpoint}/admin/user/delete/${userId}`, {
+      .delete(`${config.endpoint}/${role}/user/delete/${userId}`, {
         headers: {
           authorization: `${token}`,
         },
@@ -217,12 +232,18 @@ export const useAdminApiHook = () => {
   const handleUpdateUser = (userId, fname, mobile, email, password) => {
     setLoading(true);
     axios
-      .patch(`${config.endpoint}/admin/user/update/${userId}`, {
-        fname,
-        mobile,
-        email,
-        password,
-      })
+      .patch(
+        `${config.endpoint}/admin/user/update/${userId}`,
+        {
+          fname,
+          mobile,
+          email,
+          password,
+        },
+        {
+          headers: { authorization: `${token}` },
+        }
+      )
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -248,7 +269,13 @@ export const useAdminApiHook = () => {
   const handleUserStatus = (userId, isActive) => {
     setLoading(true);
     axios
-      .put(`${config.endpoint}/admin/user/${userId}/${isActive}`)
+      .put(
+        `${config.endpoint}/${role}/user/${userId}/${isActive}`,
+        {},
+        {
+          headers: { authorization: `${token}` },
+        }
+      )
       .then((response) => {
         setData(response.data);
         setLoading(false);

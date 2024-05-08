@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import DetailedProfile from "./DetailedProfile";
+import DetailedProfile from "../../pages/DetailedProfile";
+import Update from "../../pages/subAdmin/UpdateSubAdmin";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("stats");
@@ -9,7 +10,7 @@ const Tabs = () => {
   };
 
   return (
-    <div className="w[100%] bg-custom-600 mt-4 border-none border-gray-200 ml-4 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="mt-4  border-none border-gray-200 ml-4 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
           Select tab
@@ -39,7 +40,7 @@ const Tabs = () => {
             role="tab"
             aria-controls="stats"
             aria-selected={activeTab === "stats"}
-            className={`inline-block w-full p-4 text-white rounded-ss-lg bg-custom-500 hover:bg-custom-900 hover:shadow-lg focus:outline-none ${
+            className={`inline-block w-full p-4  text-white rounded-ss-lg bg-custom-500 hover:bg-custom-900 hover:shadow-lg focus:outline-none ${
               activeTab === "stats"
                 ? "dark:bg-gray-700 dark:hover:bg-gray-600"
                 : ""
@@ -88,12 +89,12 @@ const Tabs = () => {
       </ul>
       <div
         id="fullWidthTabContent"
-        className="border-t border-gray-200 dark:border-gray-600"
+        className="border-t border-gray-200 dark:border-gray-600 h-screen w-full"
       >
         <div
           className={`${
             activeTab === "stats" ? "" : "hidden"
-          } p-4 bg-white  md:p-8 dark:bg-gray-800`}
+          } p-4 bg-custom-800  shadow-lg shadow md:p-8 dark:bg-gray-800`}
           id="stats"
           role="tabpanel"
           aria-labelledby="stats-tab"
@@ -103,18 +104,17 @@ const Tabs = () => {
         <div
           className={`${
             activeTab === "about" ? "" : "hidden"
-          } p-4 bg-white md:p-8 dark:bg-gray-800`}
+          } p-4 bg-custom-800 md:p-8 dark:bg-gray-800`}
           id="about"
           role="tabpanel"
           aria-labelledby="about-tab"
         >
-          {/* Services content */}
-          <p>Services tab content</p>
+          <Update />
         </div>
         <div
           className={`${
             activeTab === "faq" ? "" : "hidden"
-          } p-4 bg-white dark:bg-gray-800`}
+          } p-4 bg-custom-800 dark:bg-gray-800`}
           id="faq"
           role="tabpanel"
           aria-labelledby="faq-tab"

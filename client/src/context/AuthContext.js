@@ -98,6 +98,7 @@ export const AuthProvider = ({ children }) => {
     };
     setUIRole();
   }, [localRole, responseRole]);
+
   //----------------------------------------providing value --------------------
   const value = {
     CMSData,

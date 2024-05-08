@@ -50,13 +50,28 @@ router.post(
 );
 
 // to detete subAdmin
-router.delete("/admin/subAdmin/delete/:subAdminId", deleteSubAdmin);
+router.delete(
+  "/admin/subAdmin/delete/:subAdminId",
+  authenticate,
+  adminAuthentication,
+  deleteSubAdmin
+);
 
 // to update subAdmin
-router.patch("/admin/subAdmin/update/:subAdminId", updateSubAdminData);
+router.patch(
+  "/admin/subAdmin/update/:subAdminId",
+  authenticate,
+  adminAuthentication,
+  updateSubAdminData
+);
 
 // to change subAdmin's status
-router.put("/admin/subAdmin/:subAdminId/:isActive", subAdminStatus);
+router.put(
+  "/admin/subAdmin/:subAdminId/:isActive",
+  authenticate,
+  adminAuthentication,
+  subAdminStatus
+);
 
 // to get single subAdmin
 router.get(
@@ -72,12 +87,30 @@ router.get(
 router.get("/admin/user/data", authenticate, adminAuthentication, getUsers);
 
 // to update user's data
-router.patch("/admin/user/update/:userId", updateUserData);
+router.patch(
+  "/admin/user/update/:userId",
+  authenticate,
+  adminAuthentication,
+  updateUserData
+);
 
 // to change user's status
-router.put("/admin/user/:userId/:isActive", userStatus);
+router.put(
+  "/admin/user/:userId/:isActive",
+  authenticate,
+  adminAuthentication,
+  userStatus
+);
 
 // to delete user
-router.delete("/admin/user/delete/:userId", deleteUser);
+router.delete(
+  "/admin/user/delete/:userId",
+  authenticate,
+  adminAuthentication,
+  deleteUser
+);
+
+
+
 
 module.exports = router;

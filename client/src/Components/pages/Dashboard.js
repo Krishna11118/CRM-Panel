@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useAuth } from "../../context/AuthContext";
-import Table from "./Table";
 
 const Dashboard = () => {
 
@@ -20,7 +19,7 @@ const Dashboard = () => {
           />
         </div> */}
 
-        <Table />
+        {/* <Table /> */}
       </div>
     </>
   );
