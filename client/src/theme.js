@@ -1,21 +1,13 @@
 import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Lato"
-  },
-  primary: {
-    light: '#8fcafa',
-    main: '#1297f6',
-    dark: '#0666c3',
-    contrastText: '#fff',
-  },
-  secondary: {
-    light: '#834bff', 
-    main: '#651fff',
-    dark: '#4615b2',
-    contrastText: '#000',
+const theme =  createTheme({
+  palette: {
+    primary: {
+      main: '#1E88E5', // Example primary color
+    },
+    secondary: {
+      main: '#FF4081', // Example secondary color
+    },
   },
 });
-
 export default theme;

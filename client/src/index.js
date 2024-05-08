@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
+import theme from "./theme";
+import { ThemeProvider } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

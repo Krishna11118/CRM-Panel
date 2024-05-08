@@ -19,6 +19,7 @@ const {
   updateUserData,
   userStatus,
   deleteUser,
+  getSingleUser,
 } = require("../../controllers/users.controller");
 
 // -------------------------------------------------------------------------------admin route
@@ -110,6 +111,13 @@ router.delete(
   deleteUser
 );
 
+// to get single user *pending
+router.get(
+  "/admin/user/single/:userId",
+  authenticate,
+  adminAuthentication,
+  getSingleUser
+);
 
 
 

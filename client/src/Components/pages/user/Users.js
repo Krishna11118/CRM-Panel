@@ -10,15 +10,17 @@ import { useLocalStorage } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
 import { useSetRole } from "../../../utils/SetPermission";
 import Pagination from "../../common/pagination/Pagination";
+import SkeletonLoader from "../../skeletonLoader/TableSkeleton";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const { handleUserStatus, handleDeleteUser, loading, error } =
-    useAdminApiHook();
+  const { handleUserStatus, handleDeleteUser, error } = useAdminApiHook();
   const { getFromLocalStorage } = useLocalStorage();
   const { role } = useAuth();
   const { subAdminCreatePermissions } = useSetRole();
+  const [loading, setLoading] = useState(false);
 
+  //-----------------------------------Pagination----------------------------------
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -29,6 +31,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       const token = getFromLocalStorage("token");
+      setLoading(true);
 
       try {
         const res = await axios.get(`${config.endpoint}/${role}/user/data`, {
@@ -37,7 +40,9 @@ const Users = () => {
           },
         });
         setUsers(res.data);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.error("Error fetching data:", err);
       }
     };
@@ -119,20 +124,28 @@ const Users = () => {
             </Typography>
           </div>
         </div>
+
         <Grid sx={{ margin: "1.5rem auto" }}>
           {subAdminCreatePermissions && <AddUserModal />}
 
-          <UsersTable
-            users={currentItems}
-            handleDelete={handleDelete}
-            handleStatus={handleStatus}
-            stringAvatar={stringAvatar}
-          />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(users.length / itemsPerPage)}
-            setCurrentPage={setCurrentPage}
-          />
+          {loading ? (
+            <SkeletonLoader />
+          ) : (
+            <>
+              {" "}
+              <UsersTable
+                users={currentItems}
+                handleDelete={handleDelete}
+                handleStatus={handleStatus}
+                stringAvatar={stringAvatar}
+              />
+            </>
+          )}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(users.length / itemsPerPage)}
+                setCurrentPage={setCurrentPage}
+              />
         </Grid>
       </div>
     </>

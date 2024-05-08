@@ -7,7 +7,6 @@ const adminAuthentication = async (req, res, next) => {
     const getId = req.verifytoken.user.id;
     const rootUser = await admindb.findOne({ _id: getId });
  
-    console.log(rootUser, "rootUser");
     if (!rootUser) {
       throw new Error("User not found");
     }

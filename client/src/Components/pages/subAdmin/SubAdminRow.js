@@ -79,7 +79,7 @@ const SubAdminRow = ({
             </span>
           )}
         >
-          <Link to={`/profile/${user._id}`} className="btn">
+          <Link to={`/subAdmin/profile/${user._id}`} className="btn">
             <Dropdown.Item>
               Profile
             </Dropdown.Item>

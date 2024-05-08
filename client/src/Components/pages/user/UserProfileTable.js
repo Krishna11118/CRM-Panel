@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import DetailedProfile from "../../pages/DetailedProfile";
-import Update from "../../pages/subAdmin/UpdateSubAdmin";
+import UserProfileDetails from "./UserProfileDetail";
+import Update from "../subAdmin/UpdateSubAdmin";
 
-const Tabs = () => {
+const UserProfileTable = () => {
   const [activeTab, setActiveTab] = useState("stats");
+  
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -99,7 +100,7 @@ const Tabs = () => {
           role="tabpanel"
           aria-labelledby="stats-tab"
         >
-          <DetailedProfile />
+         <UserProfileDetails/>
         </div>
         <div
           className={`${
@@ -127,4 +128,4 @@ const Tabs = () => {
   );
 };
 
-export default Tabs;
+export default UserProfileTable;

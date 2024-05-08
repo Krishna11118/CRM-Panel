@@ -41,7 +41,7 @@ const SubAdminTable = ({
   //-----------------------------------------handle Profile--------------------------------
 
   return (
-    // --------------------------------------------------Table Container for Users
+    // --------------------------------------------------Table Container for SubAdmins
     <TableContainer
       className="bg-custom-600"
       component={Paper}

@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { TableRow, TableCell, Avatar } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -90,7 +90,7 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
                   </span>
                 )}
               >
-                <Link to={`/profile/${user._id}`} className="btn">
+                <Link to={`/user/profile/${user._id}`} className="btn">
                   <Dropdown.Item>Profile</Dropdown.Item>
                 </Link>
                 {/* <Dropdown.Item>Settings</Dropdown.Item> */}

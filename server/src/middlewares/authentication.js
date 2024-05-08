@@ -11,7 +11,6 @@ const authenticate = async (req, res, next) => {
     const verifytoken = jwt.verify(token, secKey);
     req.verifytoken = verifytoken;
 
-    console.log(verifytoken, "verifytoken");
     next();
   } catch (error) {
     res
