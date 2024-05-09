@@ -1,6 +1,6 @@
-import { TextInput } from "flowbite-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import CustomButton from "../../common/buttons/CustomButton";
+import { TextInput } from "flowbite-react";
 
 const FormComponent = ({ onSubmit, buttonText }) => {
   const [fname, setfName] = useState("");
@@ -8,54 +8,59 @@ const FormComponent = ({ onSubmit, buttonText }) => {
   const [mobile, setmobile] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     onSubmit(fname, mobile, email, password);
   };
 
   return (
-    <div className="">
-      <div className="space-y-2">
+    <div>
+      <div className="gap-4 flex justify-center items-center">
         <div>
-          <TextInput
-            id="name"
-            placeholder="Full Name"
-            value={fname}
-            onChange={(event) => setfName(event.target.value)}
-            required
-          />
+          <div className="py-4">
+            <TextInput
+              id="name"
+              placeholder="Update Name"
+              value={fname}
+              onChange={(event) => setfName(event.target.value)}
+              required
+            />
+          </div>
+
+          <div className="py-4">
+            <TextInput
+              id="mobile"
+              placeholder="Update Mobile No"
+              value={mobile}
+              onChange={(event) => setmobile(event.target.value)}
+              required
+            />
+          </div>
         </div>
 
         <div>
-          <TextInput
-            id="mobile"
-            placeholder="Mobile No"
-            value={mobile}
-            onChange={(event) => setmobile(event.target.value)}
-            required
-          />
-        </div>
+          <div className="py-4">
+            <TextInput
+              id="email"
+              placeholder="Update Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <TextInput
-            id="email"
-            placeholder="example@gmail.com"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
+          <div className="py-4">
+            <TextInput
+              id="password"
+              type="password"
+              placeholder="Update Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+          </div>
         </div>
-
-        <div>
-          <TextInput
-            id="password"
-            type="password"
-            placeholder="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-
+      </div>
+      <div>
         <div onClick={handleSubmit}>
           <CustomButton
             text={buttonText}

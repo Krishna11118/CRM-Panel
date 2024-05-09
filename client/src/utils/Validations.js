@@ -3,7 +3,6 @@ import { toast } from "react-hot-toast";
 export const Validation = () => {
   const registerUserValidation = (fname, email, mobile, password, role) => {
     let isValid = true;
-
     if (!fname.trim()) {
       isValid = false;
       toast.error("Please enter your full name");
@@ -26,15 +25,26 @@ export const Validation = () => {
       isValid = false;
       toast.error("Password must be at least 6 characters long");
     }
-    // else if (!role.trim()) {
-    //   isValid = false;
-    //   toast.error("Please select a Role");
-    // }
 
     return isValid;
   };
 
-  return { registerUserValidation };
+  //-----------------------------------------Profile Update Validation----------------------------------
+  const profileUpdateValidation = (fname, email, mobile, password) => {
+    if (
+      fname.trim() === "" &&
+      email.trim() === "" &&
+      mobile.trim() === "" &&
+      password.trim() === ""
+    ) {
+      toast.error("Please fill the fields to update");
+      return false;
+    }
+
+    return true;
+  };
+
+  return { registerUserValidation, profileUpdateValidation };
 };
 
 export const validateInput = (data) => {

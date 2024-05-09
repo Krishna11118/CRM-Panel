@@ -8,6 +8,7 @@ import SubAdminTable from "./SubadminTable";
 import { useAuth } from "../../../context/AuthContext";
 import Pagination from "../../common/pagination/Pagination"; // Import the Pagination component
 import { useLocalStorage } from "../../../utils/LocalStorage";
+import TableSkeleton from "../../skeletonLoader/TableSkeleton";
 
 const SubAdminData = () => {
   const [subAdmin, setSubAdmin] = useState([]);
@@ -16,6 +17,7 @@ const SubAdminData = () => {
     useAdminApiHook();
   const { getFromLocalStorage } = useLocalStorage();
   const { role, setSubAdminsData } = useAuth();
+  const [loadingData, setLoadingData] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -24,6 +26,7 @@ const SubAdminData = () => {
   useEffect(() => {
     const token = getFromLocalStorage("token");
     const fetchData = async () => {
+      setLoadingData(true);
       try {
         const res = await axios.get(`${config.endpoint}/admin/subAdmin/data`, {
           headers: {
@@ -32,7 +35,9 @@ const SubAdminData = () => {
         });
         setSubAdmin(res.data);
         setSubAdminsData(res.data);
+        setLoadingData(false);
       } catch (err) {
+        setLoadingData(false);
         console.error("Error fetching data:", err);
       }
     };
@@ -123,12 +128,16 @@ const SubAdminData = () => {
           </div>
           <Grid sx={{ margin: "1.5rem auto" }}>
             <AddSubAdminModal />
-            <SubAdminTable
-              users={currentItems}
-              handleDelete={handleDelete}
-              handleStatus={handleStatus}
-              stringAvatar={stringAvatar}
-            />
+            {loadingData ? (
+              <TableSkeleton />
+            ) : (
+              <SubAdminTable
+                users={currentItems}
+                handleDelete={handleDelete}
+                handleStatus={handleStatus}
+                stringAvatar={stringAvatar}
+              />
+            )}
             <Pagination
               currentPage={currentPage}
               totalPages={Math.ceil(subAdmin.length / itemsPerPage)}

@@ -58,7 +58,7 @@ router.delete(
   deleteSubAdmin
 );
 
-// to update subAdmin
+// to update subAdmin 
 router.patch(
   "/admin/subAdmin/update/:subAdminId",
   authenticate,
