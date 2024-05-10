@@ -112,7 +112,7 @@ export const useAdminApiHook = () => {
       .then((response) => {
         setData(response.data);
         setLoading(false);
-        toast.success("SubAdmin status updated successfully");
+        toast.success("Sub Admin status updated successfully");
       })
       .catch((error) => {
         setError(

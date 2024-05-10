@@ -94,7 +94,9 @@ const AddUserModal = () => {
                         value=" Name"
                       />{" "}
                     </div>
-                    <TextInput
+                    <input
+                      className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full"
+                      type="text"
                       id="name"
                       placeholder="Full Name"
                       value={fname}
@@ -113,7 +115,9 @@ const AddUserModal = () => {
                         className="text-white"
                       />
                     </div>
-                    <TextInput
+                    <input
+                      className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full"
+                      type="number"
                       id="mobile"
                       placeholder="Mobile No"
                       value={mobile}
@@ -130,8 +134,10 @@ const AddUserModal = () => {
                         className="text-white"
                       />
                     </div>
-                    <TextInput
+                    <input
+                      className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full"
                       id="email"
+                      type="email"
                       placeholder="example@gmail.com"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
@@ -148,8 +154,8 @@ const AddUserModal = () => {
                         className="text-white"
                       />
                     </div>
-                    <TextInput
-                      className="py-2"
+                    <input
+                      className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
                       id="password"
                       type="password"
                       placeholder="password"
@@ -158,10 +164,10 @@ const AddUserModal = () => {
                       onChange={(event) => setPassword(event.target.value)}
                     />
                   </div>
-                  <div onClick={handleRegister}>
+                  <div onClick={handleRegister} className="pt-4">
                     <CustomButton
                       text="Create"
-                      customClass="bg-blue-600 hover:bg-blue-700 hover:shadow-lg rounded-lg text-white font-semibold cursor-pointer py-2 px-4"
+                      customClass="bg-blue-600 hover:bg-blue-700 hover:shadow-lg rounded-lg text-white font-semibold cursor-pointer py-2 px-4 "
                     />
                   </div>
                 </div>
@@ -169,7 +175,7 @@ const AddUserModal = () => {
             </div>
             <div className="border-l-2 border-gray-600"></div>
             <div>
-              {/*----------------------------------------Permissions */}
+              {/*--------------------------------------------------------------Permissions */}
               <Modal.Body className="bg-custom-600 h-[100%]">
                 <div className="space-y-2 pt-4 ">
                   <div className="flex justify-around items-center pb-4">
@@ -196,7 +202,7 @@ const AddUserModal = () => {
                         className="sr-only peer"
                       />
                       <div
-                        className="relative w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
+                        className="relative w-11 h-6 bg-red-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
                                     peer dark:bg-gray-700 peer-checked:after:translate-x-full
                                     rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['']
                                  after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
@@ -221,7 +227,7 @@ const AddUserModal = () => {
                         className="sr-only peer"
                       />
                       <div
-                        className="relative w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
+                        className="relative w-11 h-6 bg-red-700  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
                                     peer dark:bg-gray-700 peer-checked:after:translate-x-full
                                     rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['']
                                  after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
@@ -246,7 +252,7 @@ const AddUserModal = () => {
                         className="sr-only peer"
                       />
                       <div
-                        className="relative w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
+                        className="relative w-11 h-6 bg-red-700  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
                                     peer dark:bg-gray-700 peer-checked:after:translate-x-full
                                     rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['']
                                  after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
@@ -270,7 +276,7 @@ const AddUserModal = () => {
                         className="sr-only peer"
                       />
                       <div
-                        className="relative w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
+                        className="relative w-11 h-6 bg-red-700  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
                                     peer dark:bg-gray-700 peer-checked:after:translate-x-full
                                     rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['']
                                  after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
@@ -295,7 +301,7 @@ const AddUserModal = () => {
                         className="sr-only peer"
                       />
                       <div
-                        className="relative w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
+                        className="relative w-11 h-6 bg-red-700  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-red-600 rounded-full
                                     peer dark:bg-gray-700 peer-checked:after:translate-x-full
                                     rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['']
                                  after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full

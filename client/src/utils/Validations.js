@@ -40,6 +40,12 @@ export const Validation = () => {
       toast.error("Please fill the fields to update");
       return false;
     }
+    if (email.trim() !== "") {
+      if (!/\S+@\S+\.\S+/.test(email)) {
+        toast.error("Please enter a valid email address");
+        return false;
+      }
+    }
 
     return true;
   };

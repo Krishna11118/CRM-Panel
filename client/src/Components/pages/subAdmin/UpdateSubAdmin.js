@@ -19,7 +19,7 @@ const UpdateSubAdmin = () => {
 
   return (
     <>
-      <FormComponent onSubmit={handleUpdate} buttonText="Update User" />
+      <FormComponent onSubmit={handleUpdate} buttonText="Update " />
     </>
   );
 };

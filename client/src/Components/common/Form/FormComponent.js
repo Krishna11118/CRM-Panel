@@ -14,10 +14,11 @@ const FormComponent = ({ onSubmit, buttonText }) => {
 
   return (
     <div>
-      <div className="gap-4 flex justify-center items-center">
+      <div className="gap-7 flex justify-center items-center">
         <div>
           <div className="py-4">
-            <TextInput
+            <input className=" bg-custom-600 rounded-lg py-2 px-4 text-white  "
+              type="text"
               id="name"
               placeholder="Update Name"
               value={fname}
@@ -27,7 +28,8 @@ const FormComponent = ({ onSubmit, buttonText }) => {
           </div>
 
           <div className="py-4">
-            <TextInput
+          <input className=" bg-custom-600 rounded-lg py-2 px-4 text-white  "
+              type="number"
               id="mobile"
               placeholder="Update Mobile No"
               value={mobile}
@@ -39,9 +41,10 @@ const FormComponent = ({ onSubmit, buttonText }) => {
 
         <div>
           <div className="py-4">
-            <TextInput
-              id="email"
+          <input className=" bg-custom-600 rounded-lg py-2 px-4 text-white  "
+              type="email"
               placeholder="Update Email"
+              id="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
@@ -49,7 +52,7 @@ const FormComponent = ({ onSubmit, buttonText }) => {
           </div>
 
           <div className="py-4">
-            <TextInput
+          <input className=" bg-custom-600 rounded-lg py-2 px-4 text-white   "
               id="password"
               type="password"
               placeholder="Update Password"

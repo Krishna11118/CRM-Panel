@@ -69,7 +69,9 @@ const AddUserModal = () => {
                   value=" Name"
                 />{" "}
               </div>
-              <TextInput
+              <input
+              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
+                type="text"
                 id="name"
                 placeholder="Full Name"
                 value={fname}
@@ -88,7 +90,9 @@ const AddUserModal = () => {
                   className="text-white"
                 />
               </div>
-              <TextInput
+              <input
+              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
+                type="number"
                 id="mobile"
                 placeholder="Mobile No"
                 value={mobile}
@@ -101,8 +105,11 @@ const AddUserModal = () => {
                 <FaStarOfLife color="red" size={8} />
                 <Label htmlFor="email" value="E-mail" className="text-white" />
               </div>
-              <TextInput
+
+              <input
+              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
                 id="email"
+                type="email"
                 placeholder="example@gmail.com"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -118,10 +125,10 @@ const AddUserModal = () => {
                 className="text-white"
               />
             </div>
-            <TextInput
-              className="py-2"
+            <input
+              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
               id="password"
-              type="password"
+              type="Password"
               placeholder="password"
               required
               value={password}
