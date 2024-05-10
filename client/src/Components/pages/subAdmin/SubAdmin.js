@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Typography, Grid } from "@mui/material";
 import config from "../../../Config/Config";
-import AddSubAdminModal from "../../common/modals/AddSubAdminModal";
+import AddSubAdminModal from "./AddSubAdminModal";
 import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 import SubAdminTable from "./SubadminTable";
 import { useAuth } from "../../../context/AuthContext";

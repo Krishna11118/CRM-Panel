@@ -59,9 +59,9 @@ const Sidebar = () => {
 
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      <div className="sidebar-content">
+      <div className="sidebar-content cursor-pointer">
         {" "}
-        <div className="logo-details">
+        <div className="logo-details ">
           <div className="logo_name">Dashboard</div>
           <FaBars id="btn" color="white" onClick={toggleSidebar} />
         </div>

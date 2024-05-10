@@ -1,7 +1,7 @@
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import CustomButton from "../buttons/CustomButton";
+import CustomButton from "../../common/buttons/CustomButton";
 import { useUserApiHooks } from "../../../hooks/userApiHooks";
 import { Validation } from "../../../utils/Validations";
 import { FaStarOfLife } from "react-icons/fa";
@@ -65,12 +65,12 @@ const AddUserModal = () => {
                 <FaStarOfLife color="red" size={8} />
                 <Label
                   htmlFor="name"
-                  className="text-white"
+                className="text-white font-light"
                   value=" Name"
                 />{" "}
               </div>
               <input
-              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
+                className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
                 type="text"
                 id="name"
                 placeholder="Full Name"
@@ -87,11 +87,11 @@ const AddUserModal = () => {
                 <Label
                   htmlFor="mobile"
                   value="Mobile No"
-                  className="text-white"
+                  className="text-white font-light"
                 />
               </div>
               <input
-              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
+                className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
                 type="number"
                 id="mobile"
                 placeholder="Mobile No"
@@ -103,11 +103,15 @@ const AddUserModal = () => {
             <div>
               <div className="mb-2 block flex pt-2">
                 <FaStarOfLife color="red" size={8} />
-                <Label htmlFor="email" value="E-mail" className="text-white" />
+                <Label
+                  htmlFor="email"
+                  value="E-mail"
+                  className="text-white font-light"
+                />
               </div>
 
               <input
-              className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
+                className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
                 id="email"
                 type="email"
                 placeholder="example@gmail.com"
@@ -122,50 +126,29 @@ const AddUserModal = () => {
               <Label
                 htmlFor="password"
                 value=" Password"
-                className="text-white"
+                className="text-white font-light"
               />
             </div>
             <input
               className=" bg-custom-700 rounded-lg py-2 px-4 text-white w-full py-2 "
               id="password"
               type="Password"
-              placeholder="password"
+              placeholder="Password"
               required
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
 
-            {/* <div className="mb-2 block flex pt-2">
-                <FaStarOfLife color="red" size={8} />
-                <Label htmlFor="password" value="Role" className="text-white" />
-              </div> */}
-
-            {/* <div className="bg-custom-800 w-[37%] rounded-md">
-                <Dropdown
-                  label="Select role"
-                  className="bg-custom-500 shadow-md border-0"
+            <div className="w-full pt-4">
+              <div className="flex justify-center items-center  font-medium ">
+                <Button
+                  variant="contained"
+                  onClick={handleRegister}
+                  className="bg-blue-700 hover:shadow uppercase shadow-md hover:bg-blue-600 rounded"
                 >
-                  <Dropdown.Item
-                    className="text-white hover:text-black"
-                    value={role}
-                    onClick={() => setRole("subAdmin")}
-                  >
-                    Sub Admin
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className="text-white hover:text-black"
-                    value={role}
-                    onClick={() => setRole("user")}
-                  >
-                    User
-                  </Dropdown.Item>
-                </Dropdown>
-              </div> */}
-            <div onClick={handleRegister}>
-              <CustomButton
-                text="Create User"
-                customClass="bg-blue-600 hover:bg-blue-700 hover:shadow-lg rounded-lg text-white font-semibold cursor-pointer py-2 px-4"
-              />
+                  Create
+                </Button>
+              </div>
             </div>
           </div>
         </Modal.Body>

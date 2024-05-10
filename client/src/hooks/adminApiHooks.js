@@ -232,7 +232,7 @@ export const useAdminApiHook = () => {
     setLoading(true);
     axios
       .patch(
-        `${config.endpoint}/admin/user/update/${userId}`,
+        `${config.endpoint}/${role}/user/update/${userId}`,
         {
           fname,
           mobile,

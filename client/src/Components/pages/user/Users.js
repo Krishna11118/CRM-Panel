@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Typography, Grid } from "@mui/material";
 import config from "../../../Config/Config";
-import AddUserModal from "../../common/modals/AddUserModal";
+import AddUserModal from "./AddUserModal";
 import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 import UsersTable from "./UsersTable";
 import { useLocalStorage } from "../../../utils/LocalStorage";

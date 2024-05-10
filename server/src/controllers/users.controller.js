@@ -130,33 +130,55 @@ const getUser = async (req, res) => {
 const updateUserData = asyncHandler(async (req, res) => {
   const userId = req.params.userId;
   const newData = req.body;
-  const { email, mobile } = newData;
+  const { email, mobile, password, fname } = newData;
 
   try {
-    const preuser = await userdb.findOne({ email: email });
-    const premobile = await userdb.findOne({ mobile: mobile });
-    // Check if the email or mobile number is already in use
-    if (preuser || premobile) {
-      res.status(409).json({
-        error: `This ${
-          premobile ? "mobile number" : "E-mail"
-        } is Already Exist`,
-      });
-      return;
+    // Update fields with data
+    const updateFields = {};
+    if (fname) {
+      updateFields.fname = fname;
     }
-    // Hash password
-    if (newData.password) {
-      newData.password = await hashPassword(newData.password);
+    if (email) {
+      updateFields.email = email;
+    }
+    if (mobile) {
+      updateFields.mobile = mobile;
+    }
+    if (password) {
+      updateFields.password = await hashPassword(password);
     }
 
-    // Update user data
+    // Check if any fields are being updated
+    if (Object.keys(updateFields).length === 0) {
+      return res.status(400).json({ error: "No fields to update" });
+    }
+
+    //--------------------- Check for duplicate email or mobile only if they are being updated
+    if (email) {
+      const preEmail = await userdb.findOne({ email: email });
+      if (preEmail) {
+        return res.status(409).json({
+          error: `This email is already in use`,
+        });
+      }
+    }
+    if (mobile) {
+      const preMobile = await userdb.findOne({ mobile: mobile });
+      if (preMobile) {
+        return res.status(409).json({
+          error: `This mobile number is already in use`,
+        });
+      }
+    }
+
+    // ------------Update user data
     const updatedUser = await userdb
-      .findByIdAndUpdate(userId, newData, {
+      .findByIdAndUpdate(userId, updateFields, {
         new: true,
       })
       .lean();
     if (!updatedUser) {
-      return res.status(404).send(`No user founded`);
+      return res.status(404).send(`No user found`);
     }
     res.status(201).json({ message: "User updated successfully" });
   } catch (error) {

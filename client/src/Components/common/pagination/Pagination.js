@@ -21,7 +21,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
         disabled={currentPage === 1}
         className=" p-2 bg-custom-500 rounded hover:shadow hover:bg-blue-900"
       >
-          <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center cursor-pointer">
           <GrFormPrevious />
           <span>Previous</span>
         </div>
@@ -32,7 +32,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
       <button
         onClick={handleNextClick}
         disabled={currentPage === totalPages}
-        className=" p-2 bg-custom-500 rounded hover:shadow hover:bg-blue-900"
+        className=" p-2 bg-custom-500 rounded hover:shadow hover:bg-blue-900  cursor-pointer"
       >
         <div className="flex items-center justify-center">
           <span>Next</span>

@@ -24,7 +24,7 @@ const {
 
 // -------------------------------------------------------------------------------admin route
 router.post("/admin/register", adminRegister);
-router.post("/admin/login", adminLogin);
+router.post("/admin/login", adminLogin);  
 router.get(
   "/globalAccess/singleData",
   authenticate,
@@ -111,7 +111,7 @@ router.delete(
   deleteUser
 );
 
-// to get single user *pending
+// to get single user 
 router.get(
   "/admin/user/single/:userId",
   authenticate,

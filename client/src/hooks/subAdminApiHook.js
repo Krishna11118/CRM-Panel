@@ -90,47 +90,47 @@ export const useSubAdminApiHook = () => {
   };
 
   // ---------------------------------------- handle update user
-  const handleUpdateUser = (userId, fname, mobile, email, password) => {
-    setLoading(true);
-    axios
-      .patch(
-        `${config.endpoint}/user/updateUser/${userId}`,
-        {
-          fname,
-          mobile,
-          email,
-          password,
-        },
-        {
-          headers: { authorization: `${token}` },
-        }
-      )
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-        toast.success("User updated successfully");
-      })
-      .catch((error) => {
-        setError("An error occurred while updating user. Please try again.");
-        setLoading(false);
-        if (
-          error.response &&
-          error.response.data.error.includes("Email is Already Exist")
-        ) {
-          setError("This email is already registered");
-          toast.error("This email is already registered");
-        } else {
-          toast.error(
-            "An error occurred while updating user. Please try again."
-          );
-        }
-      });
-  };
+  // const handleUpdateUser = (userId, fname, mobile, email, password) => {
+  //   setLoading(true);
+  //   axios
+  //     .patch(
+  //       `${config.endpoint}/${role}/user/update/${userId}`,
+  //       {
+  //         fname,
+  //         mobile,
+  //         email,
+  //         password,
+  //       },
+  //       {
+  //         headers: { authorization: `${token}` },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       setData(response.data);
+  //       setLoading(false);
+  //       toast.success("User updated successfully");
+  //     })
+  //     .catch((error) => {
+  //       setError("An error occurred while updating user. Please try again.");
+  //       setLoading(false);
+  //       if (
+  //         error.response &&
+  //         error.response.data.error.includes("Email is Already Exist")
+  //       ) {
+  //         setError("This email is already registered");
+  //         toast.error("This email is already registered");
+  //       } else {
+  //         toast.error(
+  //           "An error occurred while updating user. Please try again."
+  //         );
+  //       }
+  //     });
+  // };
 
   return {
     handleSubAdminRegister,
     handleSubAdminLogin,
     handleDeleteUser,
-    handleUpdateUser,
+    // handleUpdateUser,
   };
 };

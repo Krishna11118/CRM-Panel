@@ -18,7 +18,7 @@ import Pages from "./Pagination";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import config from "../../Config/Config";
-import AddUserModal from "../common/modals/AddUserModal";
+import AddUserModal from "./user/AddUserModal";
 import MenuButton from "../common/editMenuButton/EditMenuButton";
 import { useUserApiHooks } from "../../hooks/userApiHooks";
 import { useLocalStorage } from "../../utils/LocalStorage";
@@ -94,11 +94,6 @@ const Users = () => {
     };
   };
 
-  // -----------------------------------------Dropdown--------------------------------
-
-  const handleUpdateUser = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
 
   // ------------------------------------------Status switch---------------------------
 
@@ -221,7 +216,6 @@ const Users = () => {
                     </TableCell>
                   </TableRow>
                 ))}
-                {/* // dropdown will open just below of that row  when user click on handleUpdateUser */}
               </TableBody>
             </Table>
           </TableContainer>

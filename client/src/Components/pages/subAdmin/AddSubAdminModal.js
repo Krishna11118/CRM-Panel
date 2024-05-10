@@ -1,7 +1,7 @@
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import CustomButton from "../buttons/CustomButton";
+import CustomButton from "../../common/buttons/CustomButton";
 import { Validation } from "../../../utils/Validations";
 import { FaStarOfLife } from "react-icons/fa";
 import { Dropdown } from "flowbite-react";
@@ -10,6 +10,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { TableRow, TableCell, Avatar } from "@mui/material";
 import { MdOutlineSecurity } from "react-icons/md";
 import { IoIosCreate } from "react-icons/io";
+
 
 const AddUserModal = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -68,20 +69,20 @@ const AddUserModal = () => {
         className="bg-black bg-opacity-70   "
       >
         {/* --------------------------------------Modal Header */}
-        <div className="w-[119.3%]">
+        <div className="w-[130.6%]  h-full w-full">
           <Modal.Header className="bg-custom-500 shadow-lg   " />
           <div className="flex ">
             {/* -------------------------------------Create SubAdmin */}
             <div>
-              <Modal.Body className="bg-custom-600">
+              <Modal.Body className="bg-custom-600 h-full">
                 <div className="space-y-2 pt-4">
                   <div className="flex justify-around items-center">
                     <IoIosCreate color="white" size={20} />
                     <h3
-                      className="text-xl font-medium text-white "
+                      className="text-xl text-white  font-normal"
                       color="primary"
                     >
-                      Create Sub Admin
+                       Sub Admin
                     </h3>
                   </div>
 
@@ -90,7 +91,7 @@ const AddUserModal = () => {
                       <FaStarOfLife color="red" size={8} />
                       <Label
                         htmlFor="name"
-                        className="text-white"
+                        className="text-white font-light"
                         value=" Name"
                       />{" "}
                     </div>
@@ -112,7 +113,7 @@ const AddUserModal = () => {
                       <Label
                         htmlFor="mobile"
                         value="Mobile No"
-                        className="text-white"
+                        className="text-white font-light"
                       />
                     </div>
                     <input
@@ -131,7 +132,7 @@ const AddUserModal = () => {
                       <Label
                         htmlFor="email"
                         value="E-mail"
-                        className="text-white"
+                        className="text-white font-light"
                       />
                     </div>
                     <input
@@ -151,7 +152,7 @@ const AddUserModal = () => {
                       <Label
                         htmlFor="password"
                         value=" Password"
-                        className="text-white"
+                        className="text-white font-light"
                       />
                     </div>
                     <input
@@ -164,11 +165,17 @@ const AddUserModal = () => {
                       onChange={(event) => setPassword(event.target.value)}
                     />
                   </div>
-                  <div onClick={handleRegister} className="pt-4">
-                    <CustomButton
-                      text="Create"
-                      customClass="bg-blue-600 hover:bg-blue-700 hover:shadow-lg rounded-lg text-white font-semibold cursor-pointer py-2 px-4 "
-                    />
+                  {/* ------------------------------ Create Button */}
+                  <div className="w-full pt-4">
+                    <div className="flex justify-center items-center  font-medium ">
+                      <Button
+                        variant="contained"
+                        onClick={handleRegister}
+                        className="bg-blue-700 hover:shadow uppercase shadow-md hover:bg-blue-600 rounded"
+                      >
+                        Create
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Modal.Body>

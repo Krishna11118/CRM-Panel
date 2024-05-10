@@ -13,6 +13,7 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
     subAdminDeletePermissions,
     subAdminStatusPermissions,
   } = useSetRole();
+  
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 

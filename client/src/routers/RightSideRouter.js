@@ -5,7 +5,7 @@ import PrivateRoutes from "../Components/protectRoute/privateRoute";
 
 //-----------------------------------------------------main pages
 import Dashboard from "../Components/pages/Dashboard";
-import SubAdmin from "../Components/pages/subAdmin/SubAdminData";
+import SubAdmin from "../Components/pages/subAdmin/SubAdmin";
 import Users from "../Components/pages/user/Users";
 import SubAdminProfile from "../Components/pages/subAdmin/SubAdminProfile";
 import UserProfile from "../Components/pages/user/UserProfile";

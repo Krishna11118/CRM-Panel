@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UserProfileDetails from "./UserProfileDetail";
-import Update from "../subAdmin/UpdateSubAdmin";
+import Update from "../user/UserUpdate";
 
 const UserProfileTable = () => {
   const [activeTab, setActiveTab] = useState("stats");
