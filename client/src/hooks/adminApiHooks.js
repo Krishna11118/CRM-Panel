@@ -1,15 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import config from "../Config/Config";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
-
 
 export const useAdminApiHook = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { token , role } = useAuth();
+  const { token, role } = useAuth();
 
   // -------------------------------------------------------------------------------------------------admin's API
   // ---------------------------------------- admin login
@@ -33,20 +32,53 @@ export const useAdminApiHook = () => {
   };
 
   //-------------------------------------------------------------------------------------------------subAdmin API
+
+  //-----------------------------------------------------Fetch single subAdmin data
+  // useEffect(() => {
+  //   const handleFetchSubAdminDetails = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await axios.get(
+  //         `${config.endpoint}/admin/subAdmin/single/${subAdminId}`,
+  //         {
+  //           headers: {
+  //             authorization: token,
+  //           },
+  //         }
+  //       );
+  //       //------------------------------ set permissions switch
+  //       setCreateUserPermission(response.data.permissions.createUser);
+  //       setReadUserPermission(response.data.permissions.readUser);
+  //       setUpdateUserPermission(response.data.permissions.updateUser);
+  //       setDeleteUserPermission(response.data.permissions.deleteUser);
+  //       setChangeStatusPermission(response.data.permissions.changeStatus);
+
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log("Error fetching sub-admin details:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   handleFetchSubAdminDetails();
+  // }, [subAdminId, token]);
+
   // ---------------------------------------- update subAdmin
   const handleUpdateSubAdmin = (subAdminId, fname, mobile, email, password) => {
     setLoading(true);
+    const requestBody = {
+      ...(fname.trim() !== "" && { fname }),
+      ...(mobile.trim() !== "" && { mobile }),
+      ...(email.trim() !== "" && { email }),
+      ...(password.trim() !== "" && { password }),
+    };
+
     axios
       .patch(
         `${config.endpoint}/admin/subAdmin/update/${subAdminId}`,
+        requestBody,
         {
-          fname,
-          mobile,
-          email,
-          password,
-        },
-        {
-          headers: { authorization: `${token}` },
+          headers: { authorization: token },
         }
       )
       .then((response) => {
@@ -55,21 +87,48 @@ export const useAdminApiHook = () => {
         toast.success("SubAdmin updated successfully");
       })
       .catch((error) => {
-        setError(
-          "An error occurred while updating SubAdmin. Please try again."
-        );
+        toast.error(error.response.data.error);
         setLoading(false);
-        if (
-          error.response &&
-          error.response.data.error.includes("Email is Already Exist")
-        ) {
-          setError("This email is already registered");
-          toast.error("This email is already registered");
-        } else {
-          toast.error(
-            "An error occurred while updating SubAdmin. Please try again."
-          );
+      });
+  };
+
+  //--------------------------------------------update subAdmin permission
+  const handleUpdateSubAdminPermissions = (
+    subAdminId,
+    { createUser, readUser, updateUser, deleteUser, changeStatus }
+  ) => {
+    setLoading(true);
+    console.log(
+      "createUser, readUser, updateUser, deleteUser, changeStatus",
+      createUser,
+      readUser,
+      updateUser,
+      deleteUser,
+      changeStatus
+    );
+
+    axios
+      .patch(
+        `${config.endpoint}/admin/subAdmin/update/permissions/${subAdminId}`,
+        {
+          createUser,
+          readUser,
+          updateUser,
+          changeStatus,
+          deleteUser,
+        },
+        {
+          headers: { authorization: token },
         }
+      )
+      .then((response) => {
+        setData(response.data);
+        setLoading(false);
+        toast.success("SubAdmin updated successfully");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.error || "Unexpected error");
+        setLoading(false);
       });
   };
 
@@ -80,7 +139,7 @@ export const useAdminApiHook = () => {
     console.log("token handleDeleteSubAdmin", token);
     axios
       .delete(`${config.endpoint}/admin/subAdmin/delete/${subAdminId}`, {
-        headers: { authorization: `${token}` },
+        headers: { authorization: token },
       })
       .then((response) => {
         setData(response.data);
@@ -106,7 +165,7 @@ export const useAdminApiHook = () => {
         `${config.endpoint}/admin/subAdmin/${subAdminId}/${isActive}`,
         {},
         {
-          headers: { authorization: `${token}` },
+          headers: { authorization: token },
         }
       )
       .then((response) => {
@@ -150,7 +209,7 @@ export const useAdminApiHook = () => {
         },
         {
           headers: {
-            authorization: `${token}`,
+            authorization: token,
           },
         }
       )
@@ -174,6 +233,7 @@ export const useAdminApiHook = () => {
         }
       });
   };
+
   // -------------------------------------------------------------------------------------------------- user's API
 
   // ---------------------------------------- create user
@@ -206,13 +266,14 @@ export const useAdminApiHook = () => {
         }
       });
   };
+
   // ---------------------------------------- handle delete user
   const handleDeleteUser = (userId) => {
     setLoading(true);
     axios
       .delete(`${config.endpoint}/${role}/user/delete/${userId}`, {
         headers: {
-          authorization: `${token}`,
+          authorization: token,
         },
       })
       .then((response) => {
@@ -240,7 +301,7 @@ export const useAdminApiHook = () => {
           password,
         },
         {
-          headers: { authorization: `${token}` },
+          headers: { authorization: token },
         }
       )
       .then((response) => {
@@ -272,7 +333,7 @@ export const useAdminApiHook = () => {
         `${config.endpoint}/${role}/user/${userId}/${isActive}`,
         {},
         {
-          headers: { authorization: `${token}` },
+          headers: { authorization: token },
         }
       )
       .then((response) => {
@@ -297,6 +358,7 @@ export const useAdminApiHook = () => {
     loading,
     handleLoginAdmin,
     handleUpdateSubAdmin,
+    handleUpdateSubAdminPermissions,
     handleDeleteSubAdmin,
     handleSubAdminStatus,
     handleCreateSubAdmin,

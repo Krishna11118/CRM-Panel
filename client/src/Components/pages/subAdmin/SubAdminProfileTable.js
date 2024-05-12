@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import SubAdminProfileDetail from "./SubAdminProfileDetail";
 import Update from "./UpdateSubAdmin";
+import SubAdminUpdatePermission from "./SubAdminUpdatePermission";
 
 const SubAdminTable = () => {
   const [activeTab, setActiveTab] = useState("stats");
-  
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -120,8 +120,7 @@ const SubAdminTable = () => {
           role="tabpanel"
           aria-labelledby="faq-tab"
         >
-          {/* FAQ content */}
-          <p>FAQ tab content</p>
+          <SubAdminUpdatePermission />
         </div>
       </div>
     </div>

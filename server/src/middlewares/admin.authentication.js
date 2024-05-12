@@ -10,6 +10,7 @@ const adminAuthentication = async (req, res, next) => {
     if (!rootUser) {
       throw new Error("User not found");
     }
+    // console.log("rootUser",rootUser )
     req.userId = rootUser._id;
 
     next();

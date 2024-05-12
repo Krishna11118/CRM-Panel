@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   const [resData, setResData] = useState({});
   const { getFromLocalStorage } = useLocalStorage();
   const [usersData, setUsersData] = useState(0);
-  const [subAdminsData, setSubAdminsData] = useState(0);
+  const [subAdminsData, setSubAdminsData] = useState({});
 
   
 

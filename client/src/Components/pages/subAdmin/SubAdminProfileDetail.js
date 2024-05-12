@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../../Config/Config";
 import { useLocalStorage } from "../../../utils/LocalStorage";
-import { IoPersonCircle } from "react-icons/io5";
 import ProfileDetails from "../../common/Profile/ProfileDetails";
+import { useAuth } from "../../../context/AuthContext";
 
 const SubAdminProfileDetail = () => {
-
   const [loading, setLoading] = useState(true);
   const { getFromLocalStorage } = useLocalStorage();
   const [email, setEmail] = useState("");
@@ -16,6 +15,7 @@ const SubAdminProfileDetail = () => {
   const [name, setName] = useState("");
   const { subAdminId } = useParams();
   const [resRole, setResRole] = useState("");
+  const { setSubAdminsData } = useAuth();
 
   // -----------------------------------------Fetch Single SubAdmin Details----------------------------------
   useEffect(() => {
@@ -31,6 +31,7 @@ const SubAdminProfileDetail = () => {
             },
           }
         );
+        setSubAdminsData(response.data);
         setName(response.data.fname);
         setEmail(response.data.email);
         setMobile(response.data.mobile);
@@ -44,8 +45,14 @@ const SubAdminProfileDetail = () => {
     fetchSubAdminDetails();
   }, [subAdminId]);
 
-  return <ProfileDetails name={name} resRole={resRole} mobile={mobile} email={email} />;
-
+  return (
+    <ProfileDetails
+      name={name}
+      resRole={resRole}
+      mobile={mobile}
+      email={email}
+    />
+  );
 };
 
 export default SubAdminProfileDetail;

@@ -7,6 +7,7 @@ const authenticate = async (req, res, next) => {
     const token = req.headers.authorization;
     const secKey = config.secretKey;
 
+    // console.log("token", token);
 
     const verifytoken = jwt.verify(token, secKey);
     req.verifytoken = verifytoken;

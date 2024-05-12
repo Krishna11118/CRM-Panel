@@ -146,42 +146,40 @@ const updateSubAdminData = asyncHandler(async (req, res) => {
   const { email, mobile, password, fname } = newData;
 
   try {
-    // Update fields with data
     const updateFields = {};
-    if (fname) {
-      updateFields.fname = fname;
+    if (email || password || mobile || fname) {
+      // Update fields with data
+      if (fname !== undefined) {
+        updateFields.fname = fname;
+      }
+      if (email !== undefined) {
+        updateFields.email = email;
+      }
+      if (mobile !== undefined) {
+        updateFields.mobile = mobile;
+      }
+      if (password !== undefined) {
+        updateFields.password = await hashPassword(password);
+      }
     }
-    if (email) {
-      updateFields.email = email;
-    }
-    if (mobile) {
-      updateFields.mobile = mobile;
-    }
-    if (password) {
-      updateFields.password = await hashPassword(password);
-    }
-
     // Check if any fields are being updated
     if (Object.keys(updateFields).length === 0) {
       return res.status(400).json({ error: "No fields to update" });
     }
 
     // Check for duplicate email or mobile only if they are being updated
-    if (email) {
-      const preEmail = await subAdmindb.findOne({ email: email });
-      if (preEmail) {
-        return res.status(409).json({
-          error: `This email is already in use`,
-        });
-      }
+    const preEmail = await subAdmindb.findOne({ email });
+    if (preEmail) {
+      return res.status(409).json({
+        error: `This email is already in use`,
+      });
     }
-    if (mobile) {
-      const preMobile = await subAdmindb.findOne({ mobile: mobile });
-      if (preMobile) {
-        return res.status(409).json({
-          error: `This mobile number is already in use`,
-        });
-      }
+
+    const preMobile = await subAdmindb.findOne({ mobile });
+    if (preMobile) {
+      return res.status(409).json({
+        error: `This mobile number is already in use`,
+      });
     }
 
     // Update subAdmins data
@@ -190,17 +188,51 @@ const updateSubAdminData = asyncHandler(async (req, res) => {
         new: true,
       })
       .lean();
+
     if (!updatedUser) {
       return res.status(404).send(`No user found`);
     }
-    res.status(201).json({ message: "User updated successfully" });
+
+    res.status(200).json({ message: "User updated successfully", updatedUser });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
   }
 });
 
+//-------------------------------------------------------------------------------Update subAdmin Permissions
 
+const updateSubAdminPermissions = asyncHandler(async (req, res) => {
+  const subAdminId = req.params.subAdminId;
+  const { createUser, readUser, updateUser, changeStatus, deleteUser } =
+    req.body;
+
+  try {
+    // Update subAdmins data
+    const updatedUser = await subAdmindb.findOneAndUpdate(
+      { _id: subAdminId },
+      {
+        $set: {
+          "permissions.createUser": createUser,
+          "permissions.readUser": readUser,
+          "permissions.updateUser": updateUser,
+          "permissions.changeStatus": changeStatus,
+          "permissions.deleteUser": deleteUser,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send(`No user found`);
+    }
+
+    res.status(200).json({ message: "User updated successfully", updatedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 // -------------------------------------------------------------------------------Update subAdmin status
 const subAdminStatus = asyncHandler(async (req, res) => {
@@ -244,4 +276,5 @@ module.exports = {
   updateSubAdminData,
   subAdminStatus,
   getSingleSubAdmin,
+  updateSubAdminPermissions,
 };

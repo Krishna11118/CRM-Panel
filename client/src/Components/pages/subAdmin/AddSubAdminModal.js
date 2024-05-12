@@ -69,7 +69,7 @@ const AddUserModal = () => {
         className="bg-black bg-opacity-70   "
       >
         {/* --------------------------------------Modal Header */}
-        <div className="w-[130.6%]  h-full w-full">
+        <div className="w-[130.6%]  ">
           <Modal.Header className="bg-custom-500 shadow-lg   " />
           <div className="flex ">
             {/* -------------------------------------Create SubAdmin */}

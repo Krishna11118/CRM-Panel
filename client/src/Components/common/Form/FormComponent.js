@@ -67,7 +67,7 @@ const FormComponent = ({ onSubmit, buttonText }) => {
           </div>
         </div>
       </div>
-
+{/* //--------------------------------Button */}
       <div className="w-full">
         <div className="flex justify-center items-center  font-medium ">
           <Button
