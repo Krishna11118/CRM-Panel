@@ -385,6 +385,24 @@ export const useAdminApiHook = () => {
       });
   };
 
+  //-----------------------------------------chart subadmin data
+  // const chartData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const res = await axios.get(`${config.endpoint}/admin/subAdmin/data`, {
+  //       headers: {
+  //         authorization: token,
+  //       },
+  //     });
+  //     console.log(res.data)
+  //     setData(res.data);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     setLoading(false);
+  //     console.error("Error fetching data:", err);
+  //   }
+  // };
+
   return {
     data,
     error,
@@ -400,5 +418,6 @@ export const useAdminApiHook = () => {
     handleDeleteUser,
     handleUpdateUser,
     handleUserStatus,
+    // chartData,
   };
 };

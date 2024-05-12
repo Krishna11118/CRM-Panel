@@ -21,7 +21,6 @@ const {
   userStatus,
   deleteUser,
   getSingleUser,
-  updateUserPermissions,
 } = require("../../controllers/users.controller");
 
 // -------------------------------------------------------------------------------admin route

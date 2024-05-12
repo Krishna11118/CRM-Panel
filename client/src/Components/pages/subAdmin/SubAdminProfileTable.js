@@ -22,9 +22,9 @@ const SubAdminTable = () => {
           value={activeTab}
           onChange={(e) => handleTabClick(e.target.value)}
         >
-          <option value="stats">Statistics</option>
-          <option value="about">Services</option>
-          <option value="faq">FAQ</option>
+          <option value="stats">Profile</option>
+          <option value="about">Update Profile</option>
+          <option value="faq">Update Permissions</option>
         </select>
       </div>
       <ul

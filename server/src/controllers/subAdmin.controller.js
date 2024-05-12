@@ -267,8 +267,6 @@ const getSingleSubAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-
-
 module.exports = {
   subAdminRegister,
   subAdminLogin,
@@ -279,5 +277,4 @@ module.exports = {
   subAdminStatus,
   getSingleSubAdmin,
   updateSubAdminPermissions,
-  cartData,
 };

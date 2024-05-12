@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   
 
   // useEffect(() => {
-  //     CMSServices.getCMS().then((res) => {
+  //     CMSUpdate Profile.getCMS().then((res) => {
   //         setCMSData(res.data)
   //         document.documentElement.style.setProperty('--brand-color', res.data.colors.brand);
   //         document.documentElement.style.setProperty('--brand-pastel-color', res.data.colors.pastel);
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
           `${config.endpoint}/${getRole}/singleData`,
           {
             headers: {
-              authorization: `${token}`,
+              authorization: token,
             },
           }
         );
