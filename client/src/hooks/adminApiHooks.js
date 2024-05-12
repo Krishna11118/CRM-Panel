@@ -30,7 +30,6 @@ export const useAdminApiHook = () => {
         toast.error("An error occurred while logging in. Please try again.");
       });
   };
-
   //-------------------------------------------------------------------------------------------------subAdmin API
 
   //-----------------------------------------------------Fetch single subAdmin data
@@ -352,6 +351,40 @@ export const useAdminApiHook = () => {
       });
   };
 
+  //---------------------------------------------------------------------------------- common route admin and sub admin
+
+  //----------------------------------------update user permission
+  const handleUpdateUserPermissions = (
+    userId,
+    { createUser, readUser, updateUser, deleteUser, changeStatus }
+  ) => {
+    setLoading(true);
+
+    axios
+      .patch(
+        `${config.endpoint}/${role}/user/update/permissions/${userId}`,
+        {
+          createUser,
+          readUser,
+          updateUser,
+          changeStatus,
+          deleteUser,
+        },
+        {
+          headers: { authorization: token },
+        }
+      )
+      .then((response) => {
+        setData(response.data);
+        setLoading(false);
+        toast.success("SubAdmin updated successfully");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.error || "Unexpected error");
+        setLoading(false);
+      });
+  };
+
   return {
     data,
     error,
@@ -359,6 +392,7 @@ export const useAdminApiHook = () => {
     handleLoginAdmin,
     handleUpdateSubAdmin,
     handleUpdateSubAdminPermissions,
+    handleUpdateUserPermissions,
     handleDeleteSubAdmin,
     handleSubAdminStatus,
     handleCreateSubAdmin,

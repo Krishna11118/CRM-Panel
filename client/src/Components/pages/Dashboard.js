@@ -1,11 +1,9 @@
 import { React, useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useAuth } from "../../context/AuthContext";
+import DashboardChart from "../chart/DashboardChart";
 
 const Dashboard = () => {
-
-
- 
   return (
     <>
       <div className=" pr-4">
@@ -20,6 +18,7 @@ const Dashboard = () => {
         </div> */}
 
         {/* <Table /> */}
+        <DashboardChart />
       </div>
     </>
   );

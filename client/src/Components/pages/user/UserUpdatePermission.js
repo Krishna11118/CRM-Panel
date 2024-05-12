@@ -6,18 +6,21 @@ import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import config from "../../../Config/Config";
+import { useAuth } from "../../../context/AuthContext";
 
-const SubAdminUpdatePermission = () => {
-  const { handleUpdateSubAdminPermissions } = useAdminApiHook();
+const UserUpdatePermission = () => {
+  const { handleUpdateUserPermissions } = useAdminApiHook();
   const [createUserPermission, setCreateUserPermission] = useState(null);
   const [readUserPermission, setReadUserPermission] = useState(null);
   const [updateUserPermission, setUpdateUserPermission] = useState(null);
   const [changeStatusPermission, setChangeStatusPermission] = useState(null);
   const [deleteUserPermission, setDeleteUserPermission] = useState(null);
 
+  const { role } = useAuth();
+
   const { getFromLocalStorage } = useLocalStorage();
   const [loading, setLoading] = useState(false);
-  const { subAdminId } = useParams();
+  const { userId } = useParams();
 
   useEffect(() => {
     const token = getFromLocalStorage("token");
@@ -25,7 +28,7 @@ const SubAdminUpdatePermission = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${config.endpoint}/admin/subAdmin/single/${subAdminId}`,
+          `${config.endpoint}/${role}/subAdmin/single/${userId}`,
           {
             headers: {
               authorization: `${token}`,
@@ -53,10 +56,10 @@ const SubAdminUpdatePermission = () => {
       createUser: createUserPermission,
       readUser: readUserPermission,
       updateUser: updateUserPermission,
-      deleteUser: deleteUserPermission,
-      changeStatus: changeStatusPermission,
+      deleteUser: changeStatusPermission,
+      changeStatus: deleteUserPermission,
     };
-    await handleUpdateSubAdminPermissions(subAdminId, permission);
+    await handleUpdateUserPermissions(subAdminId, permission);
   };
 
   return (
@@ -105,4 +108,4 @@ const SubAdminUpdatePermission = () => {
   );
 };
 
-export default SubAdminUpdatePermission;
+export default UserUpdatePermission;

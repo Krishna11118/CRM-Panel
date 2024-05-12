@@ -13,7 +13,6 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
     subAdminDeletePermissions,
     subAdminStatusPermissions,
   } = useSetRole();
-  
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -78,6 +77,7 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
           {subAdminUpdatePermissions && (
             <TableCell className="cursor-pointer">
               <Dropdown
+                className="bg-custom-500 text-white hover:bg-blue-900 shadow-md border-none hover:border hover:border-white"
                 label=""
                 dismissOnClick={false}
                 renderTrigger={() => (
@@ -92,10 +92,10 @@ const UserRow = ({ user, index, handleDelete, handleStatus, stringAvatar }) => {
                 )}
               >
                 <Link to={`/user/profile/${user._id}`} className="btn">
-                  <Dropdown.Item>Profile</Dropdown.Item>
+                  <Dropdown.Item className="text-white hover:bg-blue-900 hover:shadow ">
+                    Profile
+                  </Dropdown.Item>
                 </Link>
-                {/* <Dropdown.Item>Settings</Dropdown.Item> */}
-                {/* <Dropdown.Item>Update</Dropdown.Item> */}
               </Dropdown>
             </TableCell>
           )}

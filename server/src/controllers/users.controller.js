@@ -219,6 +219,38 @@ const getSingleUser = asyncHandler(async (req, res) => {
   }
 });
 
+//-------------------------------------------------------update user permisssions *not in working
+// const updateUserPermissions = asyncHandler(async (req, res) => {
+//   const userId = req.params.userId;
+//   const { createUser, readUser, updateUser, changeStatus, deleteUser } =
+//     req.body;
+
+//   try {
+//     // Update subAdmins data
+//     const updatedUser = await userdb.findOneAndUpdate(
+//       { _id: userId },
+//       {
+//         $set: {
+//           "permissions.createUser": createUser,
+//           "permissions.readUser": readUser,
+//           "permissions.updateUser": updateUser,
+//           "permissions.changeStatus": changeStatus,
+//           "permissions.deleteUser": deleteUser,
+//         },
+//       },
+//       { new: true }
+//     );
+
+//     if (!updatedUser) {
+//       return res.status(404).send(`No user found`);
+//     }
+
+//     res.status(200).json({ message: "User updated successfully", updatedUser });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal server error");
+//   }
+// });
 module.exports = {
   loginUser,
   registerUser,

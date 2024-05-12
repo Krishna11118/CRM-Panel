@@ -21,6 +21,7 @@ const {
   userStatus,
   deleteUser,
   getSingleUser,
+  updateUserPermissions,
 } = require("../../controllers/users.controller");
 
 // -------------------------------------------------------------------------------admin route
@@ -91,6 +92,14 @@ router.patch(
   updateSubAdminPermissions
 );
 
+// to update subadmin permissions
+router.patch(
+  "/admin/subAdmin/update/permissions/:subAdminId",
+  authenticate,
+  adminAuthentication,
+  updateSubAdminPermissions
+);
+
 // -------------------------------------------------------------------------------users route
 
 // to get all user's data
@@ -127,5 +136,13 @@ router.get(
   adminAuthentication,
   getSingleUser
 );
+
+// to update user permissions *not in working
+// router.patch(
+//   "/admin/user/update/permissions/:subAdminId",
+//   authenticate,
+//   adminAuthentication,
+//   updateUserPermissions
+// );
 
 module.exports = router;

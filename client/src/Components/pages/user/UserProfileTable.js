@@ -4,7 +4,6 @@ import Update from "../user/UserUpdate";
 
 const UserProfileTable = () => {
   const [activeTab, setActiveTab] = useState("stats");
-  
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -100,7 +99,7 @@ const UserProfileTable = () => {
           role="tabpanel"
           aria-labelledby="stats-tab"
         >
-         <UserProfileDetails/>
+          <UserProfileDetails />
         </div>
         <div
           className={`${
@@ -120,8 +119,10 @@ const UserProfileTable = () => {
           role="tabpanel"
           aria-labelledby="faq-tab"
         >
-          {/* FAQ content */}
-          <p>FAQ tab content</p>
+          <div className=" text-white">
+            {" "}
+            <p>No permission given yet!</p>
+          </div>
         </div>
       </div>
     </div>

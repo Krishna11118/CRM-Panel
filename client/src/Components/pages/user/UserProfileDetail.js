@@ -5,6 +5,7 @@ import axios from "axios";
 import config from "../../../Config/Config";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import ProfileDetails from "../../common/Profile/ProfileDetails";
+import { useAuth } from "../../../context/AuthContext";
 
 const UserProfileDetail = () => {
   const [loading, setLoading] = useState(true);
@@ -14,6 +15,7 @@ const UserProfileDetail = () => {
   const [name, setName] = useState("");
   const { userId } = useParams();
   const [resRole, setResRole] = useState("");
+  const { role } = useAuth();
 
   // -----------------------------------------Fetch Single SubAdmin Details----------------------------------
   useEffect(() => {
@@ -22,7 +24,7 @@ const UserProfileDetail = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${config.endpoint}/admin/user/single/${userId}`,
+          `${config.endpoint}/${role}/user/single/${userId}`,
           {
             headers: {
               authorization: `${token}`,
@@ -43,8 +45,14 @@ const UserProfileDetail = () => {
     fetchSubAdminDetails();
   }, [userId]);
 
-  return <ProfileDetails name={name} resRole={resRole} mobile={mobile} email={email} />;
-
+  return (
+    <ProfileDetails
+      name={name}
+      resRole={resRole}
+      mobile={mobile}
+      email={email}
+    />
+  );
 };
 
 export default UserProfileDetail;

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const {
-  subAdminRegister,
   subAdminLogin,
   getSubAdmin,
 } = require("../../controllers/subAdmin.controller");
@@ -11,6 +10,7 @@ const {
   updateUserData,
   userStatus,
   deleteUser,
+  getSingleUser,
 } = require("../../controllers/users.controller");
 
 //--------------------------------------------------------subAdmin route
@@ -59,5 +59,21 @@ router.delete(
   subAdminAuthentication,
   deleteUser
 );
+
+// to get single user
+router.get(
+  "/subAdmin/user/single/:userId",
+  authenticate,
+  subAdminAuthentication,
+  getSingleUser
+);
+
+// to update user permissions *not in working
+// router.patch(
+//   "/subAdmin/user/update/permissions/:subAdminId",
+//   authenticate,
+//   subAdminAuthentication,
+//   updateUserPermissions
+// );
 
 module.exports = router;
