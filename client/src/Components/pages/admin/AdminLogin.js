@@ -62,7 +62,7 @@ export default function SignInSide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-               
+
     // ---------------------------------------Validation-------------------------------------
     if (!validateInput({ email, password })) {
       return;
@@ -83,6 +83,11 @@ export default function SignInSide() {
         setLoading(false);
         setUser(response.data.user);
         toast.success("Login Successful");
+
+        setTimeout(() => {
+          window.location.reload();
+        }); // Reloads the window after 5 seconds (5000 milliseconds)
+
         // ---------------------------------------Save data to local storage--------------------
         saveToLocalStorage("name", response.data.user.fname);
         saveToLocalStorage("role", response.data.user.role[0]);

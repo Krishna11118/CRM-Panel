@@ -53,7 +53,11 @@ export const useSubAdminApiHook = () => {
       .then((response) => {
         setData(response.data);
         setLoading(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000)
         toast.success("SubAdmin logged in successfully");
+       
       })
       .catch((error) => {
         console.error("Error:", error);

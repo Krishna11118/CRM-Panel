@@ -50,6 +50,9 @@ const Login = () => {
       if (response.status === 201) {
         setUser(response.data.user);
         toast.success("Login Successful");
+        setTimeout(() => {
+          window.location.reload();
+        });
 
         // -----------------------------------------------save to local storage
         saveToLocalStorage("name", response.data.user.fname);

@@ -60,6 +60,9 @@ export default function SignInSide() {
         setLoading(false);
         setUser(response.data.user);
         toast.success("Login Successful");
+        setTimeout(() => {
+          window.location.reload();
+        });
         // ---------------------------------------Save data to local storage--------------------
         saveToLocalStorage("name", response.data.user.fname);
         saveToLocalStorage("role", response.data.user.role[0]);

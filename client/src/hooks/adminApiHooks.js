@@ -23,6 +23,9 @@ export const useAdminApiHook = () => {
         setData(response.data);
         setLoading(false);
         toast.success("Admin logged in successfully");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       .catch((error) => {
         setError("An error occurred while logging in. Please try again.");
@@ -97,14 +100,6 @@ export const useAdminApiHook = () => {
     { createUser, readUser, updateUser, deleteUser, changeStatus }
   ) => {
     setLoading(true);
-    console.log(
-      "createUser, readUser, updateUser, deleteUser, changeStatus",
-      createUser,
-      readUser,
-      updateUser,
-      deleteUser,
-      changeStatus
-    );
 
     axios
       .patch(
@@ -218,15 +213,8 @@ export const useAdminApiHook = () => {
         toast.success("Sub Admin created successfully");
       })
       .catch((error) => {
-        console.error("Error:", error);
-        setError("An error occurred while registering. Please try again.");
-        setLoading(false);
-        if (
-          error.response &&
-          error.response.data.error.includes("Email is Already Exist")
-        ) {
-          setError("This email is already registered");
-          toast.error("This email is already registered");
+        if (error) {
+          toast.error(error.response.data.error);
         } else {
           toast.error("An error occurred while registering. Please try again.");
         }
