@@ -10,7 +10,7 @@ export const useAdminApiHook = () => {
   const [loading, setLoading] = useState(false);
   const { token, role } = useAuth();
 
-  // -------------------------------------------------------------------------------------------------admin's API
+  // -------------------------------------------------------------------------------------------------admin
   // ---------------------------------------- admin login
   const handleLoginAdmin = (email, password) => {
     setLoading(true);
@@ -33,37 +33,7 @@ export const useAdminApiHook = () => {
         toast.error("An error occurred while logging in. Please try again.");
       });
   };
-  //-------------------------------------------------------------------------------------------------subAdmin API
-
-  //-----------------------------------------------------Fetch single subAdmin data
-  // useEffect(() => {
-  //   const handleFetchSubAdminDetails = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await axios.get(
-  //         `${config.endpoint}/admin/subAdmin/single/${subAdminId}`,
-  //         {
-  //           headers: {
-  //             authorization: token,
-  //           },
-  //         }
-  //       );
-  //       //------------------------------ set permissions switch
-  //       setCreateUserPermission(response.data.permissions.createUser);
-  //       setReadUserPermission(response.data.permissions.readUser);
-  //       setUpdateUserPermission(response.data.permissions.updateUser);
-  //       setDeleteUserPermission(response.data.permissions.deleteUser);
-  //       setChangeStatusPermission(response.data.permissions.changeStatus);
-
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log("Error fetching sub-admin details:", error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   handleFetchSubAdminDetails();
-  // }, [subAdminId, token]);
+  //-------------------------------------------------------------------------------------------------subAdmin
 
   // ---------------------------------------- update subAdmin
   const handleUpdateSubAdmin = (subAdminId, fname, mobile, email, password) => {
@@ -128,9 +98,7 @@ export const useAdminApiHook = () => {
 
   // ---------------------------------------- delete subAdmin
   const handleDeleteSubAdmin = (subAdminId) => {
-    console.log("handleDeleteSubAdmin", token);
     setLoading(true);
-    console.log("token handleDeleteSubAdmin", token);
     axios
       .delete(`${config.endpoint}/admin/subAdmin/delete/${subAdminId}`, {
         headers: { authorization: token },
@@ -372,24 +340,6 @@ export const useAdminApiHook = () => {
         setLoading(false);
       });
   };
-
-  //-----------------------------------------chart subadmin data
-  // const chartData = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await axios.get(`${config.endpoint}/admin/subAdmin/data`, {
-  //       headers: {
-  //         authorization: token,
-  //       },
-  //     });
-  //     console.log(res.data)
-  //     setData(res.data);
-  //     setLoading(false);
-  //   } catch (err) {
-  //     setLoading(false);
-  //     console.error("Error fetching data:", err);
-  //   }
-  // };
 
   return {
     data,

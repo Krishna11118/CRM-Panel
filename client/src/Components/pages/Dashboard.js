@@ -4,6 +4,14 @@ import { useAuth } from "../../context/AuthContext";
 import DashboardChart from "../chart/DashboardChart";
 
 const Dashboard = () => {
+  const [hideForUser, setHideForUser] = useState(false);
+  const { role } = useAuth();
+
+  useEffect(() => {
+    if (role === "admin") {
+      setHideForUser(true);
+    }
+  }, [role]);
   return (
     <>
       <div className=" pr-4">
@@ -18,7 +26,7 @@ const Dashboard = () => {
         </div> */}
 
         {/* <Table /> */}
-        <DashboardChart />
+        {hideForUser && <DashboardChart />}
       </div>
     </>
   );

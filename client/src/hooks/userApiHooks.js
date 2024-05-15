@@ -26,7 +26,6 @@ export const useUserApiHooks = () => {
       })
       .then((response) => {
         setData(response.data);
-        console.log("response", response.data);
         setLoading(false);
         toast.success("User logged in successfully");
 

@@ -76,19 +76,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token, role]);
 
-  console.log(resData, " resData from context");
   //------------------------------------Setting Role--------------------
   useEffect(() => {
     const setUIRole = async () => {
       if (localRole === responseRole && responseRole === "noAccess") {
         setRole("user");
-        console.log("user");
       } else if (
         localRole === responseRole &&
         responseRole === "midLevelAccess"
       ) {
         setRole("subAdmin");
-        console.log("subAdmin");
       } else if (
         localRole === responseRole &&
         responseRole === "globalAccess"
@@ -111,7 +108,6 @@ export const AuthProvider = ({ children }) => {
     token,
     role,
     resData,
-
     usersData,
     setUsersData,
     subAdminsData,

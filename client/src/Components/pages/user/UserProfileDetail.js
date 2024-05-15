@@ -31,7 +31,6 @@ const UserProfileDetail = () => {
             },
           }
         );
-        console.log("response", response.data);
         setName(response.data.fname);
         setEmail(response.data.email);
         setMobile(response.data.mobile);

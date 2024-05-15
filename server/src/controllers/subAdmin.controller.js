@@ -17,7 +17,6 @@ const subAdminRegister = asyncHandler(async (req, res) => {
     deleteUser,
     changeStatus,
   } = req.body;
-  console.log(createUser, readUser, updateUser, deleteUser, changeStatus);
 
   if (!email || !password || !mobile || !fname) {
     return res.status(400).json({ error: "Please fill all details" });
