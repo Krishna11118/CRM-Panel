@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import config from "../Config/Config";
 import { useLocalStorage } from "../utils/LocalStorage";
+import { getCookie, removeTokenCookie } from "../utils/Cookie";
 
 const AuthContext = createContext();
 
@@ -10,6 +11,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const { getFromLocalStorage } = useLocalStorage();
   const [user, setUser] = useState(null);
   const [rolesAndPermissions, setrolesAndPermissions] = useState({});
   const [loader, setLoader] = useState(false);
@@ -18,13 +20,35 @@ export const AuthProvider = ({ children }) => {
   const [localRole, setLocalRole] = useState([]);
   const [responseRole, setResponseRole] = useState([]);
   const [role, setRole] = useState([]);
-  const [token] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(
+    () => localStorage.getItem("token") || null
+  );
   const [resData, setResData] = useState({});
-  const { getFromLocalStorage } = useLocalStorage();
   const [usersData, setUsersData] = useState(0);
   const [subAdminsData, setSubAdminsData] = useState({});
+  const [updateUseEffect, setUpdateUseEffect] = useState(false);
 
-  
+  // console.log("localRole", localRole);
+
+  //----------------------------------------------------Fetching User Data --------------------
+  useEffect(() => {
+    let role = getCookie("role");
+    let token = getCookie("token");
+
+    // ---- if the role from the cookie is undefined, null, or blank, try getting it from local storage
+    if (role === undefined || role === null || role.trim() === "") {
+      role = getFromLocalStorage("role");
+    }
+    setLocalRole(role);
+    console.log("Use effect role", role);
+
+    // ---- if the token from the cookie is undefined, null, or blank, try getting it from local storage
+    if (token === undefined || token === null || token.trim() === "") {
+      token = getFromLocalStorage("token");
+    }
+    setToken(token);
+    // console.log("Use effect token", token);
+  }, [updateUseEffect]);
 
   // useEffect(() => {
   //     CMSUpdate Profile.getCMS().then((res) => {
@@ -40,41 +64,39 @@ export const AuthProvider = ({ children }) => {
   // }, [])
 
   //----------------------------------------------------Fetching User Data --------------------
-  useEffect(() => {
-    const fetchData = async () => {
-      const getRole = getFromLocalStorage("role");
-      setLocalRole(getRole);
+  const fetchData = async () => {
+    const getRole = getFromLocalStorage("role");
+    setLocalRole(getRole);
 
-      try {
-        setLoader(true);
-        const response = await axios.get(
-          `${config.endpoint}/${getRole}/singleData`,
-          {
-            headers: {
-              authorization: token,
-            },
-          }
-        );
-        setUser(response.data);
-        setResData(response.data);
-        setLoader(false);
-        if (response.data.users.role[0] === "noAccess") {
-          setRole("user");
-        } else if (response.data.users.role[0] === "midLevelAccess") {
-          setRole("subAdmin");
-        } else if (response.data.users.role[0] === "globalAccess") {
-          setRole("admin");
+    try {
+      setLoader(true);
+      const response = await axios.get(
+        `${config.endpoint}/${getRole}/singleData`,
+        {
+          headers: {
+            authorization: token,
+          },
         }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setLoader(false);
+      );
+      setUser(response.data);
+      setResData(response.data);
+      setLoader(false);
+      if (response.data.users.role[0] === "noAccess") {
+        setRole("user");
+      } else if (response.data.users.role[0] === "midLevelAccess") {
+        setRole("subAdmin");
+      } else if (response.data.users.role[0] === "globalAccess") {
+        setRole("admin");
       }
-    };
-
-    if (!user && token) {
-      fetchData();
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setLoader(false);
     }
-  }, [token, role]);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [updateUseEffect, token, localRole]);
 
   //------------------------------------Setting Role--------------------
   useEffect(() => {
@@ -96,6 +118,21 @@ export const AuthProvider = ({ children }) => {
     setUIRole();
   }, [localRole, responseRole]);
 
+  //------------------------------------------------------------ Logout
+  const logout = () => {
+    localStorage.clear();
+    removeTokenCookie("token");
+    removeTokenCookie("role");
+    removeTokenCookie("id");
+    removeTokenCookie("logo");
+    setUser(null);
+    setToken(null);
+    setRole([]);
+    setResData({});
+    setLocalRole("");
+    setResponseRole([]);
+  };
+
   //----------------------------------------providing value --------------------
   const value = {
     CMSData,
@@ -112,7 +149,11 @@ export const AuthProvider = ({ children }) => {
     setUsersData,
     subAdminsData,
     setSubAdminsData,
-    
+
+    logout,
+    updateUseEffect,
+    setUpdateUseEffect,
+    fetchData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

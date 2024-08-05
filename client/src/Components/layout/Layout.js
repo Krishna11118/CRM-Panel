@@ -5,6 +5,7 @@ import RightSideRouter from "../../routers/RightSideRouter";
 import { useAuth } from "../../context/AuthContext";
 import Navbar from "../navbar/Navbar";
 
+
 const Layout = () => {
   const { isOpen } = useAuth();
 

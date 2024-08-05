@@ -11,24 +11,26 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import config from "../../../Config/Config";
 import CircularProgress from "@mui/material/CircularProgress";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
+import { setCookie } from "../../../utils/Cookie";
 
 const defaultTheme = createTheme();
 //---------------------------------------Handle submit function-------------------------------------
 
 export default function SignInSide() {
+  const { fetchData, setUpdateUseEffect } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { saveToLocalStorage, getFromLocalStorage } = useLocalStorage();
-  const { setUser } = useAuth();
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -58,18 +60,22 @@ export default function SignInSide() {
 
       if (response.status === 201) {
         setLoading(false);
-        setUser(response.data.user);
-        toast.success("Login Successful");
-        setTimeout(() => {
-          window.location.reload();
-        });
+
         // ---------------------------------------Save data to local storage--------------------
         saveToLocalStorage("name", response.data.user.fname);
         saveToLocalStorage("role", response.data.user.role[0]);
         saveToLocalStorage("email", response.data.user.email);
         saveToLocalStorage("token", response.data.token);
 
+        //------------------------------------------------save to cookie----------------------
+        setCookie("token", response.data.token);
+        setCookie("role", response.data.user.role[0]);
+
+        // --------- trigger useEffect in AuthContext
+        setUpdateUseEffect((prev) => !prev);
+
         navigate("/");
+        toast.success("Login Successful");
       } else {
         setLoading(false);
         toast.error("Login Failed");
@@ -88,6 +94,11 @@ export default function SignInSide() {
       }
     }
   };
+
+  useEffect(() => {
+    // ----------- fetch data when component mounts
+    fetchData();
+  }, [setUpdateUseEffect]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

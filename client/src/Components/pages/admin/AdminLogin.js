@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,6 +21,7 @@ import { useAuth } from "../../../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
+import { setCookie } from "../../../utils/Cookie";
 
 // function Copyright(props) {
 //   return (
@@ -44,7 +45,7 @@ const defaultTheme = createTheme();
 //---------------------------------------Handle submit function-------------------------------------
 
 export default function SignInSide() {
-  const { setUser } = useAuth();
+  const { fetchData, setUpdateUseEffect } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -81,20 +82,22 @@ export default function SignInSide() {
 
       if (response.status === 201) {
         setLoading(false);
-        setUser(response.data.user);
-        toast.success("Login Successful");
 
-        setTimeout(() => {
-          window.location.reload();
-        }); // Reloads the window after 5 seconds (5000 milliseconds)
-
-        // ---------------------------------------Save data to local storage--------------------
+        // ---------------------------------------save data to local storage--------------------
         saveToLocalStorage("name", response.data.user.fname);
-        saveToLocalStorage("role", response.data.user.role[0]);
         saveToLocalStorage("email", response.data.user.email);
         saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("role", response.data.user.role[0]);
+
+        //------------------------------------------------save to cookie-------------------------
+        setCookie("token", response.data.token);
+        setCookie("role", response.data.user.role[0]);
+
+        // --------- trigger useEffect in AuthContext
+        setUpdateUseEffect((prev) => !prev);
 
         navigate("/");
+        toast.success("Login Successful");
       }
     } catch (err) {
       setLoading(false);
@@ -109,6 +112,11 @@ export default function SignInSide() {
       }
     }
   };
+
+  useEffect(() => {
+    // ----------- fetch data when component mounts
+    fetchData();
+  }, [setUpdateUseEffect]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

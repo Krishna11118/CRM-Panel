@@ -1,5 +1,4 @@
-// login
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, Form, Button } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,9 +12,10 @@ import axios from "axios";
 import config from "../../../Config/Config";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
+import { setCookie } from "../../../utils/Cookie";
 
 const Login = () => {
-  const { setUser } = useAuth();
+  const { fetchData, setUpdateUseEffect } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,18 +48,21 @@ const Login = () => {
       });
 
       if (response.status === 201) {
-        setUser(response.data.user);
-        toast.success("Login Successful");
-        setTimeout(() => {
-          window.location.reload();
-        });
-
         // -----------------------------------------------save to local storage
         saveToLocalStorage("name", response.data.user.fname);
-        saveToLocalStorage("token", response.data.token);
         saveToLocalStorage("role", response.data.user.role[0]);
         saveToLocalStorage("email", response.data.user.email);
         saveToLocalStorage("mobile", response.data.user.mobile);
+        saveToLocalStorage("token", response.data.token);
+
+        //------------------------------------------------save to cookie-----------
+        setCookie("token", response.data.token);
+        setCookie("role", response.data.user.role[0]);
+
+        // --------- trigger useEffect in AuthContext
+        setUpdateUseEffect((prev) => !prev);
+
+        toast.success("Login Successful");
         navigate("/");
       } else {
         setLoading(false);
@@ -77,6 +80,11 @@ const Login = () => {
       }
     }
   };
+
+  useEffect(() => {
+    // ----------- fetch data when component mounts
+    fetchData();
+  }, [setUpdateUseEffect]);
 
   return (
     <>

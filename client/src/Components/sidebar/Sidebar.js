@@ -17,7 +17,7 @@ import { FaUsers } from "react-icons/fa";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { setUser, isOpen, setIsOpen, role } = useAuth();
+  const { setUser, isOpen, setIsOpen, role, logout } = useAuth();
   const [hideForSubAdmin, setHideForSubAdmin] = useState(false);
   const [hideForUser, setHideForUser] = useState(false);
 
@@ -42,10 +42,9 @@ const Sidebar = () => {
     navigate("/messages");
   };
 
-  const logoutButton = () => {
-    setUser(null);
-    localStorage.clear();
-    navigate("/subAdmin/login");
+  const logoutButton = async () => {
+    await logout();
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -80,7 +79,7 @@ const Sidebar = () => {
             {/* ------------------------------------Sub admin */}
             {!hideForUser && !hideForSubAdmin && (
               <li onClick={subAdminsButton}>
-                <a >
+                <a>
                   <FaUser className="sidebar-icon" color="white" />
                   <span className="links_name">Sub Admins</span>
                 </a>
@@ -91,7 +90,7 @@ const Sidebar = () => {
             {/* ----------------------------------------Users */}
             {!hideForUser && (
               <li className="sidebar-text-list" onClick={usersButton}>
-                <a >
+                <a>
                   <FaUsers className="sidebar-icon" color="white" />
                   {/* <FaChartPie className="sidebar-icon" color="white" /> */}
                   <span className="links_name">Users</span>
@@ -102,7 +101,7 @@ const Sidebar = () => {
 
             {/* ---------------------------------------Messages */}
             <li className="sidebar-text-list">
-              <a  onClick={messagesButton}>
+              <a onClick={messagesButton}>
                 <FaComments className="sidebar-icon" color="white" />
                 <span className="links_name ">Messages </span>
                 <RiArrowDropDownLine
@@ -119,7 +118,7 @@ const Sidebar = () => {
                   <ul className={isDropdownOpen ? "dropdown-open" : ""}>
                     <li>
                       <div className="sidebar-dropdown-div">
-                        <a >
+                        <a>
                           <FaChartPie
                             className="sidebar-dropdown-icon"
                             color="white"
@@ -131,7 +130,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                       <div className="sidebar-dropdown-div">
-                        <a >
+                        <a>
                           <FaChartPie
                             className="sidebar-dropdown-icon"
                             color="white"
@@ -143,7 +142,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                       <div className="sidebar-dropdown-div">
-                        <a >
+                        <a>
                           <FaChartPie
                             className="sidebar-dropdown-icon"
                             color="white"
@@ -162,7 +161,7 @@ const Sidebar = () => {
 
             {/* -----------------------------------Analytics */}
             <li className="sidebar-text-list">
-              <a >
+              <a>
                 <FaChartPie className="sidebar-icon" color="white" />
                 <span className="links_name">Analytics</span>
               </a>
@@ -171,7 +170,7 @@ const Sidebar = () => {
 
             {/* ---------------------------------------Setting */}
             <li className="sidebar-text-list">
-              <a >
+              <a>
                 <FaCog color="white" />
                 <span className="links_name">Setting</span>
               </a>
@@ -183,7 +182,7 @@ const Sidebar = () => {
             className="sidebar-text-list sidebar-logout-button "
             onClick={logoutButton}
           >
-            <a >
+            <a>
               <FaSignOutAlt color="white" />
               <span className="links_name">Logout</span>
             </a>
