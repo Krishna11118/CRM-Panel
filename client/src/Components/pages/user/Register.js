@@ -52,7 +52,7 @@ const Register = () => {
             </Form.Group>
           </div>
           <div className="box-img">
-            <Image src={Img} fluid />
+            {/* <Image src={Img} fluid /> */}
           </div>
         </Link>
         <div className="user-main-icon">

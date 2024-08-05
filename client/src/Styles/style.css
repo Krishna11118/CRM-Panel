@@ -14,17 +14,9 @@ h6 {
   background-color: #fff;
 }
 
-.login-container {
-  width:100%;
-} 
-
-.register-container {
-  width:100%;
-}
 .login-container,
 .register-container {
-  background: #047f6a;
-  background: -webkit-linear-gradient(180deg, #047f6a 0%, #02d6c4 100%);
+  width: 100%;
   background: linear-gradient(180deg, #047f6a 0%, #02d6c4 100%);
   height: 100vh;
   display: flex;
@@ -34,14 +26,15 @@ h6 {
   flex-wrap: wrap;
 }
 
-.login-form {
-  height: 26.4rem;
-  width: 30rem;
+.login-form,
+.register-form {
+  width: 90%;
+  max-width: 30rem;
   padding: 50px;
   font-size: 15px;
   border-radius: 10px;
   background-color: #1e2c4f;
-  margin-bottom: 6rem !important;
+  /* margin-bottom: 6rem !important; */
   position: relative;
 }
 
@@ -49,18 +42,22 @@ h6 {
   position: absolute;
   z-index: 1;
   top: -0.7rem;
-  left: 7rem;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 0px;
 }
 
 .signInButton div button {
-  width: 16rem;
+  width: 100%;
+  max-width: 16rem;
   height: 3.7rem;
   border-radius: 0;
   background-color: #02d6c4;
+  width: 10rem;
 }
 
-.login-form::after {
+.login-form::after,
+.register-form::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -68,38 +65,33 @@ h6 {
   width: 100%;
   border-radius: 50%;
   height: 1rem;
-  -webkit-box-shadow: 0 32px 32px 2px #003535;
-  -moz-box-shadow: 0 32px 32px 2px #003535;
   box-shadow: 0 32px 32px 2px #003535;
 }
 
 .box-img {
-  padding: -10px;
-  margin-left: -3.1rem;
-  margin-bottom: 6rem;
-  width: 30rem;
+  margin: 0 auto 6rem;
+  width: 90%;
+  max-width: 30rem;
   height: 2.5rem;
 }
 
 .box-img img {
   height: 5rem;
 }
+
 .user-main-icon {
   position: absolute;
   z-index: 1;
   top: 3.5rem;
-  left: 11.9rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .input-group {
   height: 50px;
 }
 
-.form-control {
-  background-color: #424d6b !important;
-  border-color: #424d6b !important;
-}
-
+.form-control,
 .input-group-text {
   background-color: #424d6b !important;
   border-color: #424d6b !important;
@@ -107,64 +99,39 @@ h6 {
 
 .loginButton {
   height: 50px;
-  bottom: 0px;
-  right: 0px;
   width: 100%;
   background-color: #02d6c4;
+  z-index: 1;
 }
 
-/* //register */
-
-.register-form {
-  height: 33.6rem;
-  width: 30rem;
-  margin: 5rem auto;
-  padding: 50px;
-  font-size: 15px;
-  border-radius: 10px;
-  background-color: #1e2c4f;
-  margin-bottom: 6rem !important;
-  position: relative;
-}
-
-/* // Logout */
-
-.l
-
-
-
-
-
-/* //media queries */
+/* Media queries for responsiveness */
 
 @media screen and (max-width: 550px) {
-  .login-form {
-    width: 20rem;
+  .login-form,
+  .register-form {
+    width: 90%;
+    max-width: 20rem;
   }
 
   .signInButton {
-    left: 5rem;
+    top: -0.7rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .signInButton div button {
-    width: 10rem;
-    height: 3.7rem;
-    border-radius: 0;
-    background-color: #02d6c4;
+    width: 6rem;
+    max-width: 10rem;
   }
 
   .box-img {
-    padding: -10px;
-    margin-left: -3.1rem;
-    margin-bottom: 6rem;
-    width: 20rem;
-    height: 2.5rem;
-  }
-  .user-main-icon {
-    left: 7rem;
+    width: 90%;
+    max-width: 20rem;
   }
 
-  .register-form {
-    width: 20rem;
+  .user-main-icon {
+    top: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
