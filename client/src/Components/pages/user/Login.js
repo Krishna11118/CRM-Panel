@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Image, Form, Button } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link, useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 import { toast } from "react-hot-toast";
 import "../../../Styles/style.css";
 import Img from "../../../Assets/wave.png";
@@ -13,6 +14,7 @@ import config from "../../../Config/Config";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import { setCookie } from "../../../utils/Cookie";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Login = () => {
   const { fetchData, setUpdateUseEffect } = useAuth();
@@ -96,9 +98,7 @@ const Login = () => {
                 <Button variant="info">SIGN IN</Button>
               </Form.Group>
             </div>
-            <div className="box-img">
-              {/* <Image src={Img} fluid /> */}
-            </div>
+            <div className="box-img">{/* <Image src={Img} fluid /> */}</div>
           </Link>
           <div className="user-main-icon">
             <IconContext.Provider value={{ color: "#c3c5c7", size: "100" }}>
@@ -142,14 +142,19 @@ const Login = () => {
             </Form.Group>
 
             <Form.Group>
-              <Button
-                disabled={loading}
-                className="loginButton w-100 my-4"
-                variant="info"
-                type="submit"
-              >
-                LOGIN
-              </Button>
+              {loading ? (
+                <Box sx={{ display: "flex" }} className="justify-center items-center">
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <Button
+                  className="loginButton w-100 my-4"
+                  variant="info"
+                  type="submit"
+                >
+                  LOGIN
+                </Button>
+              )}
             </Form.Group>
           </Form>
         </div>
