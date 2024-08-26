@@ -42,6 +42,16 @@ const Sidebar = () => {
     navigate("/messages");
   };
 
+  const analyticsButton = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+    navigate("/analytics");
+  };
+
+  const settingsButton = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+    navigate("/settings");
+  };
+
   const logoutButton = async () => {
     await logout();
     navigate("/login");
@@ -123,9 +133,9 @@ const Sidebar = () => {
                             className="sidebar-dropdown-icon"
                             color="white"
                           />
-                          <span className="links_name">Analytics</span>
+                          <span className="links_name">Inbox</span>
                         </a>
-                        <span className="dropdown-tooltip">Analytics</span>
+                        <span className="dropdown-tooltip">Inbox</span>
                       </div>
                     </li>
                     <li>
@@ -135,9 +145,9 @@ const Sidebar = () => {
                             className="sidebar-dropdown-icon"
                             color="white"
                           />
-                          <span className="links_name">Analytics</span>
+                          <span className="links_name">Archived</span>
                         </a>
-                        <span className="dropdown-tooltip">Analytics</span>
+                        <span className="dropdown-tooltip">Archived</span>
                       </div>
                     </li>
                     <li>
@@ -147,9 +157,9 @@ const Sidebar = () => {
                             className="sidebar-dropdown-icon"
                             color="white"
                           />
-                          <span className="links_name">Analytics</span>
+                          <span className="links_name">Draft</span>
                         </a>
-                        <span className="dropdown-tooltip">Analytics</span>
+                        <span className="dropdown-tooltip">Draft</span>
                       </div>
                     </li>
                     <li className="divider"></li>
@@ -160,17 +170,20 @@ const Sidebar = () => {
             </li>
 
             {/* -----------------------------------Analytics */}
-            <li className="sidebar-text-list">
-              <a>
-                <FaChartPie className="sidebar-icon" color="white" />
-                <span className="links_name">Analytics</span>
-              </a>
-              <span className="tooltip">Analytics</span>
-            </li>
+
+            {!hideForUser && (
+              <li className="sidebar-text-list">
+                <a onClick={analyticsButton}>
+                  <FaChartPie className="sidebar-icon" color="white" />
+                  <span className="links_name">Analytics</span>
+                </a>
+                <span className="tooltip">Analytics</span>
+              </li>
+            )}
 
             {/* ---------------------------------------Setting */}
             <li className="sidebar-text-list">
-              <a>
+              <a onClick={settingsButton}>
                 <FaCog color="white" />
                 <span className="links_name">Setting</span>
               </a>

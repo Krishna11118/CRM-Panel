@@ -65,7 +65,8 @@ const SubAdminRow = ({
       </TableCell>
       {/*----------------------------------------------edit Dropdown */}
       <TableCell className="cursor-pointer">
-      <Dropdown className="bg-custom-500 text-white hover:bg-blue-900 shadow-md border-none hover:border hover:border-white"
+        <Dropdown
+          className="bg-custom-500 text-white hover:bg-blue-900 shadow-md border-none hover:border hover:border-white"
           label=""
           dismissOnClick={false}
           renderTrigger={() => (
@@ -80,7 +81,7 @@ const SubAdminRow = ({
           )}
         >
           <Link to={`/subAdmin/profile/${user._id}`} className="btn">
-          <Dropdown.Item className="text-white hover:bg-blue-900 hover:shadow ">
+            <Dropdown.Item className="text-white hover:bg-blue-900 hover:shadow ">
               Profile
             </Dropdown.Item>
           </Link>

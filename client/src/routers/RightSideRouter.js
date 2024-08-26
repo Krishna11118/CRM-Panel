@@ -9,9 +9,7 @@ import SubAdmin from "../Components/pages/subAdmin/SubAdmin";
 import Users from "../Components/pages/user/Users";
 import SubAdminProfile from "../Components/pages/subAdmin/SubAdminProfile";
 import UserProfile from "../Components/pages/user/UserProfile";
-
-
-
+import LaunchingUI from "../Components/LaunchingUI";
 const RightSideRouter = () => {
   return (
     <Routes>
@@ -20,9 +18,13 @@ const RightSideRouter = () => {
         <Route element={<SubAdmin />} path="/subAdmins" />
         <Route element={<Users />} path="/users" />
         <Route element={<Support />} path="/support" />
-        <Route element={<SubAdminProfile />} path="/subAdmin/profile/:subAdminId" />
-        <Route element={<UserProfile />} path="/user/profile/:userId" />
-        
+        <Route
+          element={<SubAdminProfile />}
+          path="/subAdmin/profile/:subAdminId"
+        />
+        <Route element={<LaunchingUI />} path="/messages" />
+        <Route element={<LaunchingUI />} path="/analytics" />
+        <Route element={<LaunchingUI />} path="/settings" />
       </Route>
     </Routes>
   );
