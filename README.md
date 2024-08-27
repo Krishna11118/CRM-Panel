@@ -39,19 +39,30 @@
 
 Welcome to CRM-Panel:
 
-* Admin: The Admin has full control over the CRM panel, including the ability to manage users, configure settings, and oversee all data. Admins can create and manage sub-admin accounts and have access to all user data and interactions.
+ * Admin: The Admin has full control over the CRM panel, including the ability to manage users, configure settings, and oversee all data. Admins can create and manage sub- admin accounts and have access to all user data and interactions.
 
-* Sub-Admins: Sub-Admins assist the Admin in managing the CRM system. They have access to most of the features and data but may have some restrictions based on the permissions set by the Admin. Sub-Admins can manage users, handle customer data, and generate reports.
+ * Sub-Admins: Sub-Admins assist the Admin in managing the CRM system. They have access to most of the features and data but may have some restrictions based on the permissions set by the Admin. Sub-Admins can manage users, handle customer data, and generate reports.
 
-* Users: Users are typically sales representatives or customer service agents who interact directly with customers. They have access to customer data relevant to their tasks and can update information, track customer interactions, and manage their daily activities within the CRM.
+ * Users: Users are typically sales representatives or customer service agents who interact directly with customers. They have access to customer data relevant to their tasks and can update information, track customer interactions, and manage their daily activities within the CRM.
 
-During the course of development journey,I have learnt and apply these **skills in React**:
+## During the course of development journey,I have learnt and apply these **skills in React**:
 
-* User Management: Admins can create, edit, and delete user accounts, including assigning roles and permissions.
-* Customer Data Management: Centralized storage of customer information with easy access for users, ensuring all interactions and data are logged and easily retrievable.
-* Reporting and Analytics: Generate detailed reports on customer interactions, sales performance, and more, helping the team to make data-driven decisions.
-* Role-Based Access Control: Secure the CRM by assigning role-based permissions to ensure that users only access the data and features they need.
-* Interactive Dashboard: A user-friendly dashboard that provides an overview of key metrics and activities, tailored to the user's role within the system.
+ * User Management: Admins can create, edit, and delete user accounts, including assigning roles and permissions.
+ * Customer Data Management: Centralized storage of customer information with easy access for users, ensuring all interactions and data are logged and easily retrievable.
+ * Reporting and Analytics: Generate detailed reports on customer interactions, sales performance, and more, helping the team to make data-driven decisions.
+ * Role-Based Access Control: Secure the CRM by assigning role-based permissions to ensure that users only access the data and features they need.
+ * Interactive Dashboard: A user-friendly dashboard that provides an overview of key metrics and activities, tailored to the user's role within the system.
+
+## Links 
+
+### Admin Login
+ [https://crm-admin-main.vercel.app/admin/login](https://crm-admin-main.vercel.app/admin/login)
+
+### Sub Admin Login
+ [https://crm-admin-main.vercel.app/subAdmin/login](https://crm-admin-main.vercel.app/subAdmin/login)
+
+### User Login
+ [https://crm-admin-main.vercel.app/login](https://crm-admin-main.vercel.app/login)
 
 <!-- GETTING STARTED -->
 ## Getting Started
