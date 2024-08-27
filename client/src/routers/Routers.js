@@ -4,16 +4,16 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
-import Login from "../Components/pages/user/Login";
-import Register from "../Components/pages/user/Register";
-import PrivateRoutes from "../Components/protectRoute/privateRoute";
-import PublicRoutes from "../Components/protectRoute/publicRoute";
+import Login from "../components/pages/user/Login";
+import Register from "../components/pages/user/Register";
+import PrivateRoutes from "../components/protectRoute/privateRoute";
+import PublicRoutes from "../components/protectRoute/publicRoute";
 import { useAuth } from "../context/AuthContext";
-import AdminLogin from "../Components/pages/admin/AdminLogin";
-import Layout from "../Components/layout/Layout";
-import { useAuthRouter } from "../Components/Auth/useAuth";
-import Skelton from "../Components/pages/Skelton";
-import SubAdminLogin from "../Components/pages/subAdmin/SubAdminLogin";
+import AdminLogin from "../components/pages/admin/AdminLogin";
+import Layout from "../components/layout/Layout";
+import { useAuthRouter } from "../components/auth/useAuth";
+import Skelton from "../components/pages/Skelton";
+import SubAdminLogin from "../components/pages/subAdmin/SubAdminLogin";
 
 function Routers() {
   const { user } = useAuth();

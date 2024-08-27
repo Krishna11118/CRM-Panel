@@ -17,7 +17,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Pages from "./Pagination";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import config from "../../Config/Config";
+import config from "../../config/config";
 import AddUserModal from "./user/AddUserModal";
 import MenuButton from "../common/editMenuButton/EditMenuButton";
 import { useUserApiHooks } from "../../hooks/userApiHooks";

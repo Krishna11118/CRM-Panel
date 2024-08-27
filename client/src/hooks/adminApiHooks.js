@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import config from "../Config/Config";
+import config from "../config/config";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 

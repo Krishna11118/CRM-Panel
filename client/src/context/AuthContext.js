@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import config from "../Config/Config";
+import config from "../config/config";
 import { useLocalStorage } from "../utils/LocalStorage";
 import { getCookie, removeTokenCookie } from "../utils/Cookie";
 

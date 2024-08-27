@@ -4,7 +4,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import "../../../Styles/style.css";
-import Img from "../../../Assets/wave.png";
+import Img from "../../../assets/wave.png";
 import { FaRegCircleUser } from "react-icons/fa6";
 
 import { useUserApiHooks } from "../../../hooks/userApiHooks";

@@ -2,20 +2,20 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import config from "../../../Config/Config";
+import config from "../../../config/config";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import ProfileDetails from "../../common/Profile/ProfileDetails";
 import { useAuth } from "../../../context/AuthContext";
 
-const SubAdminProfileDetail = () => {
+const UserProfileDetail = () => {
   const [loading, setLoading] = useState(true);
   const { getFromLocalStorage } = useLocalStorage();
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [name, setName] = useState("");
-  const { subAdminId } = useParams();
+  const { userId } = useParams();
   const [resRole, setResRole] = useState("");
-  const { setSubAdminsData } = useAuth();
+  const { role } = useAuth();
 
   // -----------------------------------------Fetch Single SubAdmin Details----------------------------------
   useEffect(() => {
@@ -24,14 +24,13 @@ const SubAdminProfileDetail = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${config.endpoint}/admin/subAdmin/single/${subAdminId}`,
+          `${config.endpoint}/${role}/user/single/${userId}`,
           {
             headers: {
               authorization: `${token}`,
             },
           }
         );
-        setSubAdminsData(response.data);
         setName(response.data.fname);
         setEmail(response.data.email);
         setMobile(response.data.mobile);
@@ -43,7 +42,7 @@ const SubAdminProfileDetail = () => {
       }
     };
     fetchSubAdminDetails();
-  }, [subAdminId]);
+  }, [userId]);
 
   return (
     <ProfileDetails
@@ -55,4 +54,4 @@ const SubAdminProfileDetail = () => {
   );
 };
 
-export default SubAdminProfileDetail;
+export default UserProfileDetail;

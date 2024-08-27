@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import config from "../Config/Config";
+import config from "../config/config";
 import { useAuth } from "../context/AuthContext";
 
 export const useSubAdminApiHook = () => {

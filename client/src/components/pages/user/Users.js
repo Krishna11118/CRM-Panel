@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Typography, Grid } from "@mui/material";
-import config from "../../../Config/Config";
+import config from "../../../config/config";
 import AddUserModal from "./AddUserModal";
 import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 import UsersTable from "./UsersTable";

@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useState } from "react";
-import config from "../Config/Config";
+import config from "../config/config";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {useLocalStorage} from "../utils/LocalStorage";

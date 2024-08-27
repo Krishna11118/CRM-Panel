@@ -5,7 +5,7 @@ import { useAdminApiHook } from "../../../hooks/adminApiHooks";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import { useLocalStorage } from "../../../utils/LocalStorage";
-import config from "../../../Config/Config";
+import config from "../../../config/config";
 
 const SubAdminUpdatePermission = () => {
   const { handleUpdateSubAdminPermissions } = useAdminApiHook();

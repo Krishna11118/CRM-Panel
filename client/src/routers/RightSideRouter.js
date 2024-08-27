@@ -1,15 +1,15 @@
 import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
-import Support from "../Components/pages/Support";
-import PrivateRoutes from "../Components/protectRoute/privateRoute";
+import Support from "../components/pages/Support";
+import PrivateRoutes from "../components/protectRoute/privateRoute";
 
 //-----------------------------------------------------main pages
-import Dashboard from "../Components/pages/Dashboard";
-import SubAdmin from "../Components/pages/subAdmin/SubAdmin";
-import Users from "../Components/pages/user/Users";
-import SubAdminProfile from "../Components/pages/subAdmin/SubAdminProfile";
-import UserProfile from "../Components/pages/user/UserProfile";
-import LaunchingUI from "../Components/LaunchingUI";
+import Dashboard from "../components/pages/Dashboard";
+import SubAdmin from "../components/pages/subAdmin/SubAdmin";
+import Users from "../components/pages/user/Users";
+import SubAdminProfile from "../components/pages/subAdmin/SubAdminProfile";
+import UserProfile from "../components/pages/user/UserProfile";
+import LaunchingUI from "../components/LaunchingUI";
 const RightSideRouter = () => {
   return (
     <Routes>

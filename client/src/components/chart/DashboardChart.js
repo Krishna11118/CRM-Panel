@@ -2,7 +2,7 @@ import * as React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import config from "../../Config/Config";
+import config from "../../config/config";
 import { useAuth } from "../../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 

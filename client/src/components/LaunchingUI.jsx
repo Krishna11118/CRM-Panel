@@ -4,7 +4,7 @@ import GradientBackground from "../lib/neatGradients";
 const LaunchingUI = () => {
   return (
     <>
-      <GradientBackground text="We're launching soon...">
+      <GradientBackground text="Coming Soon!">
         <div className="p-4 text-center "></div>
       </GradientBackground>
     </>

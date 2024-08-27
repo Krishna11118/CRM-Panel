@@ -1,8 +1,11 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -11,21 +14,38 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import config from "../../../Config/Config";
+import config from "../../../config/config";
+import { useAuth } from "../../../context/AuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
-import { useAuth } from "../../../context/AuthContext";
 import { setCookie } from "../../../utils/Cookie";
 
+// function Copyright(props) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       {/* <Link color="inherit" src="www.ganeshcars.com">
+//       Ganesh Cars
+//       </Link>{" "} */}
+//       {new Date().getFullYear()}
+//     </Typography>
+//   );
+// }
+
 const defaultTheme = createTheme();
+
 //---------------------------------------Handle submit function-------------------------------------
 
 export default function SignInSide() {
   const { fetchData, setUpdateUseEffect } = useAuth();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,26 +68,28 @@ export default function SignInSide() {
     if (!validateInput({ email, password })) {
       return;
     }
-
     // ---------------------------------------API call---------------------------------------
     try {
       const token = getFromLocalStorage("token");
       setLoading(true);
-      const response = await axios.post(`${config.endpoint}/subAdmin/login`, {
+      const response = await axios.post(`${config.endpoint}/admin/login`, {
         email: email,
         password: password,
+        headers: {
+          authorization: `${token}`,
+        },
       });
 
       if (response.status === 201) {
         setLoading(false);
 
-        // ---------------------------------------Save data to local storage--------------------
+        // ---------------------------------------save data to local storage--------------------
         saveToLocalStorage("name", response.data.user.fname);
-        saveToLocalStorage("role", response.data.user.role[0]);
         saveToLocalStorage("email", response.data.user.email);
         saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("role", response.data.user.role[0]);
 
-        //------------------------------------------------save to cookie----------------------
+        //------------------------------------------------save to cookie-------------------------
         setCookie("token", response.data.token);
         setCookie("role", response.data.user.role[0]);
 
@@ -76,17 +98,13 @@ export default function SignInSide() {
 
         navigate("/");
         toast.success("Login Successful");
-      } else {
-        setLoading(false);
-        toast.error("Login Failed");
       }
     } catch (err) {
       setLoading(false);
       if (err.response.status === 401) {
+        setLoading(false);
         toast.error(err.response.data.error);
-        return;
-      }
-      if (err?.response?.status === 400) {
+      } else if (err?.response?.status === 400) {
         toast.error(err.response.data.error);
       } else {
         setLoading(false);
@@ -195,6 +213,19 @@ export default function SignInSide() {
                   Sign In
                 </Button>
               )}
+              {/* <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid> */}
+              {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
         </Grid>
