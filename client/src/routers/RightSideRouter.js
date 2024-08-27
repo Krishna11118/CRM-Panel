@@ -22,6 +22,10 @@ const RightSideRouter = () => {
           element={<SubAdminProfile />}
           path="/subAdmin/profile/:subAdminId"
         />
+        <Route
+          element={<UserProfile />}
+          path="/user/profile/:userId"
+        />
         <Route element={<LaunchingUI />} path="/messages" />
         <Route element={<LaunchingUI />} path="/analytics" />
         <Route element={<LaunchingUI />} path="/settings" />
