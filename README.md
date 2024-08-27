@@ -115,9 +115,9 @@ Don't forget to give the project a star! <img src="https://res.cloudinary.com/dv
 <!-- CONTACT -->
 ## Contact
 
-Krishna - [@Whatsapp](https://wa.me/+917318378893) - krishnassss365@gmail.com - [@LinkedIn](https://www.linkedin.com/in/krishna365/)
+Krishna- krishnassss365@gmail.com - [@LinkedIn](https://www.linkedin.com/in/krishna365/)
 
-Project Link: [https://github.com/Krishna11118/Trekki.git](https://github.com/Krishna11118/Q-Kart)
+Project Link: [https://github.com/Krishna11118/CRM-Panel]https://github.com/Krishna11118/CRM-Panel)
 
 
 
@@ -128,11 +128,9 @@ Use this space to list resources you find helpful and would like to give credit 
 
 * [Icon8 ](https://icons8.com/)
 * [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
 * [Malven's Grid Cheatsheet](https://grid.malven.co/)
 * [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
