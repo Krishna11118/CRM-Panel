@@ -90,7 +90,7 @@ This CRM panel is designed to enhance efficiency and improve customer relationsh
 <h2>Delete Account</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/delete.png"  />
 
-# Admin
+# Sub-Admin
 <h2>Sub-Admin Home</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/subAdminHome.png"  />
 
