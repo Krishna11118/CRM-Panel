@@ -9,8 +9,8 @@ const StatusPermission = () => {
   const navigate = useNavigate();
 
   const statusPermission = (loggedInStatus) => {
-    console.log("resData", resData);
-    console.log("loggedInStatus", loggedInStatus);
+    // console.log("resData", resData);
+    // console.log("loggedInStatus", loggedInStatus);
     if (loggedInStatus === false) {
       clearLocalStorage();
       navigate("/subAdmin/login");
