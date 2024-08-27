@@ -55,7 +55,8 @@ During the course of development journey,I have learnt and apply these **skills 
 #### 1. Register and Login Pages - 
 This CRM panel is designed to enhance efficiency and improve customer relationship management within organizations by providing a clear, role-based structure for managing customer data and interactions.
 
-*Admin
+# Admin
+
 <h2>Admin Home</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/adminHome.png"  />
 
@@ -68,25 +69,30 @@ This CRM panel is designed to enhance efficiency and improve customer relationsh
 <h2>Admin add User</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/adminAddUser.png"  />
 
+<h2>Sub-Admin list with **Block/Profile/Delete** features</h2>
+<img src="<h2>Accounts Profile</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png" />
+<hr>
+
+<h2>Users list with **Block/Profile/Delete** features</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/users.png"  />
+<hr>
+
+<h2>Accounts Profile</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png"  />
+<hr>
+
 <h2>Block Account</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/block.png"  />
 
 <h2>Delete Account</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/delete.png"  />
 
-<h2>Accounts Profile</h2>
-<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png"  />
-<hr>
+# Admin
+<h2>Sub-Admin Home</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/subAdminHome.png"  />
 
-<h2>Sub-Admin list with **Block/Profile/Delete** features</h2>
-<img src="<h2>Accounts Profile</h2>
-<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png" />
-<hr>
-
-<h2>Update Sub-Admin Permissions </h2>
-<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/updateSubAdminPermissions.png"  />
-<hr>
-
+# User
 <h2>User Home</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/userHome.png"  />
 <hr>
@@ -97,10 +103,6 @@ This CRM panel is designed to enhance efficiency and improve customer relationsh
 
 <h2>User Login</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/userlogin.png"  />
-<hr>
-
-<h2>Users list with **Block/Profile/Delete** features</h2>
-<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/users.png"  />
 <hr>
 
 <!-- CONTRIBUTING -->
