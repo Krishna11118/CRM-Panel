@@ -1,7 +1,7 @@
 
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://github.com/Krishna11118/CRM-Panel/blob/master/example/logo.svg" alt="Logo" width="70px" height="35px">
+    <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/logo.svg" alt="Logo" width="70px" height="35px">
   </a>
 </div>
 <br />
