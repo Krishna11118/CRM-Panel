@@ -1,6 +1,6 @@
 
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://crm-admin-main.vercel.app/">
     <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/logo.svg" alt="Logo" width="70px" height="35px">
   </a>
 </div>
@@ -21,10 +21,11 @@
 <h3>👨‍💻Technologies Used</h3>
 <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> </br>
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" /> </br>
-<img src="https://img.shields.io/badge/express-8BBE3C?style=for-the-badge&logo=express&logoColor=white" /> </br>
+<img src="https://img.shields.io/badge/express.js-8TBE3C?style=for-the-badge&logo=express.js&logoColor=61DA3B" /> </br>
 <img src="https://img.shields.io/badge/mongodb-8BBE3C?style=for-the-badge&logo=mongodb&logoColor=white" /> </br>
 <img src="https://img.shields.io/badge/restapi-20442A?style=for-the-badge&logo=restapi&logoColor=61DAFB" /> </br>
 <img src="https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white" /> </br>
+<img src="https://img.shields.io/badge/flowbite-8BTE3C?style=for-the-badge&logo=flowbite&logoColor=white" /> </br>
 <img src="https://img.shields.io/badge/tailwind-8BBE3C?style=for-the-badge&logo=tailwind&logoColor=white" /> </br>
 <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" /> </br>
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" /> </br>
