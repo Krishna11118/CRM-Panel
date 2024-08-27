@@ -45,7 +45,7 @@ Welcome to CRM-Panel:
 
  * Users: Users are typically sales representatives or customer service agents who interact directly with customers. They have access to customer data relevant to their tasks and can update information, track customer interactions, and manage their daily activities within the CRM.
 
-## During the course of development journey,I have learnt and apply these **skills in React**:
+## During of development,I have learnt and apply these **skills**:
 
  * User Management: Admins can create, edit, block and delete user accounts, including assigning roles and permissions.
  * Customer Data Management: Centralized storage of customer information with easy access for users, ensuring all interactions and data are logged and easily retrievable.
@@ -172,15 +172,11 @@ Project Link: [https://github.com/Krishna11118/CRM-Panel]https://github.com/Kris
 ## Acknowledgments
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Icon8 ](https://icons8.com/)
+* [Material-UI](https://mui.com/)
+* [React Flowbite ](https://flowbite-react.com/)
+* [Tailwind CSS Cheat Sheet ](https://nerdcave.com/tailwind-cheat-sheet)
+* [React Icons] ](https://react-icons.github.io/react-icons/)
 * [Choose an Open Source License](https://choosealicense.com)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
 <hr>
 
 <!-- <LICENSE> -->
