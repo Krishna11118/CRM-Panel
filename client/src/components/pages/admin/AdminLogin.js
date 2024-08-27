@@ -3,9 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -22,6 +19,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { validateInput } from "../../../utils/Validations";
 import { useLocalStorage } from "../../../utils/LocalStorage";
 import { setCookie } from "../../../utils/Cookie";
+import InputAdornment from "@mui/material/InputAdornment";
+import EmailIcon from "@mui/icons-material/Email";
+import PasswordIcon from "@mui/icons-material/Password";
 
 // function Copyright(props) {
 //   return (
@@ -46,8 +46,8 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
   const { fetchData, setUpdateUseEffect } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("publicAdmin@test.com");
+  const [password, setPassword] = useState("publicAdmin123#");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { saveToLocalStorage, getFromLocalStorage } = useLocalStorage();
@@ -101,15 +101,7 @@ export default function SignInSide() {
       }
     } catch (err) {
       setLoading(false);
-      if (err.response.status === 401) {
-        setLoading(false);
-        toast.error(err.response.data.error);
-      } else if (err?.response?.status === 400) {
-        toast.error(err.response.data.error);
-      } else {
-        setLoading(false);
-        toast.error("Login Failed");
-      }
+      toast.error(err.response?.data?.error || "Try later");
     }
   };
 
@@ -128,8 +120,10 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1695807216937-fddfaa1f63ac?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+            backgroundImage: `
+            linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            url(https://images.unsplash.com/photo-1695807216937-fddfaa1f63ac?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+          `,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -139,7 +133,16 @@ export default function SignInSide() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          className="bg-custom-600 "
+        >
           <Box
             sx={{
               my: 8,
@@ -147,19 +150,79 @@ export default function SignInSide() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+              borderRadius: "10px",
+              padding: "20px",
+              backgroundColor: "white",
             }}
+            className="bg-custom-200 "
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar
+              sx={{
+                m: 1,
+                bgcolor: "#003366", 
+                transition: "transform 0.3s, background-color 0.3s", 
+                "&:hover": {
+                  transform: "scale(1.1)",
+                  bgcolor: "#004080", 
+                },
+              }}
+            >
               <LockOutlinedIcon />
             </Avatar>
             <Typography
               component="h1"
               variant="h5"
-              className="h-10"
-              style={{ height: "50px" }}
+              style={{ height: "50px", fontFamily: "Roboto, sans-serif" }}
             >
               Sign in
             </Typography>
+
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              align="center"
+              sx={{
+                mt: 2,
+                mb: 2,
+                color: "#003366", // Dark blue color for text
+                fontSize: "1rem",
+                textTransform: "uppercase",
+              }}
+            >
+              Use the following credentials
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              align="center"
+              sx={{
+                mt: 1,
+                fontSize: "1rem",
+                color: "#003366", // Dark blue color for text
+              }}
+            >
+              <span style={{ color: "#004080" }}>
+                <strong>Email:</strong>
+              </span>{" "}
+              publicAdmin@test.com
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              align="center"
+              sx={{
+                mt: 1,
+                fontSize: "1rem",
+                color: "#003366", // Dark blue color for text
+              }}
+            >
+              <span style={{ color: "#004080" }}>
+                <strong>Password:</strong>
+              </span>{" "}
+              publicAdmin123#
+            </Typography>
+
             <Box
               component="form"
               noValidate
@@ -177,8 +240,14 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EmailIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
-
               <TextField
                 onChange={handlePassword}
                 margin="normal"
@@ -190,15 +259,28 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PasswordIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
-
               {loading ? (
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 5 }}
-                  style={{ height: "50px", borderRadius: "30px" }}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    height: "50px",
+                    borderRadius: "30px",
+                    background:
+                      "linear-gradient(45deg, #003366 30%, #004080 90%)",
+                    boxShadow: "0px 3px 5px 2px rgba(0, 51, 102, 0.3)",
+                  }}
                 >
                   <CircularProgress color="inherit" />
                 </Button>
@@ -207,25 +289,28 @@ export default function SignInSide() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 5 }}
-                  style={{ height: "50px", borderRadius: "30px" }}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    height: "50px",
+                    borderRadius: "30px",
+                    background:
+                      "linear-gradient(45deg, #003366 30%, #004080 90%)",
+                    boxShadow: "0px 3px 5px 2px rgba(0, 51, 102, 0.3)",
+                  }}
                 >
                   Sign In
                 </Button>
               )}
-              {/* <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid> */}
-              {/* <Copyright sx={{ mt: 5 }} /> */}
+
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                align="center"
+                sx={{ mt: 5 }}
+              >
+                {"© "} Krishna {new Date().getFullYear()}
+              </Typography>
             </Box>
           </Box>
         </Grid>

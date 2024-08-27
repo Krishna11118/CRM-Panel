@@ -46,45 +46,49 @@ const adminRegister = asyncHandler(async (req, res) => {
 //----------------------------------------------------------------------------------Admin Login
 
 const adminLogin = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ error: "Please fill all details" });
+    if (!email || !password) {
+      return res.status(400).json({ error: "Please fill all details" });
+    }
+
+    // ---------------------------------------Compare user-------------------------
+    const user = await admindb.findOne({ email: email });
+    if (!user) {
+      return res.status(401).json({ error: "Admin not founded!" });
+    }
+
+    //----------------------------------------Compare password-----------------
+
+    const isMatching = await comparePasswords(password, user.password);
+
+    if (!isMatching) {
+      return res.status(401).json({ error: "Invalid password" });
+    }
+
+    if (!user.status) {
+      return res.status(401).json({ error: "Admin is inactive!" });
+    }
+
+    //----------------------------------------Create Token
+    const loginUserData = {
+      user: {
+        id: user._id,
+      },
+    };
+
+    const token = generateToken(loginUserData);
+    const loginResult = {
+      user,
+      token,
+      msg: "Admin logged in successfully",
+    };
+
+    return res.status(201).json(loginResult);
+  } catch (error) {
+    res.status(404).json({ error: "Try later" });
   }
-
-  // ---------------------------------------Compare user-------------------------
-  const user = await admindb.findOne({ email: email });
-  if (!user) {
-    return res.status(401).json({ error: "Admin not founded!" });
-  }
-
-  //----------------------------------------Compare password-----------------
-
-  const isMatching = await comparePasswords(password, user.password);
-
-  if (!isMatching) {
-    return res.status(401).json({ error: "Invalid password" });
-  }
-
-  if (!user.status) {
-    return res.status(401).json({ error: "Admin is inactive!" });
-  }
-
-  //----------------------------------------Create Token
-  const loginUserData = {
-    user: {
-      id: user._id,
-    },
-  };
-
-  const token = generateToken(loginUserData);
-  const loginResult = {
-    user,
-    token,
-    msg: "Admin logged in successfully",
-  };
-
-  return res.status(201).json(loginResult);
 });
 
 //-----------------------------------------Get single data-----------------------------------------
@@ -97,6 +101,5 @@ const getAdmin = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
-
 
 module.exports = { adminRegister, adminLogin, getAdmin };

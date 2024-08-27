@@ -17,7 +17,7 @@ const Dashboard = () => {
       setHideForUser(true);
     }
     if (role === "user") {
-      console.log("user user", role);
+      // console.log("user user", role);
       setHideForAdmin(true);
     }
   }, [role]);
