@@ -47,7 +47,7 @@ Welcome to CRM-Panel:
 
 ## During the course of development journey,I have learnt and apply these **skills in React**:
 
- * User Management: Admins can create, edit, and delete user accounts, including assigning roles and permissions.
+ * User Management: Admins can create, edit, block and delete user accounts, including assigning roles and permissions.
  * Customer Data Management: Centralized storage of customer information with easy access for users, ensuring all interactions and data are logged and easily retrievable.
  * Reporting and Analytics: Generate detailed reports on customer interactions, sales performance, and more, helping the team to make data-driven decisions.
  * Role-Based Access Control: Secure the CRM by assigning role-based permissions to ensure that users only access the data and features they need.
