@@ -8,14 +8,14 @@
 
 
 
-**QKart**, your go-to online marketplace, provides a seamless shopping experience. With a user-friendly interface and a diverse range of products, QKart ensures secure transactions and responsive customer support. Explore our platform for convenient shopping, exclusive deals, and a commitment to your satisfaction.
+**CRM-Panel**, This CRM (Customer Relationship Management) Panel is a web-based application designed to streamline customer interactions and data management for businesses. It offers a hierarchical system with three distinct user roles
 <br>
 <div align="start" style="margin-bottom: 50px;">
     👉 Live Demo: <a href='https://q-kart-ecommerce.vercel.app/'>Live Demo</a>
 </div>
 <br>
 
-<div align="center" ><img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/qkartGif.gif" width="100%"></div>
+<div align="center" ><img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/logo.svg" width="100%"></div>
 <br>
 
 <div >
@@ -34,55 +34,74 @@
 
 ## Note From Developer
 
-Welcome to **QKart’s frontend!** The QKart frontend is built using React.js and MaterialUI majorly. This Project has the **features** like:
+Welcome to CRM-Panel:
 
-* Authentication
-* Dynamic product listing
-* Search
-* Shopping cart
-* Checkout process
+* Admin: The Admin has full control over the CRM panel, including the ability to manage users, configure settings, and oversee all data. Admins can create and manage sub-admin accounts and have access to all user data and interactions.
+
+* Sub-Admins: Sub-Admins assist the Admin in managing the CRM system. They have access to most of the features and data but may have some restrictions based on the permissions set by the Admin. Sub-Admins can manage users, handle customer data, and generate reports.
+
+* Users: Users are typically sales representatives or customer service agents who interact directly with customers. They have access to customer data relevant to their tasks and can update information, track customer interactions, and manage their daily activities within the CRM.
 
 During the course of development journey,I have learnt and apply these **skills in React**:
 
-* State manipulation and Props
-* Components - Stateless and Stateful
-* React lifecycle methods
-* Routing
-* Data binding
-* Debouncing
-* Conditional rendering
-## The QKart website will include these pages:
+* User Management: Admins can create, edit, and delete user accounts, including assigning roles and permissions.
+* Customer Data Management: Centralized storage of customer information with easy access for users, ensuring all interactions and data are logged and easily retrievable.
+* Reporting and Analytics: Generate detailed reports on customer interactions, sales performance, and more, helping the team to make data-driven decisions.
+* Role-Based Access Control: Secure the CRM by assigning role-based permissions to ensure that users only access the data and features they need.
+* Interactive Dashboard: A user-friendly dashboard that provides an overview of key metrics and activities, tailored to the user's role within the system.
+
+## The CRM-Panel website will include these pages:
 
 #### 1. Register and Login Pages - 
-QKart allows its customers to register and login.
+This CRM panel is designed to enhance efficiency and improve customer relationship management within organizations by providing a clear, role-based structure for managing customer data and interactions.
 
-* Users can register on the QKart website by visiting the Register page
-* They can then login to the website by entering the username and password set during the registration
-* Only logged in users can buy products
+*Admin
+<h2>Admin Home</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/adminHome.png"  />
 
-<h2>1.Home Page</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/HomePage.png"  />
+<h2>Admin & SubAdmin Login</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/admin%26SubAdminLogin.png"  />
 
-<h2>2.Login Page</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/loginPage.png"  />
+<h2>Admin add Sub-Admin</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/addSubAdmin.png"  />
 
-<h2>3.Registration Page</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/registerPage.png"  />
+<h2>Admin add User</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/adminAddUser.png"  />
 
+<h2>Block Account</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/block.png"  />
 
-<h2>4.Cart Stack</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/Cart.png"  />
+<h2>Delete Account</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/delete.png"  />
 
-<h2>5.Cart Checkout Page</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/checkoutPage.png"  />
-
-<h2>6.Payment Page</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/paymentPage.png"  />
-
-<h2>7.Cart Checkout Page</h2>
-<img src="https://github.com/Krishna11118/Q-Kart-main/blob/master/example/thanks.png"  />
+<h2>Accounts Profile</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png"  />
 <hr>
 
+<h2>Sub-Admin list with **Block/Profile/Delete** features</h2>
+<img src="<h2>Accounts Profile</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png" />
+<hr>
+
+<h2>Update Sub-Admin Permissions </h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/updateSubAdminPermissions.png"  />
+<hr>
+
+<h2>User Home</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/userHome.png"  />
+<hr>
+
+<h2>User Register</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/userReg.png"  />
+<hr>
+
+<h2>User Login</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/userlogin.png"  />
+<hr>
+
+<h2>Users list with **Block/Profile/Delete** features</h2>
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/users.png"  />
+<hr>
 
 <!-- CONTRIBUTING -->
 ## Contributing
