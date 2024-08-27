@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 const secretKey = process.env.REACT_APP_SECRET_KEY;
 
-console.log("secretKey",secretKey);
+// console.log("secretKey",secretKey);
 
 if (!secretKey) {
     throw new Error("SECRET_KEY is not defined in the environment variables.");

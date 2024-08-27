@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
       role = getFromLocalStorage("role");
     }
     setLocalRole(role);
-    console.log("Use effect role", role);
+    // console.log("Use effect role", role);
 
     // ---- if the token from the cookie is undefined, null, or blank, try getting it from local storage
     if (token === undefined || token === null || token.trim() === "") {

@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (role === "admin" || role === "subAdmin") {
-      console.log("admin admin", role);
+      // console.log("admin admin", role);
 
       setHideForUser(true);
     }
