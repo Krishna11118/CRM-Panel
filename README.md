@@ -53,6 +53,39 @@ During the course of development journey,I have learnt and apply these **skills 
 * Role-Based Access Control: Secure the CRM by assigning role-based permissions to ensure that users only access the data and features they need.
 * Interactive Dashboard: A user-friendly dashboard that provides an overview of key metrics and activities, tailored to the user's role within the system.
 
+<!-- GETTING STARTED -->
+## Getting Started
+ 
+Instructions for setting up project locally.
+To get a local copy up and running follow these simple example steps.
+### Installation
+
+1. Client folder path
+   ```sh
+    cd client/
+   ```
+2. Server folder path
+   ```sh
+   cd server/
+   ```
+  
+3. Clone the repo
+   ```sh
+   git clone https://github.com/Krishna11118/CRM-Panel.git
+   ```
+4. Install NPM packages
+   ```sh
+   npm install
+   ```
+5. To start Server 
+   ```js
+   npm run server
+   ```
+6. To start Client 
+   ```sh
+   npm start 
+   ```  
+
 ## The CRM-Panel website will include these pages:
 
 #### 1. Register and Login Pages - 
