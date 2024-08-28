@@ -113,12 +113,13 @@ This CRM panel is designed to enhance efficiency and improve customer relationsh
 <h2>Admin add User</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/adminAddUser.png"  />
 
-<h2>Sub-Admin list with **Block/Profile/Delete** features</h2>
+<h2>Sub-Admin list with Block/Profile/Delete features</h2>
+
 <img src="<h2>Accounts Profile</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/profileDetails.png" />
 <hr>
 
-<h2>Users list with **Block/Profile/Delete** features</h2>
+<h2>Users list with Block/Profile/Delete features</h2>
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/users.png"  />
 <hr>
 
