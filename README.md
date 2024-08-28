@@ -133,7 +133,7 @@ This CRM panel is designed to enhance efficiency and improve customer relationsh
 <img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/delete.png"  />
 
 <h2>Admin & SubAdmin Login</h2>
-<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/admin%26SubAdminLogin.png"  />
+<img src="https://github.com/Krishna11118/CRM-Panel/blob/main/example/loginAdmin&SubAdmin"  />
 
 # Sub-Admin
 <h2>Sub-Admin Home</h2>
