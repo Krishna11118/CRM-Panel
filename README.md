@@ -165,7 +165,7 @@ Don't forget to give the project a star! <img src="https://res.cloudinary.com/dv
 
 Krishna- krishnassss365@gmail.com - [@LinkedIn](https://www.linkedin.com/in/krishna365/)
 
-Project Link: [https://github.com/Krishna11118/CRM-Panel]https://github.com/Krishna11118/CRM-Panel)
+Project Link: [https://github.com/Krishna11118/CRM-Panel](https://github.com/Krishna11118/CRM-Panel)
 
 
 
@@ -176,7 +176,7 @@ Use this space to list resources you find helpful and would like to give credit 
 * [Material-UI](https://mui.com/)
 * [React Flowbite ](https://flowbite-react.com/)
 * [Tailwind CSS Cheat Sheet ](https://nerdcave.com/tailwind-cheat-sheet)
-* [React Icons] ](https://react-icons.github.io/react-icons/)
+* [React Icons](https://react-icons.github.io/react-icons/)
 * [Choose an Open Source License](https://choosealicense.com)
 <hr>
 
