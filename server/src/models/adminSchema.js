@@ -66,7 +66,15 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-});
+  lastLoggedIn: {
+    ip: { type: String, required: false },
+    country_code: { type: String, },
+    country_name: { type: String,  },
+    region_name: { type: String,  },
+    city_name: { type: String, },
+    network: { type: String},
+  },
+}, { timestamps: true });
 
 const admindb = new mongoose.model("admin", userSchema);
 module.exports = admindb;
