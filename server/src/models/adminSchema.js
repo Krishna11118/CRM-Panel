@@ -69,10 +69,22 @@ const userSchema = new mongoose.Schema({
   lastLoggedIn: {
     ip: { type: String, required: false },
     country_code: { type: String, },
-    country_name: { type: String,  },
-    region_name: { type: String,  },
+    country_name: { type: String, },
+    region_name: { type: String, },
     city_name: { type: String, },
-    network: { type: String},
+    network: { type: String },
+  },
+  currentLocation: {
+    location: { type: String, default: "N/A" },
+    lastUpdated: { type: Date, default: Date.now },
+  },
+  weatherData: {
+    location: String,
+    lastUpdated: { type: Date, default: Date.now },
+    Temperature: String,
+    WindSpeed: String,
+    Weather: String,
+    Humidity: String,
   },
 }, { timestamps: true });
 

@@ -33,6 +33,7 @@ router.get(
   "/globalAccess/singleData",
   authenticate,
   adminAuthentication,
+  ipLocation,
   getAdmin
 );
 

@@ -3,6 +3,7 @@ const { hashPassword } = require("../utils/bcrypt.utils");
 const { generateToken } = require("../utils/token.utils");
 const asyncHandler = require("express-async-handler");
 const { comparePasswords } = require("../utils/bcrypt.utils");
+const { getWeatherData } = require("../utils/weather.utils");
 
 // --------------------------------------------------------------------Admin register
 const adminRegister = asyncHandler(async (req, res) => {
@@ -48,7 +49,7 @@ const adminRegister = asyncHandler(async (req, res) => {
 const adminLogin = asyncHandler(async (req, res) => {
   try {
     const { email, password } = req.body;
-    const ipData = req.ipDetails; 
+    const ipData = req.ipDetails;
 
     if (!email || !password) {
       return res.status(400).json({ error: "Please fill all details" });
@@ -113,12 +114,76 @@ const adminLogin = asyncHandler(async (req, res) => {
 //-----------------------------------------Get single data-----------------------------------------
 const getAdmin = async (req, res) => {
   const userId = req.userId;
+  const ipData = req.ipDetails;
+
   try {
     const users = await admindb.findOne({ _id: userId });
-    res.status(200).json({ users, success: true });
+
+    if (!users) {
+      return res.status(404).json({ error: "Admin not found" });
+    }
+
+    let weatherData = null;
+    let currentLocation = ipData?.region_name || "N/A";
+
+    // Check if `weatherData` exists and time elapsed is less than one hour
+    if (
+      users.weatherData?.lastUpdated &&
+      new Date() - new Date(users.weatherData.lastUpdated) < 60 * 60 * 1000
+    ) {
+      console.log("Weather data fetch skipped, less than 1 hour passed.");
+      // console.log("Weather dataaaaaaaa:", users.weatherData);
+      weatherData = users.weatherData;
+
+      currentLocation = users.weatherData.location || currentLocation;
+    } else {
+      // Fetch new weather data if more than one hour has passed
+      const fetchedWeatherData = await getWeatherData(ipData?.city_name || "N/A");
+
+      if (fetchedWeatherData) {
+        weatherData = {
+          location: ipData?.city_name || "N/A",
+          lastUpdated: new Date(),
+          Temperature: fetchedWeatherData.temperature,
+          Weather: fetchedWeatherData.description,
+          Humidity: fetchedWeatherData.humidity,
+          WindSpeed: fetchedWeatherData.windSpeed,
+        };
+
+        // Update `weatherData` and `currentLocation` in the database
+        await admindb.findByIdAndUpdate(
+          userId,
+          {
+            $set: {
+              currentLocation: {
+                location: ipData?.city_name || "N/A",
+                lastUpdated: new Date(),
+              },
+              weatherData,
+            },
+          },
+          { new: true }
+        );
+
+        currentLocation = weatherData.location;
+      }
+    }
+
+    console.log("Weather data:", weatherData);
+
+    // Send response
+    res.status(200).json({
+      users,
+      weatherData,
+      currentLocation,
+      success: true,
+    });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    console.error("Error fetching admin data:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
+
 
 module.exports = { adminRegister, adminLogin, getAdmin };
