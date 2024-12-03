@@ -132,13 +132,12 @@ const getAdmin = async (req, res) => {
       new Date() - new Date(users.weatherData.lastUpdated) < 60 * 60 * 1000
     ) {
       console.log("Weather data fetch skipped, less than 1 hour passed.");
-      // console.log("Weather dataaaaaaaa:", users.weatherData);
       weatherData = users.weatherData;
-
       currentLocation = users.weatherData.location || currentLocation;
     } else {
       // Fetch new weather data if more than one hour has passed
-      const fetchedWeatherData = await getWeatherData(ipData?.city_name || "N/A");
+      const fetchedWeatherData = await getWeatherData("Gurugram");
+      console.log("Fetched Weather Data:", fetchedWeatherData);
 
       if (fetchedWeatherData) {
         weatherData = {
@@ -150,26 +149,24 @@ const getAdmin = async (req, res) => {
           WindSpeed: fetchedWeatherData.windSpeed,
         };
 
-        // Update `weatherData` and `currentLocation` in the database
-        await admindb.findByIdAndUpdate(
-          userId,
-          {
-            $set: {
-              currentLocation: {
-                location: ipData?.city_name || "N/A",
-                lastUpdated: new Date(),
-              },
-              weatherData,
-            },
-          },
-          { new: true }
-        );
+        console.log("Fetched Weather Data:", fetchedWeatherData);
 
-        currentLocation = weatherData.location;
+        // Fetch the user document, update fields, and save
+        const users = await admindb.findById(userId);
+
+        if (users) {
+          users.currentLocation = {
+            location: ipData?.city_name || "N/A",
+            lastUpdated: new Date(),
+          };
+          users.weatherData = weatherData;
+
+          const savedUser = await users.save();
+          console.log("Updated and Saved User:", savedUser);
+        }
       }
     }
 
-    console.log("Weather data:", weatherData);
 
     // Send response
     res.status(200).json({
@@ -183,6 +180,7 @@ const getAdmin = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 
 
