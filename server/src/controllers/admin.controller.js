@@ -48,21 +48,20 @@ const adminRegister = asyncHandler(async (req, res) => {
 const adminLogin = asyncHandler(async (req, res) => {
   try {
     const { email, password } = req.body;
+    const ipData = req.ipDetails; 
 
     if (!email || !password) {
       return res.status(400).json({ error: "Please fill all details" });
     }
 
-    // ---------------------------------------Compare user-------------------------
+    // ---------------------------------------Find admin-------------------------
     const user = await admindb.findOne({ email: email });
     if (!user) {
-      return res.status(401).json({ error: "Admin not founded!" });
+      return res.status(401).json({ error: "Admin not found!" });
     }
 
-    //----------------------------------------Compare password-----------------
-
+    // ----------------------------------------Compare password-----------------
     const isMatching = await comparePasswords(password, user.password);
-
     if (!isMatching) {
       return res.status(401).json({ error: "Invalid password" });
     }
@@ -71,23 +70,43 @@ const adminLogin = asyncHandler(async (req, res) => {
       return res.status(401).json({ error: "Admin is inactive!" });
     }
 
-    //----------------------------------------Create Token
+    // ----------------------------------------Update lastLoggedIn-----------------
+    const updatedUser = await admindb.findByIdAndUpdate(
+      user._id,
+      {
+        lastLoggedIn: {
+          ip: ipData?.ip || "N/A",
+          country_code: ipData?.country_code || "N/A",
+          country_name: ipData?.country_name || "N/A",
+          region_name: ipData?.region_name || "N/A",
+          city_name: ipData?.city_name || "N/A",
+          network: ipData?.as || "N/A",
+        },
+      },
+      { new: true }
+    );
+
+    // ----------------------------------------Create Token-----------------------
     const loginUserData = {
       user: {
-        id: user._id,
+        id: updatedUser._id,
       },
     };
 
     const token = generateToken(loginUserData);
+
+    // ----------------------------------------Return Login Result---------------
     const loginResult = {
-      user,
+      user: updatedUser,
       token,
+      ipData,
       msg: "Admin logged in successfully",
     };
 
     return res.status(201).json(loginResult);
   } catch (error) {
-    res.status(404).json({ error: "Try later" });
+    console.error("Error during admin login:", error);
+    res.status(500).json({ error: "Try later" });
   }
 });
 
