@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }) => {
         }
       );
       setUser(response.data);
-      // console.log("User Data: ", response.data);
+      console.log("User Data: ", response.data);
       
       setResData(response.data);
       setLoader(false);

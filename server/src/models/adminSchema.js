@@ -86,7 +86,10 @@ const userSchema = new mongoose.Schema({
     Weather: String,
     Humidity: String,
   },
-}, { timestamps: true });
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  lastLoggedIn: Object,
+}, );
 
 const admindb = new mongoose.model("admin", userSchema);
 module.exports = admindb;
