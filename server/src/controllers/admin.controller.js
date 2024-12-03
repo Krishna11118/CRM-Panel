@@ -124,7 +124,7 @@ const getAdmin = async (req, res) => {
     }
 
     let weatherData = null;
-    let currentLocation = ipData?.region_name || "N/A";
+    let currentLocation = ipData?.city_name || ipData?.region_name || "N/A";
 
     // Check if `weatherData` exists and time elapsed is less than one hour
     if (
@@ -135,8 +135,8 @@ const getAdmin = async (req, res) => {
       weatherData = users.weatherData;
       currentLocation = users.weatherData.location || currentLocation;
     } else {
-      // Fetch new weather data if more than one hour has passed
-      const fetchedWeatherData = await getWeatherData("Gurugram");
+      // Fetch new weather data using the city name from IP details
+      const fetchedWeatherData = await getWeatherData(ipData?.city_name || "Gurugram");
       console.log("Fetched Weather Data:", fetchedWeatherData);
 
       if (fetchedWeatherData) {
@@ -167,7 +167,6 @@ const getAdmin = async (req, res) => {
       }
     }
 
-
     // Send response
     res.status(200).json({
       users,
@@ -180,7 +179,6 @@ const getAdmin = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 
 
