@@ -33,11 +33,11 @@ const Dashboard = () => {
         )}
 
         {hideForUser && (
-          // <GradientBackground text="Pie Chart">
+          <GradientBackground text="Pie Chart">
             <div className="p-4 text-center ">
               <DashboardChart />
             </div>
-          // </GradientBackground>
+           </GradientBackground>
         )}
       </div>
     </>
