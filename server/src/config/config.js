@@ -16,4 +16,5 @@ module.exports = {
       useUnifiedTopology: true,
     },
   },
+  ip2locationApiKey : process.env.IP2LOCATION_API_KEY,
 };

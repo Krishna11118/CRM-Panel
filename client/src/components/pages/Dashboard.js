@@ -24,18 +24,7 @@ const Dashboard = () => {
   return (
     <>
       <div className=" pr-4">
-        {/* <div>
-          {" "}
-          <CountUp
-            start={0}
-            end={totalSubAdmins}
-            duration={2.75}
-            separator=" "
-          />
-        </div> */}
-
-        {/* <Table /> */}
-        {/* {hideForUser && <DashboardChart />} */}
+       
 
         {hideForAdmin && (
           <GradientBackground text="We're launching soon...">
@@ -44,11 +33,11 @@ const Dashboard = () => {
         )}
 
         {hideForUser && (
-          <GradientBackground text="Pie Chart">
+          // <GradientBackground text="Pie Chart">
             <div className="p-4 text-center ">
               <DashboardChart />
             </div>
-          </GradientBackground>
+          // </GradientBackground>
         )}
       </div>
     </>

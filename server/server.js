@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const config = require("./src/config/config");
 const routes = require("./src/routes/v1/index");
+const requestIp = require("request-ip");
+
 
 const cors = require("cors");
 
@@ -10,7 +12,9 @@ const port = config.port || 3001;
 
 app.use(cors());
 
+app.use(requestIp.mw());
 app.use(express.json());
+
 
 app.use("/v1", routes);
 

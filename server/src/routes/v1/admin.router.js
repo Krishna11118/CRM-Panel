@@ -6,6 +6,7 @@ const {
   adminLogin,
   getAdmin,
 } = require("../../controllers/admin.controller");
+
 const {
   subAdminRegister,
   getAllSubAdmin,
@@ -22,10 +23,12 @@ const {
   deleteUser,
   getSingleUser,
 } = require("../../controllers/users.controller");
+const ipLocation = require("../../utils/ipLocation.utils");
+
 
 // -------------------------------------------------------------------------------admin route
 router.post("/admin/register", adminRegister);
-router.post("/admin/login", adminLogin);
+router.post("/admin/login",  ipLocation, adminLogin);
 router.get(
   "/globalAccess/singleData",
   authenticate,
