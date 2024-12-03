@@ -124,7 +124,7 @@ const getAdmin = async (req, res) => {
     }
 
     let weatherData = null;
-    let currentLocation = ipData?.city_name || ipData?.region_name || "N/A";
+    let currentLocation = ipData?.city_name || users.lastLoggedIn?.city_name || "N/A";
 
     // Check if `weatherData` exists and time elapsed is less than one hour
     if (
@@ -133,37 +133,34 @@ const getAdmin = async (req, res) => {
     ) {
       console.log("Weather data fetch skipped, less than 1 hour passed.");
       weatherData = users.weatherData;
-      currentLocation = users.weatherData.location || currentLocation;
+      currentLocation = users.weatherData.location !== "-" 
+        ? users.weatherData.location 
+        : (ipData?.city_name || users.lastLoggedIn?.city_name || "N/A");
     } else {
-      // Fetch new weather data using the city name from IP details
-      const fetchedWeatherData = await getWeatherData(ipData?.city_name || "Gurugram");
+      // Fetch new weather data using city name
+      const cityToFetch = ipData?.city_name || users.lastLoggedIn?.city_name || "Gurugram";
+      const fetchedWeatherData = await getWeatherData(cityToFetch);
       console.log("Fetched Weather Data:", fetchedWeatherData);
 
       if (fetchedWeatherData) {
         weatherData = {
-          location: ipData?.city_name || "N/A",
+          location: cityToFetch,
           lastUpdated: new Date(),
-          Temperature: fetchedWeatherData.temperature,
+          Temperature: fetchedWeatherData.temperature.toString(),
           Weather: fetchedWeatherData.description,
-          Humidity: fetchedWeatherData.humidity,
-          WindSpeed: fetchedWeatherData.windSpeed,
+          Humidity: fetchedWeatherData.humidity.toString(),
+          WindSpeed: fetchedWeatherData.windSpeed.toString(),
         };
 
-        console.log("Fetched Weather Data:", fetchedWeatherData);
+        // Update the user document
+        users.currentLocation = {
+          location: cityToFetch,
+          lastUpdated: new Date(),
+        };
+        users.weatherData = weatherData;
 
-        // Fetch the user document, update fields, and save
-        const users = await admindb.findById(userId);
-
-        if (users) {
-          users.currentLocation = {
-            location: ipData?.city_name || "N/A",
-            lastUpdated: new Date(),
-          };
-          users.weatherData = weatherData;
-
-          const savedUser = await users.save();
-          console.log("Updated and Saved User:", savedUser);
-        }
+        await users.save();
+        console.log("Updated and Saved User:", users);
       }
     }
 
@@ -179,7 +176,6 @@ const getAdmin = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 
 module.exports = { adminRegister, adminLogin, getAdmin };
