@@ -79,6 +79,8 @@ export const AuthProvider = ({ children }) => {
         }
       );
       setUser(response.data);
+      // console.log("User Data: ", response.data);
+      
       setResData(response.data);
       setLoader(false);
       if (response.data.users.role[0] === "noAccess") {

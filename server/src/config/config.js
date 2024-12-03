@@ -17,4 +17,6 @@ module.exports = {
     },
   },
   ip2locationApiKey : process.env.IP2LOCATION_API_KEY,
+  openWeatherApiKey: process.env.OPEN_WEATHER_API_KEY,
+  
 };

@@ -1,5 +1,5 @@
 const config = require("../../src/config/config");
-const ip2locationio = require("ip2location-io-nodejs"); // used to get the details of the IP address
+const ip2locationio = require("ip2location-io-nodejs");
 
 const getIpLocation = async (req, res, next) => {
   try {
@@ -11,11 +11,12 @@ const getIpLocation = async (req, res, next) => {
     
     const networkIp = req.clientIp;
     const ipDetails = await ipLocation.lookup(networkIp);
-    console.log("ipDetails:", ipDetails);
+    // console.log("ipDetails:", ipDetails);
+    
 
     req.ipDetails = ipDetails;
 
-    console.log("req.ipDetails:", req.ipDetails);
+    // console.log("req.ipDetails:", req.ipDetails);
 
     next();
   } catch (error) {

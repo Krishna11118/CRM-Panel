@@ -207,6 +207,7 @@ const userStatus = asyncHandler(async (req, res) => {
 // -------------------------------------------------------------------------------Single user
 const getSingleUser = asyncHandler(async (req, res) => {
   const userId = req.params.userId;
+  
   try {
     const user = await userdb.findById(userId);
     if (!user) {
