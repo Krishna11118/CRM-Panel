@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   important: true,
-  content: ["./src/**/*.{html,js}"],
+  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
     colors: {
       transparent: "transparent",
@@ -25,6 +25,18 @@ module.exports = {
         900: "#11101D",
         950: "#172554",
       },
+      weather: {
+        // "sunny": "#FFA960",
+        // "cloudy": "#C4C4C4",
+        // "rainy": "#3C52AD",
+        // "thunder": "#1A1A1A",
+        // "snowy": "#ECF0F1",
+        50: "#FFA960",
+        100: "#C4C4C4",
+        200: "#3C52AD",
+        300: "#1A1A1A",
+        400: "#ECF0F1",
+        },
     },
     extend: {
       animation: {
