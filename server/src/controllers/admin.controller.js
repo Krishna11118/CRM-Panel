@@ -131,7 +131,7 @@ const getAdmin = async (req, res) => {
       users.weatherData?.lastUpdated &&
       new Date() - new Date(users.weatherData.lastUpdated) < 60 * 60 * 1000
     ) {
-      console.log("Weather data fetch skipped, less than 1 hour passed.");
+      // console.log("Weather data fetch skipped, less than 1 hour passed.");
       weatherData = users.weatherData;
       currentLocation = users.weatherData.location !== "-" 
         ? users.weatherData.location 
@@ -140,7 +140,7 @@ const getAdmin = async (req, res) => {
       // Fetch new weather data using city name
       const cityToFetch = ipData?.city_name || users.lastLoggedIn?.city_name || "Gurugram";
       const fetchedWeatherData = await getWeatherData(cityToFetch);
-      console.log("Fetched Weather Data:", fetchedWeatherData);
+      // console.log("Fetched Weather Data:", fetchedWeatherData);
 
       if (fetchedWeatherData) {
         weatherData = {
