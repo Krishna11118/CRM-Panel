@@ -58,7 +58,7 @@ const BasicPie = () => {
   }, [token, role]);
 
   return (
-    <div className="flex justify-center items-center pt-8 text-white">
+    <div className="flex justify-center items-center p-0 m-0 text-white">
       {loading ? (
         <CircularProgress color="secondary" />
       ) : (

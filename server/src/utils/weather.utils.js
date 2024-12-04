@@ -27,6 +27,7 @@ const getWeatherData = async (city) => {
       description: data.weather[0].description,
       humidity: data.main.humidity,
       windSpeed: data.wind.speed,
+      
     };
   } catch (error) {
     if (error.response) {

@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 import { useAuth } from "../../context/AuthContext";
 import DashboardChart from "../chart/DashboardChart";
 import GradientBackground from "../../lib/neatGradients";
-
+import Weather from "../weather/Weather";
 const Dashboard = () => {
   const [hideForUser, setHideForUser] = useState(false);
   const [hideForAdmin, setHideForAdmin] = useState(false);
@@ -33,8 +33,9 @@ const Dashboard = () => {
         )}
 
         {hideForUser && (
-          <GradientBackground text="Pie Chart">
-            <div className="p-4 text-center ">
+          <GradientBackground text="Analysis">
+            <div className="p-0 text-center ">
+              <Weather/>
               <DashboardChart />
             </div>
            </GradientBackground>
