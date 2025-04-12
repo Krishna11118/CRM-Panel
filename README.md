@@ -56,13 +56,13 @@ Welcome to CRM-Panel:
 ## Links 
 
 ### Admin Login
- [https://crm-admin-main.vercel.app/admin/login](https://crm-admin-main.vercel.app/admin/login)
+ [https://crm-admin-main.vercel.app/admin/login](https://crm-panel.krishnastonetech.live/admin/login)
 
 ### Sub Admin Login
- [https://crm-admin-main.vercel.app/subAdmin/login](https://crm-admin-main.vercel.app/subAdmin/login)
+ [https://crm-admin-main.vercel.app/subAdmin/login](https://crm-panel.krishnastonetech.live/subAdmin/login)
 
 ### User Login
- [https://crm-admin-main.vercel.app/login](https://crm-admin-main.vercel.app/login)
+ [https://crm-admin-main.vercel.app/login](https://crm-panel.krishnastonetech.livep/login)
 
 <!-- GETTING STARTED -->
 ## Getting Started
