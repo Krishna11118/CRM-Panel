@@ -35,7 +35,7 @@ const Dashboard = () => {
         {hideForUser && (
           <GradientBackground text="Analysis">
             <div className="p-0 text-center ">
-              <Weather/>
+              {/* <Weather/> */}
               <DashboardChart />
             </div>
            </GradientBackground>
